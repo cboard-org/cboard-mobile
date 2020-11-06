@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/data/data.dart';
 import 'package:flutter/material.dart';
 import 'widgets.dart';
 
@@ -16,17 +17,41 @@ class _SentenceBarState extends State<SentenceBar> {
       child: Row(
         children: <Widget>[
           SizedBox(width: 10.0),
-          // Container of tiles (currently only fillers)
-          Container(
-            // color: Colors.blue, // debug: check container title space
-            width: screenSize.width - 60,
-            child: Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 80.0,
-                  height: 80.0,
-                ),
-              ],
+          Expanded(
+            child: SizedBox(
+              // height: 100.0,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: example.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final Tile tile = example[index];
+                  return Row(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => print(tile.name),
+                        child: SizedBox(
+                          width: 70.0,
+                          height: 70.0,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(tile.imageUrl),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                              Text(tile.name, textAlign: TextAlign.center),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
           SizedBox(width: 10.0),

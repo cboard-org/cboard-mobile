@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+// import 'widgets.dart';
 
 class MainAppBar extends StatelessWidget {
   final double scrollOffset;
@@ -25,7 +25,7 @@ class MainAppBar extends StatelessWidget {
               children: [
                 // Readability Settings
                 GestureDetector(
-                  onTap: () => print('Setting'),
+                  onTap: () => print('Setting'), // insert new screen here
                   child: Icon(
                     Icons.apps,
                     color: Colors.white,
@@ -39,7 +39,7 @@ class MainAppBar extends StatelessWidget {
                 ),
                 // Lock
                 GestureDetector(
-                  onTap: () => print('Lock'),
+                  onTap: () => print('Lock'), // insert new screen here
                   child: Icon(
                     Icons.lock,
                     color: Colors.white,
