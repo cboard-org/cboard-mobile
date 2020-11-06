@@ -25,10 +25,9 @@ class _SentenceBarState extends State<SentenceBar> {
             ),
             scrollDirection: Axis.horizontal,
             itemCount: example.length,
-            shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               final Tile tile = example[index];
-              return CreateTile(tile: tile);
+              return CreateTile(tile: tile, size: 90.0);
             },
           ),
         ),

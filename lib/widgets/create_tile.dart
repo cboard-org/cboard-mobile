@@ -3,8 +3,10 @@ import 'package:cboard_mobile/data/data.dart';
 
 class CreateTile extends StatelessWidget {
   final Tile tile;
+  final double size;
 
-  const CreateTile({Key key, @required this.tile}) : super(key: key);
+  const CreateTile({Key key, @required this.tile, @required this.size})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -14,8 +16,8 @@ class CreateTile extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 3.0),
-            height: 90.0,
-            width: 90.0,
+            height: size,
+            width: size,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(tile.imageUrl),
@@ -26,7 +28,7 @@ class CreateTile extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0,
+            top: 60,
             child: SizedBox(
               height: 20.0,
               child: Text(

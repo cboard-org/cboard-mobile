@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:cboard_mobile/data/data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 146.0),
         child: Container(
@@ -49,8 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: CustomScrollView(
-        controller: _scrollController,
+      body: Container(
+        // margin:const EdgeInsets.only(left: 30.0), // debug: find a way to center
+        child: GridView.builder(
+          padding: const EdgeInsets.symmetric(
+            vertical: 7.0,
+            horizontal: 7.0,
+          ),
+          itemCount: example.length,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemBuilder: (BuildContext context, int index) {
+            final Tile tile = example[index];
+            return CreateTile(tile: tile, size: 120.0);
+          },
+        ),
       ),
     );
   }
