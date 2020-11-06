@@ -14,27 +14,11 @@ class Tile {
 }
 
 final List<Tile> example = const [
-  Tile(name: 'Back', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
   Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(
-      name: 'Test',
-      isFile: true,
-      imageUrl: 'cboard-mobile/assets/images/test.png'),
-  Tile(
-      name: 'Test',
-      isFile: true,
-      imageUrl: 'cboard-mobile/assets/images/test.png'),
-  Tile(
-      name: 'Test',
-      isFile: true,
-      imageUrl: 'cboard-mobile/assets/images/test.png'),
-  Tile(
-      name: 'Test',
-      isFile: true,
-      imageUrl: 'cboard-mobile/assets/images/test.png'),
+  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
 ];

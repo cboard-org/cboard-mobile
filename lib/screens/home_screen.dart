@@ -1,5 +1,4 @@
 import 'package:cboard_mobile/widgets/widgets.dart';
-// import 'package:cboard_mobile/data/data.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           margin: EdgeInsets.only(
               top: 50.0), // avoid overlapping with phone's top display stuff
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               SentenceBar(), // Sentence Creation Section
               MainAppBar(scrollOffset: _scrollOffset), // Main Navigation Bar
