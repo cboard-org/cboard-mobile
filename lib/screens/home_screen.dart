@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
           height: 145,
           margin: EdgeInsets.only(
-              top: 50.0), // avoid overlapping with phone's top display stuff
+              top: 25.0), // avoid overlapping with phone's top display stuff
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -51,10 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-        // margin:const EdgeInsets.only(left: 30.0), // debug: find a way to center
         child: GridView.builder(
           padding: const EdgeInsets.symmetric(
-            vertical: 7.0,
+            vertical: 20.0,
             horizontal: 7.0,
           ),
           itemCount: example.length,
