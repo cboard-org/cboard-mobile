@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class EditTileScreen extends StatefulWidget {
@@ -6,9 +7,11 @@ class EditTileScreen extends StatefulWidget {
 }
 
 class _EditTileScreenState extends State<EditTileScreen> {
+  bool lock = false;
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -24,23 +27,36 @@ class _EditTileScreenState extends State<EditTileScreen> {
           children: <Widget>[
             SizedBox(
               height: screenSize.height / 20,
-            ), // Debug: change to relative to all screens
-            Center(
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/test.png'), // Debug: change to connect to tile class
-                    fit: BoxFit.cover,
+            ),
+            Stack(
+              children: <Widget>[
+                lock
+                    ? Positioned(
+                        left: 10.0,
+                        child: Icon(
+                          Icons.lock,
+                          color: Colors.black45,
+                          size: 75,
+                        ),
+                      )
+                    : SizedBox(width: 0, height: 0),
+                Center(
+                  child: Container(
+                    width: 200.0,
+                    height: 200.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/test.png'), // Debug: change to connect to tile class
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: GestureDetector(onTap: () {
+                      changeTilePic(context);
+                    }),
                   ),
                 ),
-                child: GestureDetector(
-                  onTap: () =>
-                      print('picture'), // Debug: Add change photo feature
-                ),
-              ),
+              ],
             ),
             SizedBox(
               height: screenSize.height / 20,
@@ -157,7 +173,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               size: 35.0, color: Colors.black54),
                         ],
                       ),
-                      onTap: () => print('Tile Color'), // Debug: change to edit
+                      onTap: () =>
+                          print('Voice Recorder'), // Debug: change to edit
                     ),
                   ),
                 ],
@@ -166,6 +183,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
             SizedBox(
               height: screenSize.height / 30,
             ),
+            // BUTTONS
             Row(
               children: <Widget>[
                 SizedBox(
@@ -180,7 +198,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       "Lock",
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
-                    onPressed: () => print('Lock'),
+                    onPressed: () {
+                      setState(() => lock = !lock);
+                    },
                   ),
                 ),
                 SizedBox(
@@ -195,7 +215,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       "Hide",
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
-                    onPressed: () => print('Hide'),
+                    onPressed: () => print('Hide'), // debug: add function
                   ),
                 ),
                 SizedBox(
@@ -210,7 +230,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       "Delete",
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
-                    onPressed: () => print('Delete'),
+                    onPressed: () => deleteTile(context),
                   ),
                 ),
                 SizedBox(
