@@ -1,9 +1,7 @@
+import 'package:cboard_mobile/screens/onboarding/welcome.dart';
 import 'package:flutter/material.dart';
-import 'screens/screens.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: EditTileScreen(), // debug: change back to homescreen
+      home: Welcome(),
     );
   }
 }
