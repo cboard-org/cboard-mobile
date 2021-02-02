@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primaryColor: paua,
         accentColor: fog,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: white,
+        scaffoldBackgroundColor: mercury,
       ),
       home: Welcome(),
     );
