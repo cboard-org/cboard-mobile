@@ -1,3 +1,5 @@
+import 'package:cboard_mobile/screens/onboarding/log-in.dart';
+import 'package:cboard_mobile/screens/onboarding/sign-up--maincopy.dart';
 import 'package:cboard_mobile/screens/onboarding/sign-up--skip.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/widgets/onboarding/header.dart';
@@ -52,6 +54,38 @@ class _WelcomeState extends State<Welcome> {
                 ),
                 margin: EdgeInsets.only(bottom: 90),
               ),
+              ButtonBar(
+                children: [
+                  FlatButton(
+                    child: Text('LOG IN'),
+                    textColor: paua,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(color: paua)),
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LogIn()),
+                      );
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('SIGN UP'),
+                    color: paua,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpMain()),
+                      );
+                    },
+                  ),
+                ],
+                alignment: MainAxisAlignment.spaceEvenly,
+              )
             ],
           ),
         ]));

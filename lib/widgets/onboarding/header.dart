@@ -10,17 +10,23 @@ class Header extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                child: Image(image: AssetImage('assets/images/logo.png')),
+                child: Image.asset('assets/images/logo.png', scale: 0.75),
                 margin: const EdgeInsets.only(bottom: 20),
               ),
               Container(
                 child: Text(
                   'C-Board',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: mine_shaft,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 margin: const EdgeInsets.only(bottom: 10),
               ),
-              Text('Giving every child a voice'),
+              Text(
+                'Giving every child a voice',
+                style: TextStyle(color: mine_shaft),
+              ),
             ],
           ),
           color: white,
