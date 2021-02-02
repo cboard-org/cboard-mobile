@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/widgets/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
 class SignUpSkip extends StatefulWidget {
@@ -10,9 +11,9 @@ class _SignUpSkipState extends State<SignUpSkip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: BaseAppBar(
         title: Text('Sign Up'),
-        centerTitle: true,
+        appBar: AppBar(),
       ),
     );
   }

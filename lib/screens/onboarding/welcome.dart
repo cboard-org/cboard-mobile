@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/screens/onboarding/sign-up--skip.dart';
+import 'package:cboard_mobile/widgets/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatefulWidget {
@@ -11,10 +12,10 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: BaseAppBar(
         title: Text('Welcome'),
-        centerTitle: true,
-        actions: <Widget>[
+        appBar: AppBar(),
+        widgets: <Widget>[
           TextButton(
             child: Text('SKIP'),
             style: TextButton.styleFrom(
