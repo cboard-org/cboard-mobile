@@ -1,14 +1,65 @@
+import 'package:cboard_mobile/screens/home_screen.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/widgets/onboarding/header.dart';
+import 'package:cboard_mobile/widgets/onboarding/input-field--stateful.dart';
+import 'package:cboard_mobile/widgets/onboarding/input-field--stateless.dart';
 import 'package:cboard_mobile/widgets/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({Key key}) : super(key: key);
+class LogInForm extends StatefulWidget {
   @override
-  _LogInState createState() => _LogInState();
+  LogInFormState createState() {
+    return LogInFormState();
+  }
 }
 
-class _LogInState extends State<LogIn> {
+class LogInFormState extends State<LogInForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _formKey,
+        child: Column(children: <Widget>[
+          Container(
+            child: InputField(),
+            margin: EdgeInsets.only(bottom: 30),
+          ),
+          Container(
+            child: InputFieldStateful(),
+            margin: EdgeInsets.only(bottom: 10),
+          ),
+          SizedBox(
+              width: double.infinity,
+              child: Container(
+                child: Text(
+                  'Forgot password?',
+                  style: TextStyle(color: studio),
+                  textAlign: TextAlign.right,
+                ),
+                margin: EdgeInsets.only(bottom: 50),
+              )),
+          FlatButton(
+            child: Text('LOG IN'),
+            color: paua,
+            textColor: white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              }
+            },
+          ),
+        ]));
+  }
+}
+
+class LogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +72,15 @@ class _LogInState extends State<LogIn> {
           Container(
             child: Header(),
             margin: EdgeInsets.only(bottom: 5),
+          ),
+          Container(
+            child: Column(
+              children: [
+                LogInForm(),
+              ],
+            ),
+            color: white,
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
           ),
         ],
       ),

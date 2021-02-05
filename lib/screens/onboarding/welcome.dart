@@ -1,5 +1,5 @@
 import 'package:cboard_mobile/screens/onboarding/log-in.dart';
-import 'package:cboard_mobile/screens/onboarding/sign-up--maincopy.dart';
+import 'package:cboard_mobile/screens/onboarding/sign-up--main.dart';
 import 'package:cboard_mobile/screens/onboarding/sign-up--skip.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/widgets/onboarding/header.dart';
