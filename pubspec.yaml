@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   overlay_screen: ^1.2.0+1
+  http: ^0.12.2
 
 
   # The following adds the Cupertino Icons font to your application.

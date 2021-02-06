@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 class UsernameField extends StatefulWidget {
+  final TextEditingController controller;
+  const UsernameField({
+    Key key,
+    this.controller,
+  }) : super(key: key);
+
   @override
   _UsernameFieldState createState() => _UsernameFieldState();
 }
 
 class _UsernameFieldState extends State<UsernameField> {
-  final _usernameController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _usernameController,
+      controller: widget.controller,
       decoration: InputDecoration(
           labelText: 'Email',
           hintText: 'Email',
           suffixIcon:
               RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(_usernameController.text)
+                      .hasMatch(widget.controller.text)
                   ? Icon(
                       Icons.check,
                       color: Colors.green,
@@ -37,14 +41,14 @@ class _UsernameFieldState extends State<UsernameField> {
   void initState() {
     super.initState();
 
-    _usernameController.addListener(() {
+    widget.controller.addListener(() {
       setState(() {});
     });
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 }
