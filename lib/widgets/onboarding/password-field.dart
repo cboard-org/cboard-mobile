@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class InputFieldStateful extends StatefulWidget {
+class PasswordField extends StatefulWidget {
   @override
-  _InputFieldStatefulState createState() => _InputFieldStatefulState();
+  _PasswordFieldState createState() => _PasswordFieldState();
 }
 
-class _InputFieldStatefulState extends State<InputFieldStateful> {
+class _PasswordFieldState extends State<PasswordField> {
   bool _obscureText = true;
 
   void _toggle() {
@@ -21,6 +21,7 @@ class _InputFieldStatefulState extends State<InputFieldStateful> {
         TextFormField(
           decoration: InputDecoration(
             labelText: 'Password',
+            hintText: 'Password',
             suffixIcon: IconButton(
                 icon: Icon(
                   Icons.remove_red_eye,
@@ -35,9 +36,9 @@ class _InputFieldStatefulState extends State<InputFieldStateful> {
           autocorrect: false,
           validator: (value) {
             if (value.isEmpty)
-              return '\u26A0 Please enter a password';
+              return 'Please enter a password';
             else if (value.contains('@')) // Make server call instead?
-              return '\u26A0 Invalid password';
+              return ' Invalid password';
             else
               return null;
           },
