@@ -1,9 +1,9 @@
-import 'package:cboard_mobile/screens/onboarding/log-in.dart';
-import 'package:cboard_mobile/screens/onboarding/sign-up--main.dart';
-import 'package:cboard_mobile/screens/onboarding/sign-up--skip.dart';
+import 'package:cboard_mobile/onboarding/screens/log-in.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up--main.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up--skip.dart';
+import 'package:cboard_mobile/onboarding/widgets/header.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
-import 'package:cboard_mobile/widgets/onboarding/header.dart';
-import 'package:cboard_mobile/widgets/shared/app-bar.dart';
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatefulWidget {

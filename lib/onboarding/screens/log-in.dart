@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:cboard_mobile/models/error.dart';
 import 'package:cboard_mobile/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
-import 'package:cboard_mobile/widgets/onboarding/header.dart';
-import 'package:cboard_mobile/widgets/onboarding/username-field.dart';
-import 'package:cboard_mobile/widgets/onboarding/password-field.dart';
-import 'package:cboard_mobile/widgets/shared/app-bar.dart';
+import 'package:cboard_mobile/onboarding/widgets/header.dart';
+import 'package:cboard_mobile/onboarding/widgets/username-field.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-field.dart';
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

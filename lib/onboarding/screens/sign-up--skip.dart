@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/widgets/shared/app-bar.dart';
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
 class SignUpSkip extends StatefulWidget {

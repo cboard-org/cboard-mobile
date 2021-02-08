@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/screens/onboarding/welcome.dart';
+import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
