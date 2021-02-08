@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,11 @@ class _SignUpSkipState extends State<SignUpSkip> {
       appBar: BaseAppBar(
         title: Text('Sign Up'),
         appBar: AppBar(),
+      ),
+      body: Column(
+        children: [
+          UserHeader(shouldSetPhoto: false, locale: 'Croatian'),
+        ],
       ),
     );
   }

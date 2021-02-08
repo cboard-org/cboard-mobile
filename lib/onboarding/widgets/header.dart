@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -11,21 +12,18 @@ class Header extends StatelessWidget {
             children: [
               Container(
                 child: Image.asset('assets/images/logo.png', scale: 0.75),
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 20),
               ),
               Container(
                 child: Text(
                   'C-Board',
-                  style: TextStyle(
-                      color: mine_shaft,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                  style: CustomTypography.Typography.header(),
                 ),
-                margin: const EdgeInsets.only(bottom: 10),
+                margin: EdgeInsets.only(bottom: 10),
               ),
               Text(
                 'Giving every child a voice',
-                style: TextStyle(color: mine_shaft),
+                style: CustomTypography.Typography.subheader(),
               ),
             ],
           ),
