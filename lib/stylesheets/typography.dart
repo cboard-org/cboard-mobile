@@ -11,4 +11,12 @@ class Typography {
   static TextStyle subheader() {
     return TextStyle(color: mine_shaft);
   }
+
+  static TextStyle label() {
+    return TextStyle(color: electric_violet);
+  }
+
+  static TextStyle description() {
+    return TextStyle();
+  }
 }

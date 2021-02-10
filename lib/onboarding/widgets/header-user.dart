@@ -33,7 +33,7 @@ class _UserHeaderState extends State<UserHeader> {
                       child: Text(
                         'Please follow these steps to download the ' +
                             widget.locale +
-                            'TTS:',
+                            ' TTS:',
                         style: CustomTypography.Typography.subheader(),
                         textAlign: TextAlign.center,
                       ),
@@ -42,7 +42,6 @@ class _UserHeaderState extends State<UserHeader> {
             ],
           ),
           color: white,
-          margin: EdgeInsets.only(bottom: 5),
           padding: EdgeInsets.fromLTRB(15, 20, 15, 15)),
     );
   }
