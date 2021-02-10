@@ -139,19 +139,21 @@ class LogIn extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            child: Header(),
-            margin: EdgeInsets.only(bottom: 5),
-          ),
-          Container(
-            child: Column(
-              children: [
-                LogInForm(),
-              ],
-            ),
-            color: white,
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-          ),
+          Stack(
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    LogInForm(),
+                  ],
+                ),
+                color: white,
+                margin: EdgeInsets.only(top: 190),
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+              ),
+              Header(),
+            ],
+          )
         ],
       ),
     );
