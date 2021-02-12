@@ -9,7 +9,7 @@ class Typography {
   }
 
   static TextStyle subheader() {
-    return TextStyle(color: mine_shaft);
+    return TextStyle(color: mine_shaft, fontSize: 15);
   }
 
   static TextStyle label() {

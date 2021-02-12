@@ -63,19 +63,23 @@ class _SignUpTTSState extends State<SignUpTTS> {
               color: white,
               margin: EdgeInsets.only(bottom: 3),
               padding: EdgeInsets.all(15)),
-          FlatButton(
-              child: Text('DONE'),
-              color: paua,
-              textColor: white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SelectVoice()),
-                );
-              }),
+          Container(
+            child: FlatButton(
+                child: Text('DONE'),
+                color: paua,
+                textColor: white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SelectVoice()),
+                  );
+                }),
+            color: white,
+            padding: EdgeInsets.fromLTRB(145, 50, 145, 255),
+          ),
         ],
       ),
     );

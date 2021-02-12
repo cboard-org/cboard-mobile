@@ -153,7 +153,7 @@ class LogIn extends StatelessWidget {
               ),
               Header(),
             ],
-          )
+          ),
         ],
       ),
     );
