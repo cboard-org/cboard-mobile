@@ -2,6 +2,7 @@ import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -24,29 +25,21 @@ class _SignUpSkipState extends State<SignUpSkip> {
           UserHeader(shouldSetPhoto: false, locale: 'Croatian'),
           ButtonBar(
             children: [
-              FlatButton(
-                child: Text('CANCEL'),
-                textColor: paua,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: paua),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                onPressed: () {
+              Button(
+                label: Text('CANCEL'),
+                padding: 30,
+                isPrimary: false,
+                onPress: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Welcome()),
                   );
                 },
               ),
-              FlatButton(
-                child: Text('NEXT'),
-                color: paua,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                onPressed: () {
+              Button(
+                label: Text('NEXT'),
+                isPrimary: false,
+                onPress: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:flutter/material.dart';
 
 class TTSDialog extends StatelessWidget {
@@ -15,15 +15,10 @@ class TTSDialog extends StatelessWidget {
           ),
           Row(
             children: [
-              FlatButton(
-                child: Text('OK'),
-                color: paua,
-                textColor: white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50),
-                onPressed: () {
+              Button(
+                label: Text('OK'),
+                padding: 50,
+                onPress: () {
                   Navigator.of(context).pop();
                 },
               ),

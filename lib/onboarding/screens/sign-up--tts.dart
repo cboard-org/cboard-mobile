@@ -2,6 +2,7 @@ import 'package:cboard_mobile/onboarding/screens/select-voice.dart';
 import 'package:cboard_mobile/onboarding/widgets/TTS-dialog.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/material.dart';
@@ -69,30 +70,15 @@ class _SignUpTTSState extends State<SignUpTTS> {
             margin: EdgeInsets.only(bottom: 3),
             padding: EdgeInsets.all(15),
           ),
-          Container(
-            child: FlatButton(
-              child: Text('DONE'),
-              color: paua,
-              textColor: white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SelectVoice()),
-                );
-              },
-              onLongPress: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => _buildTTSDialog(context),
-                );
-              },
-            ),
-            color: white,
-            padding: EdgeInsets.fromLTRB(145, 50, 145, 255),
+          Button(
+            label: Text('DONE'),
+            padding: 40,
+            onPress: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => _buildTTSDialog(context),
+              );
+            },
           ),
         ],
       ),
