@@ -30,13 +30,14 @@ class _PasswordFieldState extends State<PasswordField> {
             labelText: 'Password',
             hintText: 'Password',
             suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.remove_red_eye,
-                  color: Colors.grey,
-                ),
-                onPressed: () {
-                  _toggle();
-                }),
+              icon: Icon(
+                Icons.remove_red_eye,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                _toggle();
+              },
+            ),
           ),
           obscureText: _obscureText,
           enableSuggestions: false,

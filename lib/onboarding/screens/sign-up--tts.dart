@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/onboarding/screens/select-voice.dart';
+import 'package:cboard_mobile/onboarding/widgets/TTS-dialog.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -23,60 +24,73 @@ class _SignUpTTSState extends State<SignUpTTS> {
       body: Column(
         children: [
           Container(
-              child: UserHeader(shouldSetPhoto: false, locale: widget.locale),
-              margin: EdgeInsets.only(bottom: 3)),
+            child: UserHeader(shouldSetPhoto: false, locale: widget.locale),
+            margin: EdgeInsets.only(bottom: 3),
+          ),
           Container(
-              child: Column(
-                children: [
-                  Container(
-                      child: Text(
-                        'STEP 1',
-                        style: CustomTypography.Typography.label(),
-                      ),
-                      margin: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    style: CustomTypography.Typography.description(),
+            child: Column(
+              children: [
+                Container(
+                  child: Text(
+                    'STEP 1',
+                    style: CustomTypography.Typography.label(),
                   ),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-              ),
-              color: white,
-              margin: EdgeInsets.only(bottom: 3),
-              padding: EdgeInsets.all(15)),
+                  margin: EdgeInsets.only(bottom: 10),
+                ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  style: CustomTypography.Typography.description(),
+                ),
+              ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            color: white,
+            margin: EdgeInsets.only(bottom: 3),
+            padding: EdgeInsets.all(15),
+          ),
           Container(
-              child: Column(
-                children: [
-                  Container(
-                      child: Text(
-                        'STEP 2',
-                        style: CustomTypography.Typography.label(),
-                      ),
-                      margin: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    style: CustomTypography.Typography.description(),
+            child: Column(
+              children: [
+                Container(
+                  child: Text(
+                    'STEP 2',
+                    style: CustomTypography.Typography.label(),
                   ),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-              ),
-              color: white,
-              margin: EdgeInsets.only(bottom: 3),
-              padding: EdgeInsets.all(15)),
+                  margin: EdgeInsets.only(bottom: 10),
+                ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  style: CustomTypography.Typography.description(),
+                ),
+              ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            color: white,
+            margin: EdgeInsets.only(bottom: 3),
+            padding: EdgeInsets.all(15),
+          ),
           Container(
             child: FlatButton(
-                child: Text('DONE'),
-                color: paua,
-                textColor: white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SelectVoice()),
-                  );
-                }),
+              child: Text('DONE'),
+              color: paua,
+              textColor: white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SelectVoice()),
+                );
+              },
+              onLongPress: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => _buildTTSDialog(context),
+                );
+              },
+            ),
             color: white,
             padding: EdgeInsets.fromLTRB(145, 50, 145, 255),
           ),
@@ -84,4 +98,8 @@ class _SignUpTTSState extends State<SignUpTTS> {
       ),
     );
   }
+}
+
+Widget _buildTTSDialog(BuildContext context) {
+  return TTSDialog();
 }

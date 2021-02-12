@@ -28,8 +28,9 @@ class _SignUpSkipState extends State<SignUpSkip> {
                 child: Text('CANCEL'),
                 textColor: paua,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: paua)),
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: paua),
+                ),
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                 onPressed: () {
                   Navigator.push(
@@ -42,13 +43,15 @@ class _SignUpSkipState extends State<SignUpSkip> {
                 child: Text('NEXT'),
                 color: paua,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SignUpTTS(locale: 'Croatian')),
+                      builder: (context) => SignUpTTS(locale: 'Croatian'),
+                    ),
                   );
                 },
               ),

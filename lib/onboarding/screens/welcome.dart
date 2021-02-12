@@ -16,26 +16,27 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: BaseAppBar(
-          title: Text('Welcome'),
-          appBar: AppBar(),
-          widgets: [
-            TextButton(
-              child: Text('SKIP'),
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                textStyle: TextStyle(fontWeight: FontWeight.w400),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpSkip()),
-                );
-              },
-            )
-          ],
-        ),
-        body: Column(children: [
+      appBar: BaseAppBar(
+        title: Text('Welcome'),
+        appBar: AppBar(),
+        widgets: [
+          TextButton(
+            child: Text('SKIP'),
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+              textStyle: TextStyle(fontWeight: FontWeight.w400),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpSkip()),
+              );
+            },
+          )
+        ],
+      ),
+      body: Column(
+        children: [
           Column(
             children: [
               Container(
@@ -60,8 +61,9 @@ class _WelcomeState extends State<Welcome> {
                     child: Text('LOG IN'),
                     textColor: paua,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: paua)),
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: paua),
+                    ),
                     padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                     onPressed: () {
                       Navigator.push(
@@ -74,7 +76,8 @@ class _WelcomeState extends State<Welcome> {
                     child: Text('SIGN UP'),
                     color: paua,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
                     padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                     onPressed: () {
                       Navigator.push(
@@ -88,6 +91,8 @@ class _WelcomeState extends State<Welcome> {
               )
             ],
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }

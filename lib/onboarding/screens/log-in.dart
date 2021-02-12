@@ -88,8 +88,9 @@ class LogInFormState extends State<LogInForm> {
             child: Text('LOG IN'),
             color: paua,
             textColor: white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
             onPressed: () {
               if (_formKey.currentState.validate()) {
