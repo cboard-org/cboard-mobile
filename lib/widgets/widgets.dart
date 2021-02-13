@@ -4,3 +4,5 @@ export 'sentences_bar.dart';
 export 'create_tile.dart';
 export 'change_tile_pic.dart';
 export 'delete_tile_modal.dart';
+export 'UnlockedMainBar.dart';
+export 'Tiles.dart';
