@@ -24,7 +24,7 @@ class Button extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(color: paua),
       ),
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: padding),
+      padding: EdgeInsets.symmetric(horizontal: padding),
       onPressed: onPress,
     );
   }
