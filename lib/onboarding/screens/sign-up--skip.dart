@@ -13,6 +13,8 @@ class SignUpSkip extends StatefulWidget {
 }
 
 class _SignUpSkipState extends State<SignUpSkip> {
+  String localeValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,58 @@ class _SignUpSkipState extends State<SignUpSkip> {
       ),
       body: Column(
         children: [
-          UserHeader(shouldSetPhoto: false, locale: 'Croatian'),
+          UserHeader(),
+          Container(
+              child: DropdownButtonFormField(
+                icon: localeValue == null
+                    ? Icon(Icons.arrow_drop_down, color: electric_violet)
+                    : Icon(
+                        Icons.check,
+                        color: fruit_salad,
+                      ),
+                decoration: InputDecoration(
+                    hintText: 'Select country',
+                    hintStyle: TextStyle(color: electric_violet)),
+                isExpanded: true,
+                style: TextStyle(color: electric_violet),
+                onChanged: (String newValue) {
+                  setState(() {
+                    localeValue = newValue;
+                  });
+                },
+                items: [
+                  'One',
+                  'Two',
+                  'Free',
+                  'Four'
+                ] // Should change to global constant or retrieve from backend
+                    .map(
+                      (String value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(value),
+                      ),
+                    )
+                    .toList(),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 30)),
+          if (localeValue != null)
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    child: Icon(Icons.error_outline, color: tulip_tree),
+                    margin: EdgeInsets.only(right: 10),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Text-to-speech download instructions are available on the next screen',
+                    ),
+                  ),
+                ],
+              ),
+              margin: EdgeInsets.only(top: 25, bottom: 50),
+              padding: EdgeInsets.symmetric(horizontal: 30),
+            ),
           ButtonBar(
             children: [
               Button(
@@ -38,13 +91,14 @@ class _SignUpSkipState extends State<SignUpSkip> {
               ),
               Button(
                 label: Text('NEXT'),
-                isPrimary: false,
+                padding: 40,
                 onPress: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SignUpTTS(locale: 'Croatian'),
+                      builder: (context) => SignUpTTS(locale: localeValue),
                     ),
+                    // Should also save to global state here
                   );
                 },
               ),
@@ -53,6 +107,7 @@ class _SignUpSkipState extends State<SignUpSkip> {
           )
         ],
       ),
+      backgroundColor: white,
     );
   }
 }

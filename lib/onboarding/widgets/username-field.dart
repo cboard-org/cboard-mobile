@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
 class UsernameField extends StatefulWidget {
@@ -24,7 +25,7 @@ class _UsernameFieldState extends State<UsernameField> {
                       .hasMatch(widget.controller.text)
                   ? Icon(
                       Icons.check,
-                      color: Colors.green,
+                      color: fruit_salad,
                     )
                   : null),
       keyboardType: TextInputType.emailAddress,

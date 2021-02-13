@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class UserHeader extends StatefulWidget {
   final bool shouldSetPhoto;
   final String locale;
-  const UserHeader({Key key, this.shouldSetPhoto, this.locale})
+  const UserHeader({Key key, this.shouldSetPhoto = true, this.locale})
       : super(key: key);
 
   @override
