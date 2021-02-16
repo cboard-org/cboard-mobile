@@ -70,15 +70,26 @@ class _SignUpTTSState extends State<SignUpTTS> {
             margin: EdgeInsets.only(bottom: 3),
             padding: EdgeInsets.all(15),
           ),
-          Button(
-            label: Text('DONE'),
-            padding: 40,
-            onPress: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => _buildTTSDialog(context),
-              );
-            },
+          Expanded(
+            child: Container(
+              child: Row(
+                children: [
+                  Button(
+                    label: Text('DONE'),
+                    padding: 40,
+                    onPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _buildTTSDialog(context),
+                      );
+                    },
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              color: white,
+            ),
           ),
         ],
       ),

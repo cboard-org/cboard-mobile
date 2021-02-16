@@ -15,35 +15,33 @@ class UserHeader extends StatefulWidget {
 class _UserHeaderState extends State<UserHeader> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
-      child: Container(
-        child: Column(
-          children: [
-            Image.asset('assets/images/user.png', scale: 0.75),
-            widget.shouldSetPhoto
-                ? Container(
-                    child: Text(
-                      'Set Photo',
-                      style: TextStyle(color: electric_violet),
-                    ),
-                    margin: EdgeInsets.only(top: 5),
-                  )
-                : Container(
-                    child: Text(
-                      'Please follow these steps to download the ' +
-                          widget.locale +
-                          ' TTS:',
-                      style: CustomTypography.Typography.subheader(),
-                      textAlign: TextAlign.center,
-                    ),
-                    margin: EdgeInsets.only(top: 20),
-                  )
-          ],
-        ),
-        color: white,
-        padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+      child: Column(
+        children: [
+          Image.asset('assets/images/user.png', scale: 0.75),
+          widget.shouldSetPhoto
+              ? Container(
+                  child: Text(
+                    'Set Photo',
+                    style: TextStyle(color: electric_violet),
+                  ),
+                  margin: EdgeInsets.only(top: 5),
+                )
+              : Container(
+                  child: Text(
+                    'Please follow these steps to download the ' +
+                        widget.locale +
+                        ' TTS:',
+                    style: CustomTypography.Typography.subheader(),
+                    textAlign: TextAlign.center,
+                  ),
+                  margin: EdgeInsets.only(top: 20),
+                )
+        ],
       ),
+      color: white,
+      padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
     );
   }
 }

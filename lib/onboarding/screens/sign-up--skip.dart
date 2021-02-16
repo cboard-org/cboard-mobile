@@ -34,7 +34,7 @@ class _SignUpSkipState extends State<SignUpSkip> {
                         color: fruit_salad,
                       ),
                 decoration: InputDecoration(
-                    hintText: 'Select country',
+                    hintText: 'Select Country',
                     hintStyle: TextStyle(color: electric_violet)),
                 isExpanded: true,
                 style: TextStyle(color: electric_violet),
@@ -57,6 +57,7 @@ class _SignUpSkipState extends State<SignUpSkip> {
                     )
                     .toList(),
               ),
+              margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.symmetric(horizontal: 30)),
           if (localeValue != null)
             Container(
@@ -76,35 +77,41 @@ class _SignUpSkipState extends State<SignUpSkip> {
               margin: EdgeInsets.only(top: 25, bottom: 50),
               padding: EdgeInsets.symmetric(horizontal: 30),
             ),
-          ButtonBar(
-            children: [
-              Button(
-                label: Text('CANCEL'),
-                padding: 30,
-                isPrimary: false,
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Welcome()),
-                  );
-                },
+          Expanded(
+            child: Container(
+              child: ButtonBar(
+                children: [
+                  Button(
+                    label: Text('CANCEL'),
+                    padding: 30,
+                    isPrimary: false,
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Welcome()),
+                      );
+                    },
+                  ),
+                  Button(
+                    label: Text('NEXT'),
+                    padding: 40,
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpTTS(locale: localeValue),
+                        ),
+                        // Should also save to global state here
+                      );
+                    },
+                  ),
+                ],
+                alignment: MainAxisAlignment.spaceEvenly,
               ),
-              Button(
-                label: Text('NEXT'),
-                padding: 40,
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SignUpTTS(locale: localeValue),
-                    ),
-                    // Should also save to global state here
-                  );
-                },
-              ),
-            ],
-            alignment: MainAxisAlignment.spaceEvenly,
-          )
+              alignment: Alignment.bottomCenter,
+              padding: EdgeInsets.only(bottom: 50),
+            ),
+          ),
         ],
       ),
       backgroundColor: white,
