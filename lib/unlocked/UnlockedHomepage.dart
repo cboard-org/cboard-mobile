@@ -89,10 +89,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
           ),
           crossAxisCount: 3,
           children: example.map((item) {
-            return GestureDetector(
-              onTap: () {},
-              child: Tiles(tile: item),
-            );
+            return Tiles(tile: item);
           }).toList(),
         ),
       ),
