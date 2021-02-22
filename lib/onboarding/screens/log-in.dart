@@ -75,49 +75,59 @@ class LogInFormState extends State<LogInForm> {
             child: PasswordField(controller: _passwordController),
             margin: EdgeInsets.only(bottom: 10),
           ),
-          Row(children: <Widget>[
-            Container(
-              child: Text(
-                'Forgot password?',
-                style: TextStyle(color: studio),
-                textAlign: TextAlign.right,
+          Row(
+            children: <Widget>[
+              Container(
+                child: Text(
+                  'Forgot password?',
+                  style: TextStyle(color: studio),
+                  textAlign: TextAlign.right,
+                ),
+                margin: EdgeInsets.only(bottom: 50),
               ),
-              margin: EdgeInsets.only(bottom: 50),
-            ),
-          ], mainAxisAlignment: MainAxisAlignment.end),
-          Button(
-            label: Text('LOG IN'),
-            onPress: () {
-              if (_formKey.currentState.validate()) {
-                // Sends email and password for login
-                // Currently also using an ad-hoc approach to state management when we should probably create a service (https://dev.to/aaronksaunders/simple-login-flow-in-flutter-then-firebase-part-one-29n6)
-                setState(() {
-                  _futureGetUserResponse = createUserLogin(
-                      _usernameController.text, _passwordController.text);
-                });
+            ],
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Button(
+                  label: Text('LOG IN'),
+                  onPress: () {
+                    if (_formKey.currentState.validate()) {
+                      // Sends email and password for login
+                      // Currently also using an ad-hoc approach to state management when we should probably create a service (https://dev.to/aaronksaunders/simple-login-flow-in-flutter-then-firebase-part-one-29n6)
+                      setState(() {
+                        _futureGetUserResponse = createUserLogin(
+                            _usernameController.text, _passwordController.text);
+                      });
 
-                // If the future response is not empty, parse it and navigate to homescreen
-                // if (_futureGetUserResponse != null) {
-                //   return FutureBuilder<GetUserResponse>(
-                //     future: _futureGetUserResponse,
-                //     builder: (context, snapshot) {
-                //       if (snapshot.hasData)
-                //         Navigator.push(
-                //           context,
-                //           MaterialPageRoute(builder: (context) => HomeScreen()),
-                //         );
-                //       else if (snapshot.hasError)
-                //         return Text('${snapshot.error}');
-                //       return CircularProgressIndicator();
-                //     },
-                //   );
-                // }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              }
-            },
+                      // If the future response is not empty, parse it and navigate to homescreen
+                      // if (_futureGetUserResponse != null) {
+                      //   return FutureBuilder<GetUserResponse>(
+                      //     future: _futureGetUserResponse,
+                      //     builder: (context, snapshot) {
+                      //       if (snapshot.hasData)
+                      //         Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(builder: (context) => HomeScreen()),
+                      //         );
+                      //       else if (snapshot.hasError)
+                      //         return Text('${snapshot.error}');
+                      //       return CircularProgressIndicator();
+                      //     },
+                      //   );
+                      // }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    }
+                  },
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
           ),
         ],
       ),
@@ -135,20 +145,14 @@ class LogIn extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    LogInForm(),
-                  ],
-                ),
-                color: white,
-                margin: EdgeInsets.only(top: 190),
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-              ),
-              Header(),
-            ],
+          Header(),
+          Expanded(
+            child: Container(
+              child: LogInForm(),
+              color: white,
+              margin: EdgeInsets.only(top: 3),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+            ),
           ),
         ],
       ),

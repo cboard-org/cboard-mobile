@@ -3,7 +3,6 @@ import 'package:cboard_mobile/onboarding/screens/sign-up--main.dart';
 import 'package:cboard_mobile/onboarding/screens/sign-up--skip.dart';
 import 'package:cboard_mobile/onboarding/widgets/header.dart';
 import 'package:cboard_mobile/shared/button.dart';
-import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
@@ -38,49 +37,47 @@ class _WelcomeState extends State<Welcome> {
       ),
       body: Column(
         children: [
-          Column(
-            children: [
-              Container(
-                child: Header(),
-                margin: EdgeInsets.only(bottom: 50),
-              ),
-              Container(
-                child: Placeholder(
-                  fallbackHeight: 60,
+          Container(
+            child: Header(),
+            margin: EdgeInsets.only(bottom: 50),
+          ),
+          Container(
+            child: Placeholder(
+              fallbackHeight: 60,
+            ),
+            margin: EdgeInsets.only(bottom: 20),
+          ),
+          Container(
+            child: Placeholder(
+              fallbackHeight: 60,
+            ),
+            margin: EdgeInsets.only(bottom: 90),
+          ),
+          Expanded(
+            child: ButtonBar(
+              children: [
+                Button(
+                  label: Text('LOG IN'),
+                  isPrimary: false,
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LogIn()),
+                    );
+                  },
                 ),
-                margin: EdgeInsets.only(bottom: 20),
-              ),
-              Container(
-                child: Placeholder(
-                  fallbackHeight: 60,
+                Button(
+                  label: Text('SIGN UP'),
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpMain()),
+                    );
+                  },
                 ),
-                margin: EdgeInsets.only(bottom: 90),
-              ),
-              ButtonBar(
-                children: [
-                  Button(
-                    label: Text('LOG IN'),
-                    isPrimary: false,
-                    onPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LogIn()),
-                      );
-                    },
-                  ),
-                  Button(
-                    label: Text('SIGN UP'),
-                    onPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpMain()),
-                      );
-                    },
-                  ),
-                ],
-                alignment: MainAxisAlignment.spaceEvenly,
-              )
-            ],
+              ],
+              alignment: MainAxisAlignment.spaceEvenly,
+            ),
           ),
         ],
       ),
