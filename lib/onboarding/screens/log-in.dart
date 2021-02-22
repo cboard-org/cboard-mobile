@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cboard_mobile/models/error.dart';
 import 'package:cboard_mobile/screens/home_screen.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/onboarding/widgets/header.dart';
 import 'package:cboard_mobile/onboarding/widgets/username-field.dart';
@@ -90,14 +91,9 @@ class LogInFormState extends State<LogInForm> {
           Expanded(
             child: Row(
               children: [
-                FlatButton(
-                  child: Text('LOG IN'),
-                  color: paua,
-                  textColor: white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                  onPressed: () {
+                Button(
+                  label: Text('LOG IN'),
+                  onPress: () {
                     if (_formKey.currentState.validate()) {
                       // Sends email and password for login
                       // Currently also using an ad-hoc approach to state management when we should probably create a service (https://dev.to/aaronksaunders/simple-login-flow-in-flutter-then-firebase-part-one-29n6)

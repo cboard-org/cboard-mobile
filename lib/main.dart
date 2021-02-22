@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             borderSide: BorderSide(color: electric_violet),
           ),
           labelStyle: TextStyle(color: electric_violet),
-          contentPadding: new EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+          contentPadding: new EdgeInsets.symmetric(horizontal: 15),
         ),
       ),
       home: Welcome(),
