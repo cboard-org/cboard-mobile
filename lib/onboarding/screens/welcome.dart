@@ -47,11 +47,8 @@ class _WelcomeState extends State<Welcome> {
             ),
             margin: EdgeInsets.only(bottom: 20),
           ),
-          Container(
-            child: Placeholder(
-              fallbackHeight: 60,
-            ),
-            margin: EdgeInsets.only(bottom: 90),
+          Placeholder(
+            fallbackHeight: 60,
           ),
           Expanded(
             child: ButtonBar(
