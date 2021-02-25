@@ -6,13 +6,7 @@ import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
-class Welcome extends StatefulWidget {
-  const Welcome({Key key}) : super(key: key);
-  @override
-  _WelcomeState createState() => _WelcomeState();
-}
-
-class _WelcomeState extends State<Welcome> {
+class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
