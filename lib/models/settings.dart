@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SettingsModel extends ChangeNotifier {
-  String
-      _locale; // Not sure if this should be internal, outsourced, or implemented as a separate model
+  String _locale;
 
   String get locale => _locale;
 

@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/models/locale.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
@@ -19,6 +20,8 @@ class _SignUpSkipState extends State<SignUpSkip> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> locales = LocaleModel.locales;
+
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('Sign Up'),
@@ -45,12 +48,7 @@ class _SignUpSkipState extends State<SignUpSkip> {
                     localeValue = newValue;
                   });
                 },
-                items: [
-                  'One',
-                  'Two',
-                  'Free',
-                  'Four'
-                ] // Should change to global constant or retrieve from backend
+                items: locales
                     .map(
                       (String value) => DropdownMenuItem(
                         value: value,
