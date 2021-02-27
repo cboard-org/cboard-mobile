@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 
+import 'package:cboard_mobile/unlocked/EditTile.dart';
+
 class Tiles extends StatelessWidget {
   final Tile tile;
   final double size;
@@ -11,47 +13,49 @@ class Tiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        showDialog(context: context, builder: (_) => ImageDialog(tile: tile)),
-        showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Wrap(
-              children: [
-                ListTile(
-                  leading: Icon(
-                    Icons.edit,
-                    color: Color(0xff23036A),
-                  ),
-                  title: Text('Edit Tiles'),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.layers,
-                    color: Color(0xff23036A),
-                  ),
-                  title: Text('Duplicate'),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.visibility_off,
-                    color: Color(0xff23036A),
-                  ),
-                  title: Text('Hide'),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.delete,
-                    color: Color(0xff23036A),
-                  ),
-                  title: Text(
-                    'Delete',
-                    style: TextStyle(color: Color(0xffC62828)),
-                  ),
-                ),
-              ],
-            );
-          },
-        )
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EditTileScreen(tile: tile)))
+        // showDialog(context: context, builder: (_) => ImageDialog(tile: tile)),
+        // showModalBottomSheet(
+        //   context: context,
+        //   builder: (context) {
+        //     return Wrap(
+        //       children: [
+        //         ListTile(
+        //           leading: Icon(
+        //             Icons.edit,
+        //             color: Color(0xff23036A),
+        //           ),
+        //           title: Text('Edit Tiles'),
+        //         ),
+        //         ListTile(
+        //           leading: Icon(
+        //             Icons.layers,
+        //             color: Color(0xff23036A),
+        //           ),
+        //           title: Text('Duplicate'),
+        //         ),
+        //         ListTile(
+        //           leading: Icon(
+        //             Icons.visibility_off,
+        //             color: Color(0xff23036A),
+        //           ),
+        //           title: Text('Hide'),
+        //         ),
+        //         ListTile(
+        //           leading: Icon(
+        //             Icons.delete,
+        //             color: Color(0xff23036A),
+        //           ),
+        //           title: Text(
+        //             'Delete',
+        //             style: TextStyle(color: Color(0xffC62828)),
+        //           ),
+        //         ),
+        //       ],
+        //     );
+        //   },
+        // )
       },
       child: Container(
         width: 104.86,
