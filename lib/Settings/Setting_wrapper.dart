@@ -1,18 +1,25 @@
+import 'package:cboard_mobile/Settings/ThemeManager.dart';
 import 'package:cboard_mobile/Settings/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'routes.dart';
 
 class Setting_wrapper extends StatelessWidget {
+  // ThemeNotifier theme = new ThemeNotifier();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Color(0xFF23036A),
+        accentColor: Color(0xFFE3CAFF),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white,
+      ),
       home: Scaffold(
         backgroundColor: Color(0xffE5E5E5),
         appBar: AppBar(
           centerTitle: true,
           title: Text('Settings'),
-          backgroundColor: Color(0xff23036A),
         ),
         body: MyStatefulWidget(),
       ),
@@ -42,11 +49,11 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
       'Import': [Icons.cloud_download, '/speech'],
       'Display': [Icons.remove_red_eye, '/display'],
       'Scanning': [Icons.center_focus_strong, '/speech'],
-      'Navigation': [Icons.chevron_right, '/speech']
+      'Navigation': [Icons.chevron_right, '/navigation']
     },
     {
-      'User Help': [Icons.help, '/speech'],
-      'About Cboard': [Icons.info, '/speech'],
+      'User Help': [Icons.help, '/user help'],
+      'About Cboard': [Icons.info, '/about'],
       'Donate': [Icons.monetization_on, '/speech'],
       'Feedback': [Icons.feedback, '/speech']
     },
@@ -84,7 +91,6 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
                           ? () {
                               Navigator.of(context).pushNamed(
                                 features[index].values.elementAt(iconIndex)[1],
-                                // arguments: null,
                               );
                             }
                           : null,

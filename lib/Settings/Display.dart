@@ -11,7 +11,6 @@ class Display extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Display'),
-          backgroundColor: Color(0xff23036A),
         ),
         body: Center(
           child: MyStatefulWidget(),
@@ -80,9 +79,9 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
       value: state,
       onChanged: (bool newValue) {
         setState(() {
-          if (title == "Enable Dark Theme")
+          if (title == "Enable Dark Theme") {
             _darkTheme = newValue;
-          else if (title == "Enable Predictive Text")
+          } else if (title == "Enable Predictive Text")
             _predictiveText = newValue;
           else
             _outputBar = newValue;

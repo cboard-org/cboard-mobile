@@ -24,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   overlay_screen: ^1.2.0+1
+  flutter_markdown: ^0.5.2
+  path_provider: ^1.6.27
+  url_launcher: ^5.7.10
+  shared_preferences: 0.5.12+4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,6 +52,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/help/
+    - translation/About/
+    - translation/User-help/
+  
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
