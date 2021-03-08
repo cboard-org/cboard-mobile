@@ -1,9 +1,6 @@
-import 'package:cboard_mobile/Settings/Display.dart';
 import 'package:flutter/material.dart';
 import 'screens/screens.dart';
 import 'Settings/Setting_wrapper.dart';
-import 'Settings/Speech.dart';
-import 'Settings/Display.dart';
 
 void main() {
   runApp(Setting_wrapper());
