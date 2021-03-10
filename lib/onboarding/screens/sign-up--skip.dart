@@ -1,3 +1,5 @@
+import 'package:cboard_mobile/models/locale.dart';
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
@@ -5,6 +7,7 @@ import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpSkip extends StatefulWidget {
   const SignUpSkip({Key key}) : super(key: key);
@@ -17,6 +20,8 @@ class _SignUpSkipState extends State<SignUpSkip> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> locales = LocaleModel.locales;
+
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('Sign Up'),
@@ -43,12 +48,7 @@ class _SignUpSkipState extends State<SignUpSkip> {
                     localeValue = newValue;
                   });
                 },
-                items: [
-                  'One',
-                  'Two',
-                  'Free',
-                  'Four'
-                ] // Should change to global constant or retrieve from backend
+                items: locales
                     .map(
                       (String value) => DropdownMenuItem(
                         value: value,
@@ -96,12 +96,13 @@ class _SignUpSkipState extends State<SignUpSkip> {
                     label: Text('NEXT'),
                     padding: 40,
                     onPress: () {
+                      Provider.of<SettingsModel>(context, listen: false)
+                          .updateLocale(localeValue);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpTTS(locale: localeValue),
+                          builder: (context) => SignUpTTS(),
                         ),
-                        // Should also save to global state here
                       );
                     },
                   ),
