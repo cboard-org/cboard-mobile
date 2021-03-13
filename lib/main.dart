@@ -1,10 +1,8 @@
+import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
-import 'screens/screens.dart';
-import 'Settings/Setting_wrapper.dart';
 
-void main() {
-  runApp(Setting_wrapper());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,12 +11,28 @@ class MyApp extends StatelessWidget {
       title: 'C-Board Mobile',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF23036A),
-        accentColor: Color(0xFFE3CAFF),
+        primaryColor: paua,
+        accentColor: fog,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: mercury,
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: electric_violet),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: electric_violet),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: electric_violet),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: electric_violet),
+          ),
+          labelStyle: TextStyle(color: electric_violet),
+          contentPadding: new EdgeInsets.symmetric(horizontal: 15),
+        ),
       ),
-      home: EditTileScreen(), // debug: change back to homescreen
+      home: Welcome(),
     );
   }
 }

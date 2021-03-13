@@ -44,3 +44,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#Settings
+#Dark Mode
+lib/Settings/ThemeManager.dart
+#Shared preferences
+lib/Settings/StorageManager.dart
+#Feedback screen
+lib/Settings/Feedback.dart
+
