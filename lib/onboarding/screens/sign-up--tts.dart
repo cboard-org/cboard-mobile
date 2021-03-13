@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/select-voice.dart';
 import 'package:cboard_mobile/onboarding/widgets/TTS-dialog.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
@@ -6,17 +7,13 @@ import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignUpTTS extends StatefulWidget {
-  final String locale;
-  const SignUpTTS({Key key, this.locale}) : super(key: key);
-  @override
-  _SignUpTTSState createState() => _SignUpTTSState();
-}
-
-class _SignUpTTSState extends State<SignUpTTS> {
+class SignUpTTS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var locale = context.read<SettingsModel>().locale;
+
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('Install TTS'),
@@ -25,7 +22,7 @@ class _SignUpTTSState extends State<SignUpTTS> {
       body: Column(
         children: [
           Container(
-            child: UserHeader(shouldSetPhoto: false, locale: widget.locale),
+            child: UserHeader(shouldSetPhoto: false, locale: locale),
             margin: EdgeInsets.only(bottom: 3),
           ),
           Container(
