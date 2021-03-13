@@ -1,6 +1,9 @@
-import 'package:cboard_mobile/widgets/widgets.dart';
+import 'package:cboard_mobile/unlocked/TileVocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
+
+import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
+import 'package:cboard_mobile/unlocked/TileName.dart';
 
 class EditTileScreen extends StatefulWidget {
   final Tile tile;
@@ -12,16 +15,16 @@ class EditTileScreen extends StatefulWidget {
 
 class _EditTileScreenState extends State<EditTileScreen> {
   ScrollController _scrollController;
-  double _scrollOffset = 0.0;
+  // double _scrollOffset = 0.0;
   bool lock = false;
 
   @override
   void initState() {
     _scrollController = ScrollController()
       ..addListener(() {
-        setState(() {
-          _scrollOffset = _scrollController.offset;
-        });
+        // setState(() {
+        //   _scrollOffset = _scrollController.offset;
+        // });
       });
     super.initState();
   }
@@ -41,7 +44,10 @@ class _EditTileScreenState extends State<EditTileScreen> {
         preferredSize: Size.fromHeight(screenSize.height) / 15,
         child: AppBar(
           leading: GestureDetector(
-            onTap: () => print('Back'),
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UnlockedHomeScreen()))
+            },
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
           ),
           centerTitle: true,
@@ -74,30 +80,65 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Card(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              color: Color(0xffF8C199),
-                              child: Image.asset(
-                                'assets/images/test.png',
-                                width: screenSize.width / 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                color: Color(0xffF8C199),
+                                child: GestureDetector(
+                                  onTap: () => {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Wrap(
+                                          children: [
+                                            ListTile(
+                                              leading: Icon(
+                                                Icons.photo_camera,
+                                                color: Color(0xff23036A),
+                                              ),
+                                              title: Text('Take Photos'),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(
+                                                Icons.insert_photo,
+                                                color: Color(0xff23036A),
+                                              ),
+                                              title: Text('Browse Album'),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(
+                                                Icons.search,
+                                                color: Color(0xff23036A),
+                                              ),
+                                              title: Text('Search Community'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    )
+                                  },
+                                  child: Image.asset(
+                                    widget.tile.imageUrl,
+                                    width: screenSize.width / 2,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: 24,
-                            child: Text('Test',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontFamily: "Robotto",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ),
-                        ],
-                      )),
+                            Container(
+                              height: 24,
+                              child: Text(widget.tile.name,
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: "Robotto",
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -121,7 +162,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           title: Text('Tile Name',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.black)),
-                          subtitle: Text('Test',
+                          subtitle: Text(widget.tile.name,
                               style: TextStyle(
                                   fontSize: 12, color: Color(0xff7C7C7C))),
                           trailing: Wrap(
@@ -130,8 +171,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   size: 35.0, color: Colors.black54),
                             ],
                           ),
-                          onTap: () =>
-                              print('Tile Name'), // Debug: change to edit
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TileName(
+                                          tile: widget.tile,
+                                        )))
+                          }, // Debug: change to edit
                         ),
                       ],
                     ),
@@ -145,11 +192,10 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     child: Column(
                       children: [
                         ListTile(
-                          // Tile Name
                           title: Text('Vocalization',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.black)),
-                          subtitle: Text('Test',
+                          subtitle: Text(widget.tile.vocalization,
                               style: TextStyle(
                                   fontSize: 12, color: Color(0xff7C7C7C))),
                           trailing: Wrap(
@@ -158,8 +204,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   size: 35.0, color: Colors.black54),
                             ],
                           ),
-                          onTap: () =>
-                              print('Tile Name'), // Debug: change to edit
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TileVocalization(
+                                          tile: widget.tile,
+                                        )))
+                          }, // Debug: change to edit
                         ),
                       ],
                     ),
@@ -173,7 +225,6 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     child: Column(
                       children: [
                         ListTile(
-                          // Tile Name
                           title: Text('Title Background Color',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.black)),
@@ -278,7 +329,6 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     child: Column(
                       children: [
                         ListTile(
-                          // Tile Name
                           title: Text('Tile Text Color',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.black)),
@@ -380,7 +430,6 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     child: Column(
                       children: [
                         ListTile(
-                          // Tile Name
                           title: Text('Voice Recorder',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.black)),

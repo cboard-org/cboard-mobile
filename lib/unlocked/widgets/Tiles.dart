@@ -15,6 +15,8 @@ class Tiles extends StatelessWidget {
       onTap: () => {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => EditTileScreen(tile: tile)))
+
+        // **********Tile pop up goes here*****************
         // showDialog(context: context, builder: (_) => ImageDialog(tile: tile)),
         // showModalBottomSheet(
         //   context: context,
