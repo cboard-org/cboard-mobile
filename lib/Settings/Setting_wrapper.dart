@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/Settings/ThemeManager.dart';
 import 'package:cboard_mobile/Settings/routes.dart';
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'routes.dart';
@@ -17,9 +17,9 @@ class Setting_wrapper extends StatelessWidget {
       ),
       home: Scaffold(
         backgroundColor: Color(0xffE5E5E5),
-        appBar: AppBar(
-          centerTitle: true,
+        appBar: BaseAppBar(
           title: Text('Settings'),
+          appBar: AppBar(),
         ),
         body: MyStatefulWidget(),
       ),

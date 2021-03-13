@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
 class Display extends StatelessWidget {
@@ -8,9 +9,9 @@ class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
+        appBar: BaseAppBar(
           title: Text('Display'),
+          appBar: AppBar(),
         ),
         body: Center(
           child: MyStatefulWidget(),

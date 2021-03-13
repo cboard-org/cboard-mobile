@@ -1,12 +1,13 @@
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("Navigation"),
+        appBar: BaseAppBar(
+          title: Text('Navigation'),
+          appBar: AppBar(),
         ),
         body: Center(
           child: MyStatefulWidget(),

@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,9 @@ class About extends StatelessWidget {
   final controller = ScrollController();
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
+      appBar: BaseAppBar(
         title: Text('About'),
+        appBar: AppBar(),
       ),
       body: FutureBuilder(
           future: rootBundle.loadString("translation/About/en-US.md"),
