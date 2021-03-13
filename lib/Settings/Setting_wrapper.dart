@@ -74,36 +74,28 @@ class Setting_wrapper extends StatelessWidget {
                         itemCount: features[index].length,
                         itemBuilder: (BuildContext context, int iconIndex) {
                           return GestureDetector(
-                            onTap: index != 0
-                                ? () {
-                                    Navigator.of(context).pushNamed(
-                                      features[index]
-                                          .values
-                                          .elementAt(iconIndex)[1],
-                                    );
-                                  }
-                                : null,
-                            child: ListTile(
-                              leading: Icon(
-                                features[index].values.elementAt(iconIndex)[0],
-                                color: Color(0xff391E75),
-                                size: 20,
-                              ),
-                              title: Text(
-                                  features[index].keys.elementAt(iconIndex)),
-                              trailing: (index == 0)
-                                  ? Container(
-                                      width: 121,
-                                      height: 27,
-                                      alignment: Alignment.center,
-                                      decoration: new BoxDecoration(
-                                          border: Border.all(
-                                              width: 1.0,
-                                              color: const Color(0xff6200EE)),
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(100.0)),
-                                      child: Button(
+                              onTap: index != 0
+                                  ? () {
+                                      Navigator.of(context).pushNamed(
+                                        features[index]
+                                            .values
+                                            .elementAt(iconIndex)[1],
+                                      );
+                                    }
+                                  : null,
+                              child: ListTile(
+                                leading: Icon(
+                                  features[index]
+                                      .values
+                                      .elementAt(iconIndex)[0],
+                                  color: Color(0xff391E75),
+                                  size: 20,
+                                ),
+                                title: Text(
+                                    features[index].keys.elementAt(iconIndex)),
+                                trailing: (index == 0)
+                                    ? Button(
+                                        padding: 9,
                                         label: Text('LOGIN/SIGN UP'),
                                         isPrimary: false,
                                         onPress: () {
@@ -113,11 +105,9 @@ class Setting_wrapper extends StatelessWidget {
                                                 .elementAt(iconIndex)[1],
                                           );
                                         },
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                          );
+                                      )
+                                    : null,
+                              ));
                         }),
                   ],
                 ),
