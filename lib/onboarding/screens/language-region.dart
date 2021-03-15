@@ -20,7 +20,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> locales = LocaleModel.locales;
+    final List<String> locales = LocaleModel.languageMap.keys;
 
     return Scaffold(
       appBar: BaseAppBar(
@@ -39,7 +39,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
                         color: fruit_salad,
                       ),
                 decoration: InputDecoration(
-                    hintText: 'Select Country',
+                    hintText: 'Select Language',
                     hintStyle: TextStyle(color: electric_violet)),
                 isExpanded: true,
                 style: TextStyle(color: electric_violet),
