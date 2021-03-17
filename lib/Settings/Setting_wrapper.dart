@@ -73,41 +73,38 @@ class Setting_wrapper extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: features[index].length,
                         itemBuilder: (BuildContext context, int iconIndex) {
-                          return GestureDetector(
-                              onTap: index != 0
-                                  ? () {
+                          return ListTile(
+                            onTap: index != 0
+                                ? () {
+                                    Navigator.of(context).pushNamed(
+                                      features[index]
+                                          .values
+                                          .elementAt(iconIndex)[1],
+                                    );
+                                  }
+                                : null,
+                            leading: Icon(
+                              features[index].values.elementAt(iconIndex)[0],
+                              color: Color(0xff391E75),
+                              size: 20,
+                            ),
+                            title:
+                                Text(features[index].keys.elementAt(iconIndex)),
+                            trailing: (index == 0)
+                                ? Button(
+                                    padding: 9,
+                                    label: Text('LOGIN/SIGN UP'),
+                                    isPrimary: false,
+                                    onPress: () {
                                       Navigator.of(context).pushNamed(
                                         features[index]
                                             .values
                                             .elementAt(iconIndex)[1],
                                       );
-                                    }
-                                  : null,
-                              child: ListTile(
-                                leading: Icon(
-                                  features[index]
-                                      .values
-                                      .elementAt(iconIndex)[0],
-                                  color: Color(0xff391E75),
-                                  size: 20,
-                                ),
-                                title: Text(
-                                    features[index].keys.elementAt(iconIndex)),
-                                trailing: (index == 0)
-                                    ? Button(
-                                        padding: 9,
-                                        label: Text('LOGIN/SIGN UP'),
-                                        isPrimary: false,
-                                        onPress: () {
-                                          Navigator.of(context).pushNamed(
-                                            features[index]
-                                                .values
-                                                .elementAt(iconIndex)[1],
-                                          );
-                                        },
-                                      )
-                                    : null,
-                              ));
+                                    },
+                                  )
+                                : null,
+                          );
                         }),
                   ],
                 ),

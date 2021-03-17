@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
+import 'package:cboard_mobile/shared/divider.dart';
 import 'package:flutter/material.dart';
 
 class Display extends StatelessWidget {
@@ -39,32 +40,24 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
     return ListView(
       children: <Widget>[
         radio_section('UI Size', 'Elements Size', _uiSize),
-        divider(),
+        DividerLine(),
         radio_section('Font Size', 'App Font Size', _fontSize),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Enable Dark Theme',
             'The theme specifies the color of the components, darkness of the surfaces, level of shadow, appropriate opacity of ink elements, etc.',
             _darkTheme),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Enable Predictive Text',
             'Predictive text will arrange the cards so that recommended cards based on past history will be recommended and shown first',
             _predictiveText),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Hide the Output Bar',
             'Hides the white bar on the top where you build a sentence',
             _outputBar),
       ],
-    );
-  }
-
-  Widget divider() {
-    return Divider(
-      height: 20,
-      color: Color(0xffE0E0E0),
-      thickness: 1,
     );
   }
 

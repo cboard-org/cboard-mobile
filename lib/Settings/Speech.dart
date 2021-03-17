@@ -1,5 +1,5 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cboard_mobile/shared/divider.dart';
 import 'package:flutter/material.dart';
 
 class Speech extends StatelessWidget {
@@ -33,23 +33,15 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
     return ListView(
       children: <Widget>[
         selectingSection('Dialect', 'newOption'),
-        divider(),
+        DividerLine(),
         selectingSection('Voice', 'newOption'),
-        divider(),
+        DividerLine(),
         slidingSection('Pitch', 'Make the voice use a higher or lower pitch',
             _currentPitch),
-        divider(),
+        DividerLine(),
         slidingSection(
             'Rate', 'Make the voice speaks faster or lower', _currentRate),
       ],
-    );
-  }
-
-  Widget divider() {
-    return Divider(
-      height: 20,
-      color: Color(0xffE0E0E0),
-      thickness: 1,
     );
   }
 

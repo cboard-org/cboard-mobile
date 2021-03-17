@@ -1,5 +1,5 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cboard_mobile/shared/divider.dart';
 import 'package:flutter/material.dart';
 
 class Navigation extends StatelessWidget {
@@ -30,24 +30,16 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
       children: <Widget>[
         listTile_section(
             'Enable context aware back button', 'subtitle', _context_aware),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Remove symbols from the output bar', 'subtitle', _remove_symbol),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Enable quick settings unlock', 'subtitle', _settings_unlock),
-        divider(),
+        DividerLine(),
         listTile_section(
             'Enable folder vocalization', 'subtitle', _folder_vocalization),
       ],
-    );
-  }
-
-  Widget divider() {
-    return Divider(
-      height: 20,
-      color: Color(0xffE0E0E0),
-      thickness: 1,
     );
   }
 
