@@ -65,10 +65,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
   Widget listTileSection(String title, String subtitle, bool state) {
     return SwitchListTile(
       activeColor: pure_violet,
-      title: Container(
-          width: 196,
-          child:
-              Text(title, style: TextStyle(fontSize: 14, color: Colors.black))),
+      title: Text(title, style: TextStyle(fontSize: 14, color: Colors.black)),
       subtitle:
           Text(subtitle, style: TextStyle(fontSize: 12, color: dark_gray)),
       value: state,
