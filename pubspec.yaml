@@ -53,8 +53,8 @@ flutter:
   assets:
     - assets/images/
     - assets/help/
-    - translation/About/
-    - translation/User-help/
+    - assets/markdown/About/
+    - assets/markdown/User-help/
   
   #   - images/a_dot_ham.jpeg
 

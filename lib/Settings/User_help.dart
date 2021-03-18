@@ -14,7 +14,7 @@ class User_help extends StatelessWidget {
         appBar: AppBar(),
       ),
       body: FutureBuilder(
-          future: rootBundle.loadString("translation/User-help/en-US.md"),
+          future: rootBundle.loadString("assets/markdown/User-help/en-US.md"),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (snapshot.hasData) {
               return Markdown(

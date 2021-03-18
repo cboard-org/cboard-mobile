@@ -13,7 +13,7 @@ class About extends StatelessWidget {
         appBar: AppBar(),
       ),
       body: FutureBuilder(
-          future: rootBundle.loadString("translation/About/en-US.md"),
+          future: rootBundle.loadString("assets/markdown/About/en-US.md"),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (snapshot.hasData) {
               return Markdown(

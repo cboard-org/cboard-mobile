@@ -39,21 +39,21 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        radio_section('UI Size', 'Elements Size', _uiSize),
+        radioSection('UI Size', 'Elements Size', _uiSize),
         DividerLine(),
-        radio_section('Font Size', 'App Font Size', _fontSize),
+        radioSection('Font Size', 'App Font Size', _fontSize),
         DividerLine(),
-        listTile_section(
+        listTileSection(
             'Enable Dark Theme',
             'The theme specifies the color of the components, darkness of the surfaces, level of shadow, appropriate opacity of ink elements, etc.',
             _darkTheme),
         DividerLine(),
-        listTile_section(
+        listTileSection(
             'Enable Predictive Text',
             'Predictive text will arrange the cards so that recommended cards based on past history will be recommended and shown first',
             _predictiveText),
         DividerLine(),
-        listTile_section(
+        listTileSection(
             'Hide the Output Bar',
             'Hides the white bar on the top where you build a sentence',
             _outputBar),
@@ -61,7 +61,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
     );
   }
 
-  Widget listTile_section(String title, String subtitle, bool state) {
+  Widget listTileSection(String title, String subtitle, bool state) {
     return SwitchListTile(
       activeColor: Color(0xff5600E8),
       title: Container(
@@ -101,7 +101,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
     );
   }
 
-  Widget radio_section(String title, String subtitle, size groupState) {
+  Widget radioSection(String title, String subtitle, size groupState) {
     return Container(
         margin: EdgeInsets.all(20),
         child: Column(
