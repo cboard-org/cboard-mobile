@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/Settings/routes.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../shared/button.dart';
@@ -34,13 +35,13 @@ class SettingWrapper extends StatelessWidget {
     return MaterialApp(
       routes: getRoute(),
       theme: ThemeData(
-        primaryColor: Color(0xFF23036A),
-        accentColor: Color(0xFFE3CAFF),
+        primaryColor: paua,
+        accentColor: fog,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.white,
       ),
       home: Scaffold(
-          backgroundColor: Color(0xffE5E5E5),
+          backgroundColor: mercury,
           appBar: BaseAppBar(
             title: Text('Settings'),
             appBar: AppBar(),
@@ -72,7 +73,7 @@ class SettingWrapper extends StatelessWidget {
                                   .elementAt(0)
                                   .values
                                   .elementAt(0)[0],
-                              color: Color(0xff391E75),
+                              color: dark_violet,
                               size: 20,
                             ),
                             title: Text(
@@ -109,7 +110,7 @@ class SettingWrapper extends StatelessWidget {
                                         .elementAt(index)
                                         .values
                                         .elementAt(iconIndex)[0],
-                                    color: Color(0xff391E75),
+                                    color: dark_violet,
                                     size: 20,
                                   ),
                                   title: Text(

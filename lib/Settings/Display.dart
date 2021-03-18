@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
 class Display extends StatelessWidget {
@@ -63,13 +64,13 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
 
   Widget listTileSection(String title, String subtitle, bool state) {
     return SwitchListTile(
-      activeColor: Color(0xff5600E8),
+      activeColor: pure_violet,
       title: Container(
           width: 196,
           child:
               Text(title, style: TextStyle(fontSize: 14, color: Colors.black))),
-      subtitle: Text(subtitle,
-          style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C))),
+      subtitle:
+          Text(subtitle, style: TextStyle(fontSize: 12, color: dark_gray)),
       value: state,
       onChanged: (bool newValue) {
         setState(() {
@@ -86,7 +87,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
 
   Widget _radio(size groupState, size state, String title) {
     return Radio(
-      activeColor: Color(0xff5600E8),
+      activeColor: pure_violet,
       value: state,
       groupValue: groupState,
       onChanged: (size newValue) {
@@ -108,27 +109,26 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: TextStyle(fontSize: 14)),
-            Text(subtitle,
-                style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C))),
+            Text(subtitle, style: TextStyle(fontSize: 12, color: dark_gray)),
             Row(
               children: [
                 Expanded(
                     child: Column(children: [
                   _radio(groupState, size.Standard, title),
                   Text("Standard",
-                      style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C)))
+                      style: TextStyle(fontSize: 12, color: dark_gray))
                 ])),
                 Expanded(
                     child: Column(children: [
                   _radio(groupState, size.Large, title),
                   Text("Large",
-                      style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C)))
+                      style: TextStyle(fontSize: 12, color: dark_gray))
                 ])),
                 Expanded(
                     child: Column(children: [
                   _radio(groupState, size.ExtraLarge, title),
                   Text("Extra large",
-                      style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C)))
+                      style: TextStyle(fontSize: 12, color: dark_gray))
                 ])),
               ],
             ),

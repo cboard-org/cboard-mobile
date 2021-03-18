@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
 class Speech extends StatelessWidget {
@@ -57,7 +58,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
           ),
           Text(
             newOption,
-            style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C)),
+            style: TextStyle(fontSize: 12, color: dark_gray),
           ),
         ],
       ),
@@ -75,10 +76,9 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
             section,
             style: TextStyle(fontSize: 14),
           ),
-          Text(description,
-              style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C))),
+          Text(description, style: TextStyle(fontSize: 12, color: dark_gray)),
           Slider(
-            activeColor: Color(0xff5600E8),
+            activeColor: pure_violet,
             value: currentValue,
             min: 0,
             max: 50,

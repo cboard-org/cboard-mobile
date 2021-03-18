@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
 class Navigation extends StatelessWidget {
@@ -45,13 +46,13 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
 
   Widget listTile_section(String title, String subtitle, bool state) {
     return SwitchListTile(
-      activeColor: Color(0xff5600E8),
+      activeColor: pure_violet,
       title: Container(
           width: 196,
           child:
               Text(title, style: TextStyle(fontSize: 14, color: Colors.black))),
-      subtitle: Text(subtitle,
-          style: TextStyle(fontSize: 12, color: Color(0xff7C7C7C))),
+      subtitle:
+          Text(subtitle, style: TextStyle(fontSize: 12, color: dark_gray)),
       value: state,
       onChanged: (bool newValue) {
         setState(() {
