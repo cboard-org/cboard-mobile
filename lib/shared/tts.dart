@@ -11,6 +11,7 @@ class Tts extends StatefulWidget {
   final double volume;
   final double pitch;
   final double rate;
+  final Widget child;
 
   const Tts(
       {Key key,
@@ -18,7 +19,8 @@ class Tts extends StatefulWidget {
       this.locale,
       this.volume = 0.5,
       this.pitch = 1.0,
-      this.rate = 0.5})
+      this.rate = 0.5,
+      this.child})
       : super(key: key);
 
   @override
@@ -90,6 +92,7 @@ class _TtsState extends State<Tts> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(bottomNavigationBar: bottomBar()));
+    return widget
+        .child; // Should necessarily modify this so that `onTap` or `onPress` can be called
   }
 }

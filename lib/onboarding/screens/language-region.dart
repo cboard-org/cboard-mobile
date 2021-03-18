@@ -20,7 +20,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> locales = LocaleModel.languageMap.keys;
+    final List<String> locales = LocaleModel.languageMap.keys.toList();
 
     return Scaffold(
       appBar: BaseAppBar(
