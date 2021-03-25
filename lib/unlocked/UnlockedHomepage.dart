@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/widgets/widgets.dart';
+import 'package:cboard_mobile/unlocked/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 

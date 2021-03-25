@@ -1,53 +1,26 @@
-import 'package:cboard_mobile/unlocked/EditTile.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
 
 class TileVocalization extends StatefulWidget {
-  final Tile tile;
+  final String tileVocalization;
 
-  const TileVocalization({Key key, this.tile}) : super(key: key);
+  const TileVocalization({Key key, this.tileVocalization}) : super(key: key);
   @override
   _TileVocalizationState createState() => _TileVocalizationState();
 }
 
 class _TileVocalizationState extends State<TileVocalization> {
-  ScrollController _scrollController;
-  double _scrollOffset = 0.0;
-  bool lock = false;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController()
-      ..addListener(() {
-        setState(() {
-          _scrollOffset = _scrollController.offset;
-        });
-      });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     TextEditingController vocalControllers = TextEditingController()
-      ..text = widget.tile.vocalization;
+      ..text = widget.tileVocalization;
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenSize.height) / 15,
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height) / 15,
         child: AppBar(
           leading: GestureDetector(
             onTap: () => {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EditTileScreen(tile: widget.tile))),
+              Navigator.pop(context),
             },
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
           ),
