@@ -1,7 +1,8 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/TileVocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
-
+import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/TileName.dart';
 
@@ -35,34 +36,34 @@ class _EditTileScreenState extends State<EditTileScreen> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenSize.height) / 15,
-        child: AppBar(
-          leading: GestureDetector(
-            onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UnlockedHomeScreen()))
-            },
-            child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(screenSize.height) / 15,
+          child: AppBar(
+            leading: GestureDetector(
+              onTap: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UnlockedHomeScreen()))
+              },
+              child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
+            ),
+            centerTitle: true,
+            title: Text(
+                'Edit'), // Debug: Change title to keep track of how many tiles
           ),
-          centerTitle: true,
-          title: Text(
-              'Edit'), // Debug: Change title to keep track of how many tiles
         ),
-      ),
-      body: Column(
-        children: <Widget>[
-          SizedBox(
-            height: screenSize.height / 75,
-          ),
-          Stack(
-            children: <Widget>[
-              Center(
-                child: Container(
-                  width: screenSize.width / 2,
-                  height: 168,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              height: screenSize.height / 75,
+            ),
+            Stack(
+              children: <Widget>[
+                Center(
+                  child: Container(
+                    width: screenSize.width / 2,
+                    height: screenSize.height / 4,
                     child: Card(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +71,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         children: <Widget>[
                           Expanded(
                             child: Container(
-                              color: Color(0xffF8C199),
+                              color: light_orange,
                               child: GestureDetector(
                                 onTap: () => {
                                   showModalBottomSheet(
@@ -81,21 +82,21 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                           ListTile(
                                             leading: Icon(
                                               Icons.photo_camera,
-                                              color: Color(0xff23036A),
+                                              color: paua,
                                             ),
                                             title: Text('Take Photos'),
                                           ),
                                           ListTile(
                                             leading: Icon(
                                               Icons.insert_photo,
-                                              color: Color(0xff23036A),
+                                              color: paua,
                                             ),
                                             title: Text('Browse Album'),
                                           ),
                                           ListTile(
                                             leading: Icon(
                                               Icons.search,
-                                              color: Color(0xff23036A),
+                                              color: paua,
                                             ),
                                             title: Text('Search Community'),
                                           ),
@@ -125,13 +126,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Card(
-            elevation: 0.0,
-            // margin: const EdgeInsets.fromLTRB(1.0, 8.0, 1.0, 8.0),
-            child: Column(
+              ],
+            ),
+            Column(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
@@ -144,11 +141,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       ListTile(
                         // Tile Name
                         title: Text('Tile Name',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
+                            style: CustomTypography.Typography.title()),
                         subtitle: Text(widget.tile.name,
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xff7C7C7C))),
+                            style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
                             Icon(Icons.keyboard_arrow_right,
@@ -177,11 +172,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     children: [
                       ListTile(
                         title: Text('Vocalization',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
+                            style: CustomTypography.Typography.title()),
                         subtitle: Text(widget.tile.vocalization,
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xff7C7C7C))),
+                            style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
                             Icon(Icons.keyboard_arrow_right,
@@ -211,11 +204,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     children: [
                       ListTile(
                         title: Text('Title Background Color',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
-                        // subtitle: Text('Test',
-                        //     style: TextStyle(
-                        //         fontSize: 12, color: Color(0xff7C7C7C))),
+                            style: CustomTypography.Typography.title()),
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
@@ -225,7 +214,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffBBDEFB),
+                                    color: light_blue,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -236,7 +225,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xff2E7D32),
+                                    color: dark_green,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -247,7 +236,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffEACA1E),
+                                    color: bold_yellow,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -258,7 +247,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffF4828E),
+                                    color: light_pink,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -269,7 +258,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffBA82DF),
+                                    color: light_purple,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -280,7 +269,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffF99E5C),
+                                    color: bright_orange,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -291,7 +280,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffE53935),
+                                    color: cinnabar,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -315,8 +304,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     children: [
                       ListTile(
                         title: Text('Tile Text Color',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
+                            style: CustomTypography.Typography.title()),
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
@@ -326,7 +314,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffBBDEFB),
+                                    color: light_blue,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -337,7 +325,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xff2E7D32),
+                                    color: dark_green,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -348,7 +336,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffEACA1E),
+                                    color: bold_yellow,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -359,7 +347,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffF4828E),
+                                    color: light_pink,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -370,7 +358,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffBA82DF),
+                                    color: light_purple,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -381,7 +369,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffF99E5C),
+                                    color: bright_orange,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -392,7 +380,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   width: 20,
                                   height: 20,
                                   decoration: new BoxDecoration(
-                                    color: Color(0xffE53935),
+                                    color: cinnabar,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -416,11 +404,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     children: [
                       ListTile(
                         title: Text('Voice Recorder',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
+                            style: CustomTypography.Typography.title()),
                         subtitle: Text('On',
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xff7C7C7C))),
+                            style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
                             Icon(Icons.keyboard_arrow_right,
@@ -435,35 +421,25 @@ class _EditTileScreenState extends State<EditTileScreen> {
                 ),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SizedBox(
-                width: screenSize.width / 4,
-              ),
-              RaisedButton(
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
-                padding:
-                    EdgeInsets.only(top: 10, left: 65, right: 65, bottom: 10),
-                child: Text(
-                  "SAVE",
-                  style: TextStyle(fontSize: 18.0, color: Colors.white),
+            Center(
+              child: Align(
+                alignment: Alignment.center,
+                child: RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  padding:
+                      EdgeInsets.only(top: 10, left: 65, right: 65, bottom: 10),
+                  child: Text(
+                    "SAVE",
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  ),
                 ),
-                onPressed: () {
-                  setState(() => lock = !lock);
-                },
               ),
-              SizedBox(
-                width: screenSize.width / 4,
-              )
-            ],
-          )
-          // BUTTONS
-        ],
-      ),
-    );
+            ),
+          ],
+        )
+        // BUTTONS
+        );
   }
 }

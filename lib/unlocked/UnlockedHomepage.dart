@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
@@ -54,7 +55,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                       Text(
                         'Board Name>Folder',
                         style: TextStyle(
-                          color: Color(0xff23036A),
+                          color: paua,
                           fontSize: 14.0,
                           fontFamily: "Robotto",
                         ),
@@ -67,7 +68,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                             Text(
                               'SELECT',
                               style: TextStyle(
-                                  color: Color(0xff23036A),
+                                  color: paua,
                                   fontSize: 14.0,
                                   fontFamily: "Proxima Nova",
                                   fontWeight: FontWeight.bold),

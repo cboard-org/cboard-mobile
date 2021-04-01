@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cboard_mobile/shared/app-bar.dart';
 
 class TileName extends StatefulWidget {
   final String tilename;
@@ -17,14 +18,12 @@ class _TileNameState extends State<TileName> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).size.height) / 15,
-        child: AppBar(
+        child: BaseAppBar(
           leading: GestureDetector(
             onTap: () => {Navigator.pop(context)},
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
           ),
-          centerTitle: true,
-          title: Text(
-              'Tile Name'), // Debug: Change title to keep track of how many tiles
+          title: Text('Tile Name'),
         ),
       ),
       body: TextField(

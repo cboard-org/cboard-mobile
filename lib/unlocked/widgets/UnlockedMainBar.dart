@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 
 class UnlockedMainBar extends StatelessWidget {
@@ -15,7 +16,7 @@ class UnlockedMainBar extends StatelessWidget {
         vertical: 10.0,
         horizontal: 10.0,
       ),
-      color: Color(0xffF2E7FE),
+      color: light_purple_A100,
       child: Row(
         children: [
           Expanded(
@@ -32,28 +33,28 @@ class UnlockedMainBar extends StatelessWidget {
                             ListTile(
                               leading: Icon(
                                 Icons.folder,
-                                color: Color(0xff23036A),
+                                color: paua,
                               ),
                               title: Text('Manage Boards'),
                             ),
                             ListTile(
                               leading: Icon(
                                 Icons.create_new_folder,
-                                color: Color(0xff23036A),
+                                color: paua,
                               ),
                               title: Text('New Board'),
                             ),
                             ListTile(
                               leading: Icon(
                                 Icons.assignment,
-                                color: Color(0xff23036A),
+                                color: paua,
                               ),
                               title: Text('Board 2'),
                             ),
                             ListTile(
                               leading: Icon(
                                 Icons.assignment,
-                                color: Color(0xff23036A),
+                                color: paua,
                               ),
                               title: Text('Board 2'),
                             ),
@@ -69,7 +70,7 @@ class UnlockedMainBar extends StatelessWidget {
                       Text(
                         'Board Name',
                         style: TextStyle(
-                            color: Color(0xff23036A),
+                            color: paua,
                             fontSize: 16.0,
                             fontFamily: "Robotto",
                             fontWeight: FontWeight.bold),
@@ -85,7 +86,7 @@ class UnlockedMainBar extends StatelessWidget {
                       onTap: () => print('Create'), // insert new screen here
                       child: Icon(
                         Icons.create,
-                        color: Color(0xff23036A),
+                        color: paua,
                         size: 20.0,
                       ),
                     ),
@@ -94,7 +95,7 @@ class UnlockedMainBar extends StatelessWidget {
                       onTap: () => print('Delete'), // insert new screen here
                       child: Icon(
                         Icons.delete,
-                        color: Color(0xff23036A),
+                        color: paua,
                         size: 20.0,
                       ),
                     ),
@@ -104,7 +105,7 @@ class UnlockedMainBar extends StatelessWidget {
                       onTap: () => print('Settings'), // insert new screen here
                       child: Icon(
                         Icons.settings,
-                        color: Color(0xff23036A),
+                        color: paua,
                         size: 20.0,
                       ),
                     ),
@@ -113,7 +114,7 @@ class UnlockedMainBar extends StatelessWidget {
                       onTap: () => print('Lock'), // insert new screen here
                       child: Icon(
                         Icons.lock_open,
-                        color: Color(0xff23036A),
+                        color: paua,
                         size: 20.0,
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 
@@ -26,28 +27,28 @@ class Tiles extends StatelessWidget {
         //         ListTile(
         //           leading: Icon(
         //             Icons.edit,
-        //             color: Color(0xff23036A),
+        //             color: paua,
         //           ),
         //           title: Text('Edit Tiles'),
         //         ),
         //         ListTile(
         //           leading: Icon(
         //             Icons.layers,
-        //             color: Color(0xff23036A),
+        //             color: paua,
         //           ),
         //           title: Text('Duplicate'),
         //         ),
         //         ListTile(
         //           leading: Icon(
         //             Icons.visibility_off,
-        //             color: Color(0xff23036A),
+        //             color: paua,
         //           ),
         //           title: Text('Hide'),
         //         ),
         //         ListTile(
         //           leading: Icon(
         //             Icons.delete,
-        //             color: Color(0xff23036A),
+        //             color: paua,
         //           ),
         //           title: Text(
         //             'Delete',
@@ -70,7 +71,7 @@ class Tiles extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: 83.54,
-                  color: Color(0xffFFF6B1),
+                  color: light_yellow,
                   child: Image.asset(
                     tile.imageUrl,
                     width: 104.86,
@@ -113,7 +114,7 @@ class ImageDialog extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 230.75,
-                color: Color(0xffFFF6B1),
+                color: light_yellow,
                 child: Image.asset(
                   tile.imageUrl,
                   width: 277.11,

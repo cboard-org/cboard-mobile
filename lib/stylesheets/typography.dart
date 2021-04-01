@@ -19,4 +19,12 @@ class Typography {
   static TextStyle description() {
     return TextStyle();
   }
+
+  static TextStyle title() {
+    return TextStyle(color: mine_shaft, fontSize: 14);
+  }
+
+  static TextStyle subTitle() {
+    return TextStyle(color: mine_shaft, fontSize: 12);
+  }
 }
