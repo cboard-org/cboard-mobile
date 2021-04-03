@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';

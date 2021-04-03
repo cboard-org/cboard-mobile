@@ -8,26 +8,24 @@ import 'routes.dart';
 
 class SettingWrapper extends StatelessWidget {
   // ThemeNotifier theme = new ThemeNotifier();
-  final Map<String, Map<String, List<Object>>> section = {
-    'People': {
-      'Guest': [Icons.account_circle, '/welcome']
-    },
+  final Map<String, Map<String, SettingListItem>> section = {
+    'People': {'Guest': new SettingListItem(Icons.account_circle, '/welcome')},
     'Language': {
-      'Language': [Icons.language, '/speech'],
-      'Speech': [Icons.record_voice_over, '/speech']
+      'Language': new SettingListItem(Icons.language, '/speech'),
+      'Speech': new SettingListItem(Icons.record_voice_over, '/speech')
     },
     'System': {
-      'Export': [Icons.cloud_upload, '/speech'],
-      'Import': [Icons.cloud_download, '/speech'],
-      'Display': [Icons.remove_red_eye, '/display'],
-      'Scanning': [Icons.center_focus_strong, '/speech'],
-      'Navigation': [Icons.chevron_right, '/navigation']
+      'Export': new SettingListItem(Icons.cloud_upload, '/speech'),
+      'Import': new SettingListItem(Icons.cloud_download, '/speech'),
+      'Display': new SettingListItem(Icons.remove_red_eye, '/display'),
+      'Scanning': new SettingListItem(Icons.center_focus_strong, '/speech'),
+      'Navigation': new SettingListItem(Icons.chevron_right, '/navigation')
     },
     'Help': {
-      'User Help': [Icons.help, '/user help'],
-      'About Cboard': [Icons.info, '/about'],
-      'Donate': [Icons.monetization_on, '/speech'],
-      'Feedback': [Icons.feedback, '/speech']
+      'User Help': new SettingListItem(Icons.help, '/user help'),
+      'About Cboard': new SettingListItem(Icons.info, '/about'),
+      'Donate': new SettingListItem(Icons.monetization_on, '/speech'),
+      'Feedback': new SettingListItem(Icons.feedback, '/speech')
     }
   };
   @override
@@ -66,13 +64,14 @@ class SettingWrapper extends StatelessWidget {
                       section.keys.elementAt(index),
                       textAlign: TextAlign.left,
                     ),
-                    (index == 0)
+                    (index == 0) //checking if the section is 'People'
                         ? ListTile(
                             leading: Icon(
                               section.values
                                   .elementAt(0)
                                   .values
-                                  .elementAt(0)[0],
+                                  .elementAt(0)
+                                  .icon,
                               color: dark_violet,
                               size: 20,
                             ),
@@ -86,7 +85,8 @@ class SettingWrapper extends StatelessWidget {
                                 Navigator.of(context).pushNamed(section.values
                                     .elementAt(0)
                                     .values
-                                    .elementAt(0)[1]);
+                                    .elementAt(0)
+                                    .route);
                               },
                             ))
                         : ListView.separated(
@@ -103,13 +103,15 @@ class SettingWrapper extends StatelessWidget {
                                         .values
                                         .elementAt(index)
                                         .values
-                                        .elementAt(iconIndex)[1]);
+                                        .elementAt(iconIndex)
+                                        .route);
                                   },
                                   leading: Icon(
                                     section.values
                                         .elementAt(index)
                                         .values
-                                        .elementAt(iconIndex)[0],
+                                        .elementAt(iconIndex)
+                                        .icon,
                                     color: dark_violet,
                                     size: 20,
                                   ),
@@ -126,5 +128,14 @@ class SettingWrapper extends StatelessWidget {
             },
           )),
     );
+  }
+}
+
+class SettingListItem {
+  IconData icon;
+  String route;
+  SettingListItem(IconData iconNew, String routeNew) {
+    this.icon = iconNew;
+    this.route = routeNew;
   }
 }
