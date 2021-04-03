@@ -61,8 +61,6 @@ class Tiles extends StatelessWidget {
         // )
       },
       child: Container(
-        width: 104.86,
-        height: 105,
         child: Card(
             margin: EdgeInsets.all(5),
             child: Column(
@@ -70,15 +68,15 @@ class Tiles extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  height: 83.54,
+                  height: MediaQuery.of(context).size.height / 8,
                   color: light_yellow,
                   child: Image.asset(
                     tile.imageUrl,
-                    width: 104.86,
+                    width: MediaQuery.of(context).size.width,
                   ),
                 ),
                 Container(
-                  height: 21.44,
+                  height: MediaQuery.of(context).size.height / 38,
                   child: Text(tile.name,
                       style: TextStyle(
                         fontSize: 12.0,

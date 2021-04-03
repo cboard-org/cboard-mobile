@@ -8,8 +8,24 @@ import 'package:cboard_mobile/unlocked/TileName.dart';
 
 class EditTileScreen extends StatefulWidget {
   final Tile tile;
+  final Map<Text, IconData> modelBottom = {
+    Text('Take Photos'): Icons.photo_camera,
+    Text('Browse Albums'): Icons.insert_photo,
+    Text('Search Community'): Icons.search
+  };
 
-  const EditTileScreen({Key key, this.tile}) : super(key: key);
+  final List<Color> editColors = [
+    light_blue,
+    dark_green,
+    bold_yellow,
+    light_pink,
+    light_purple,
+    bright_orange,
+    cinnabar
+  ];
+
+  EditTileScreen({Key key, this.tile}) : super(key: key);
+
   @override
   _EditTileScreenState createState() => _EditTileScreenState();
 }
@@ -58,75 +74,56 @@ class _EditTileScreenState extends State<EditTileScreen> {
             SizedBox(
               height: screenSize.height / 75,
             ),
-            Stack(
-              children: <Widget>[
-                Center(
-                  child: Container(
-                    width: screenSize.width / 2,
-                    height: screenSize.height / 4,
-                    child: Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              color: light_orange,
-                              child: GestureDetector(
-                                onTap: () => {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return Wrap(
-                                        children: [
-                                          ListTile(
-                                            leading: Icon(
-                                              Icons.photo_camera,
-                                              color: paua,
-                                            ),
-                                            title: Text('Take Photos'),
-                                          ),
-                                          ListTile(
-                                            leading: Icon(
-                                              Icons.insert_photo,
-                                              color: paua,
-                                            ),
-                                            title: Text('Browse Album'),
-                                          ),
-                                          ListTile(
-                                            leading: Icon(
-                                              Icons.search,
-                                              color: paua,
-                                            ),
-                                            title: Text('Search Community'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  )
+            Center(
+              child: Container(
+                width: screenSize.width / 2,
+                height: screenSize.height / 4,
+                child: Card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          color: light_orange,
+                          child: GestureDetector(
+                            onTap: () => {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Wrap(children: [
+                                    for (var text in widget.modelBottom.keys)
+                                      ListTile(
+                                        leading: Icon(
+                                          widget.modelBottom[text],
+                                          color: paua,
+                                        ),
+                                        title: text,
+                                      ),
+                                  ]);
                                 },
-                                child: Image.asset(
-                                  widget.tile.imageUrl,
-                                  width: screenSize.width / 2,
-                                ),
-                              ),
+                              )
+                            },
+                            child: Image.asset(
+                              widget.tile.imageUrl,
+                              width: screenSize.width / 2,
                             ),
                           ),
-                          Container(
-                            height: 24,
-                            child: Text(widget.tile.name,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontFamily: "Robotto",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Container(
+                        height: MediaQuery.of(context).size.height / 28,
+                        child: Text(widget.tile.name,
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontFamily: "Robotto",
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
             Column(
               children: <Widget>[
@@ -209,82 +206,20 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
                             children: [
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_blue,
-                                    shape: BoxShape.circle,
+                              for (var colorCircular in widget.editColors)
+                                InkResponse(
+                                  child: new Container(
+                                    margin: const EdgeInsets.only(right: 26.8),
+                                    width: screenSize.width / 18,
+                                    height: screenSize.width / 18,
+                                    decoration: new BoxDecoration(
+                                        color: colorCircular,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: dark_green,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: bold_yellow,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_pink,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_purple,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: bright_orange,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: cinnabar,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: 30,
+                              // )
                             ],
                           ),
                         ),
@@ -309,82 +244,17 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
                             children: [
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_blue,
-                                    shape: BoxShape.circle,
+                              for (var colorCircular in widget.editColors)
+                                InkResponse(
+                                  child: new Container(
+                                    margin: const EdgeInsets.only(right: 26.8),
+                                    width: screenSize.width / 18,
+                                    height: screenSize.width / 18,
+                                    decoration: new BoxDecoration(
+                                        color: colorCircular,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: dark_green,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: bold_yellow,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_pink,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: light_purple,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: bright_orange,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 30),
-                              InkResponse(
-                                child: new Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: new BoxDecoration(
-                                    color: cinnabar,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),

@@ -37,9 +37,9 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 90),
         child: Container(
-          height: 90,
           margin: EdgeInsets.only(
-              top: 25.0), // avoid overlapping with phone's top display stuff
+              top: screenSize.height /
+                  30), // avoid overlapping with phone's top display stuff
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
