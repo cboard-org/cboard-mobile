@@ -16,17 +16,42 @@ class SettingsModel extends ChangeNotifier {
 
   size _fontSize = size.Standard;
 
+  //Getters
+  String get locale => _locale;
+  bool get darkTheme => _darkTheme;
+  bool get predictiveText => _predictiveText;
+  bool get outputBar => _outputBar;
   size get uiSize => _uiSize;
+  size get fontSize => _fontSize;
+
+  //Setters
+  void updateLocale(String locale) {
+    _locale = locale;
+    notifyListeners();
+  }
+
+  void updateDarkTheme(bool newVal) {
+    _darkTheme = newVal;
+    notifyListeners();
+  }
+
+  void updatePredictiveText(bool newVal) {
+    _predictiveText = newVal;
+    notifyListeners();
+  }
+
+  void updateOutputBar(bool newVal) {
+    _outputBar = newVal;
+    notifyListeners();
+  }
 
   void updateUiSize(size newSize) {
     _uiSize = newSize;
     notifyListeners();
   }
 
-  String get locale => _locale;
-
-  void updateLocale(String locale) {
-    _locale = locale;
+  void updateFontSize(size newSize) {
+    _fontSize = newSize;
     notifyListeners();
   }
 }
