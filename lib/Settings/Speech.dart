@@ -1,7 +1,10 @@
+import 'package:cboard_mobile/Settings/Voice.dart';
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Speech extends StatelessWidget {
   String route = "speech";
@@ -27,74 +30,69 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidget extends State<MyStatefulWidget> {
-  double _currentPitch = 10;
-  double _currentRate = 10;
   @override
   Widget build(BuildContext context) {
+    var settingmodel = Provider.of<SettingsModel>(context);
     return ListView(
       children: <Widget>[
-        selectingSection('Dialect', 'newOption'),
+        ListTile(
+          title: Text(
+            "Dialect",
+          ),
+          subtitle: Text(settingmodel.voiceType.toString()),
+        ),
         DividerLine(),
-        selectingSection('Voice', 'newOption'),
+        ListTile(
+            title: Text("Voice"),
+            subtitle: Text(settingmodel.voiceType.toString()),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Voice()),
+              );
+            }),
         DividerLine(),
-        slidingSection('Pitch', 'Make the voice use a higher or lower pitch',
-            _currentPitch),
+        Column(
+          children: [
+            ListTile(
+              title: Text("Pitch"),
+              subtitle:
+                  Text("Make the voice use lower a higher or lower pitch"),
+            ),
+            Slider(
+              activeColor: pure_violet,
+              value: settingmodel.pitch,
+              min: 0,
+              max: 50,
+              onChanged: (double newValue) {
+                setState(() {
+                  settingmodel.updatePitch(newValue);
+                });
+              },
+            ),
+          ],
+        ),
         DividerLine(),
-        slidingSection(
-            'Rate', 'Make the voice speaks faster or lower', _currentRate),
+        Column(
+          children: [
+            ListTile(
+              title: Text("Rate"),
+              subtitle: Text("Make the voice speak faster or slower"),
+            ),
+            Slider(
+              activeColor: pure_violet,
+              value: settingmodel.rate,
+              min: 0,
+              max: 50,
+              onChanged: (double newValue) {
+                setState(() {
+                  settingmodel.updateRate(newValue);
+                });
+              },
+            ),
+          ],
+        )
       ],
-    );
-  }
-
-  Widget selectingSection(String section, String newOption) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            section,
-            style: TextStyle(fontSize: 14),
-          ),
-          Text(
-            newOption,
-            style: TextStyle(fontSize: 12, color: dark_gray),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget slidingSection(
-      String section, String description, double currentValue) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            section,
-            style: TextStyle(fontSize: 14),
-          ),
-          Text(description, style: TextStyle(fontSize: 12, color: dark_gray)),
-          Slider(
-            activeColor: pure_violet,
-            value: currentValue,
-            min: 0,
-            max: 50,
-            label: currentValue.round().toString(),
-            onChanged: (double newValue) {
-              setState(() {
-                if (section == 'Pitch')
-                  _currentPitch = newValue;
-                else {
-                  _currentRate = newValue;
-                }
-              });
-            },
-          ),
-        ],
-      ),
     );
   }
 }
