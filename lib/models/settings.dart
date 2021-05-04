@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +23,14 @@ class SettingsModel extends ChangeNotifier {
 
   double _rate = 20;
 
+  bool _backButton = true;
+
+  bool _symbolRemovable = true;
+
+  bool _quickSettingUnlock = false;
+
+  bool _folderVocal = true;
+
   //Getters
   String get locale => _locale;
   bool get darkTheme => _darkTheme;
@@ -35,6 +41,10 @@ class SettingsModel extends ChangeNotifier {
   voice get voiceType => _voiceType;
   double get pitch => _pitch;
   double get rate => _rate;
+  bool get backButton => _backButton;
+  bool get symbolRemovable => _symbolRemovable;
+  bool get quickSettingUnlock => _quickSettingUnlock;
+  bool get folderVocal => _folderVocal;
 
   //Setters
   void updateLocale(String locale) {
@@ -79,6 +89,26 @@ class SettingsModel extends ChangeNotifier {
 
   void updateRate(double newVal) {
     _rate = newVal;
+    notifyListeners();
+  }
+
+  void updateBackButton() {
+    _backButton = !_backButton;
+    notifyListeners();
+  }
+
+  void updateSymbolRemove() {
+    _symbolRemovable = !_symbolRemovable;
+    notifyListeners();
+  }
+
+  void updateQuickSetting() {
+    _quickSettingUnlock = !_quickSettingUnlock;
+    notifyListeners();
+  }
+
+  void updateFolderUnlock() {
+    _folderVocal = !_folderVocal;
     notifyListeners();
   }
 }

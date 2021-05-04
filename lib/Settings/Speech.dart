@@ -6,6 +6,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class Speech extends StatelessWidget {
   String route = "speech";
   @override

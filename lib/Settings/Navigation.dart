@@ -1,7 +1,9 @@
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
-import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/shared/listTile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -21,51 +23,34 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidget extends State<MyStatefulWidget> {
-  bool _context_aware = true;
-  bool _remove_symbol = true;
-  bool _settings_unlock = false;
-  bool _folder_vocalization = true;
-
   Widget build(BuildContext context) {
+    var settingmodel = Provider.of<SettingsModel>(context);
     return ListView(
       children: <Widget>[
-        listTile_section(
-            'Enable context aware back button', 'subtitle', _context_aware),
+        ListTileSection(
+            'Enable context aware back button',
+            'Shows big back buttons on top of the boards',
+            settingmodel.backButton,
+            (bool newVal) => settingmodel.updateBackButton()),
         DividerLine(),
-        listTile_section(
-            'Remove symbols from the output bar', 'subtitle', _remove_symbol),
+        ListTileSection(
+            'Remove symbols from the output bar',
+            "Shows 'x' button on each symbol in order to remove it",
+            settingmodel.symbolRemovable,
+            (bool newVal) => settingmodel.updateSymbolRemove()),
         DividerLine(),
-        listTile_section(
-            'Enable quick settings unlock', 'subtitle', _settings_unlock),
+        ListTileSection(
+            'Enable quick settings unlock',
+            'Unlocks settings with a single click',
+            settingmodel.quickSettingUnlock,
+            (bool newVal) => settingmodel.updateQuickSetting()),
         DividerLine(),
-        listTile_section(
-            'Enable folder vocalization', 'subtitle', _folder_vocalization),
+        ListTileSection(
+            'Enable folder vocalization',
+            "Reads folder's name out loud when folder is clicked",
+            settingmodel.folderVocal,
+            (bool newVal) => settingmodel.updateFolderUnlock()),
       ],
-    );
-  }
-
-  Widget listTile_section(String title, String subtitle, bool state) {
-    return SwitchListTile(
-      activeColor: pure_violet,
-      title: Container(
-          width: 196,
-          child:
-              Text(title, style: TextStyle(fontSize: 14, color: Colors.black))),
-      subtitle:
-          Text(subtitle, style: TextStyle(fontSize: 12, color: dark_gray)),
-      value: state,
-      onChanged: (bool newValue) {
-        setState(() {
-          if (title.toLowerCase().contains("context aware"))
-            _context_aware = newValue;
-          else if (title.toLowerCase().contains("remove symbols"))
-            _remove_symbol = newValue;
-          else if (title.toLowerCase().contains("settings unlock"))
-            _settings_unlock = newValue;
-          else
-            _folder_vocalization = newValue;
-        });
-      },
     );
   }
 }
