@@ -17,16 +17,16 @@ class SettingWrapper extends StatelessWidget {
       'Speech': new SettingListItem(Icons.record_voice_over, '/speech')
     },
     'System': {
-      'Export': new SettingListItem(Icons.cloud_upload, '/speech'),
+      'Export': new SettingListItem(Icons.cloud_upload, '/export'),
       'Import': new SettingListItem(Icons.cloud_download, '/speech'),
       'Display': new SettingListItem(Icons.remove_red_eye, '/display'),
-      'Scanning': new SettingListItem(Icons.center_focus_strong, '/speech'),
+      'Scanning': new SettingListItem(Icons.center_focus_strong, '/scanner'),
       'Navigation': new SettingListItem(Icons.chevron_right, '/navigation')
     },
     'Help': {
       'User Help': new SettingListItem(Icons.help, '/user help'),
       'About Cboard': new SettingListItem(Icons.info, '/about'),
-      'Donate': new SettingListItem(Icons.monetization_on, '/speech'),
+      'Donate': new SettingListItem(Icons.monetization_on, '/donate'),
       'Feedback': new SettingListItem(Icons.feedback, '/speech')
     }
   };

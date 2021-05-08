@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 enum size { Standard, Large, ExtraLarge }
 enum voice { Female, Male, Robot, Funny }
+enum file { CBoard, OpenBoard, PDF }
 
 class SettingsModel extends ChangeNotifier {
   String _locale;
@@ -31,6 +32,12 @@ class SettingsModel extends ChangeNotifier {
 
   bool _folderVocal = true;
 
+  bool _boardScanned = false;
+
+  double _timeDelay = 2;
+
+  file _exportFile = file.CBoard;
+
   //Getters
   String get locale => _locale;
   bool get darkTheme => _darkTheme;
@@ -45,6 +52,9 @@ class SettingsModel extends ChangeNotifier {
   bool get symbolRemovable => _symbolRemovable;
   bool get quickSettingUnlock => _quickSettingUnlock;
   bool get folderVocal => _folderVocal;
+  bool get boardScanned => _boardScanned;
+  double get timeDelay => _timeDelay;
+  file get exportFile => _exportFile;
 
   //Setters
   void updateLocale(String locale) {
@@ -109,6 +119,21 @@ class SettingsModel extends ChangeNotifier {
 
   void updateFolderUnlock() {
     _folderVocal = !_folderVocal;
+    notifyListeners();
+  }
+
+  void updateBoardScanned() {
+    _boardScanned = !_boardScanned;
+    notifyListeners();
+  }
+
+  void updateTimeDelay(double newVal) {
+    _timeDelay = newVal;
+    notifyListeners();
+  }
+
+  void updateExportFile(file newType) {
+    _exportFile = newType;
     notifyListeners();
   }
 }

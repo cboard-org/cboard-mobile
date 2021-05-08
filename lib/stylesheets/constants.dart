@@ -15,3 +15,4 @@ const Color mine_shaft = Color(0xFF212121);
 const Color cinnabar = Color(0xFFE53935);
 const Color tulip_tree = Color(0xFFE5BE35);
 const Color fruit_salad = Color(0xFF4CAF50);
+const Color pig_pink = Color(0xFFFFE7F0);
