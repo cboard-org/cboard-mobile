@@ -1,12 +1,9 @@
-import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
-import 'package:cboard_mobile/shared/dropDownSection.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Export extends StatelessWidget {
@@ -33,14 +30,23 @@ class ExportStateful extends StatefulWidget {
 
 class _ExportStateful extends State<ExportStateful> {
   TapGestureRecognizer cBoard, openBoard;
+  var exportSingle;
+  var exportAll;
 
-  List items = <String>['CBoard', 'OpenBoard', 'PDF']
-      .map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList();
+  List<DropdownMenuItem<dynamic>> items = [
+    DropdownMenuItem<String>(
+      child: Text("CBoard"),
+      value: 'cboard',
+    ),
+    DropdownMenuItem<String>(
+      child: Text("OpenBoard"),
+      value: 'openBoard',
+    ),
+    DropdownMenuItem<String>(
+      child: Text('PDF'),
+      value: 'pdf',
+    ),
+  ];
 
   @override
   void initState() {
@@ -64,14 +70,13 @@ class _ExportStateful extends State<ExportStateful> {
 
   @override
   Widget build(BuildContext context) {
-    var settingmodel = Provider.of<SettingsModel>(context);
     return Container(
       margin: EdgeInsets.all(20),
       child: ListView(
         children: <Widget>[
-          DropDownSection(
-            title: "Export a single board",
-            subTitle: RichText(
+          ListTile(
+            title: Text("Export a single board"),
+            subtitle: RichText(
               text: new TextSpan(
                 children: [
                   new TextSpan(
@@ -96,14 +101,36 @@ class _ExportStateful extends State<ExportStateful> {
                 ],
               ),
             ),
-            initialVal: settingmodel.exportFile,
-            items: items,
-            onChange: (var newType) => settingmodel.updateExportFile(newType),
+            trailing: Column(
+              children: [
+                DropdownButton(
+                  hint: Text("Boards"),
+                  items: items,
+                ),
+                DropdownButton(
+                    hint: Text("Export"),
+                    value: exportSingle,
+                    elevation: 16,
+                    style: const TextStyle(
+                      color: dark_gray,
+                    ),
+                    underline: Container(
+                      height: 2,
+                      color: dark_gray,
+                    ),
+                    onChanged: (var newOpt) {
+                      setState(() {
+                        exportSingle = newOpt;
+                      });
+                    },
+                    items: items),
+              ],
+            ),
           ),
           DividerLine(),
-          DropDownSection(
-            title: "Export all boards",
-            subTitle: RichText(
+          ListTile(
+            title: Text("Export all boards"),
+            subtitle: RichText(
               text: new TextSpan(
                 children: [
                   new TextSpan(
@@ -133,10 +160,24 @@ class _ExportStateful extends State<ExportStateful> {
                 ],
               ),
             ),
-            initialVal: settingmodel.exportFile,
-            items: items,
-            onChange: (var newType) => settingmodel.updateExportFile(newType),
-          ),
+            trailing: DropdownButton(
+                hint: Text("Export"),
+                value: exportAll,
+                elevation: 16,
+                style: const TextStyle(
+                  color: dark_gray,
+                ),
+                underline: Container(
+                  height: 2,
+                  color: dark_gray,
+                ),
+                onChanged: (var newOpt) {
+                  setState(() {
+                    exportAll = newOpt;
+                  });
+                },
+                items: items),
+          )
         ],
       ),
     );
