@@ -32,7 +32,7 @@ class Donate extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(20),
               child: ListTile(
-                leading: Image.asset('assets/images/test.png'),
+                leading: Image.asset('assets/images/donate.png'),
                 title: Text(
                   'Donation',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -60,7 +60,7 @@ class Donate extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(20),
               child: ListTile(
-                leading: Image.asset('assets/images/test.png'),
+                leading: Image.asset('assets/images/backer.png'),
                 title: Text(
                   'Backer',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -88,7 +88,7 @@ class Donate extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(20),
               child: ListTile(
-                leading: Image.asset('assets/images/test.png'),
+                leading: Image.asset('assets/images/sponsor.png'),
                 title: Text(
                   'Sponsor',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
