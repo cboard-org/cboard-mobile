@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 enum size { Standard, Large, ExtraLarge }
 enum voice { Female, Male, Robot, Funny }
-enum file { CBoard, OpenBoard, PDF }
+enum scanningMethod { Automatic, Manual }
 
 class SettingsModel extends ChangeNotifier {
   String _locale;
@@ -36,7 +36,7 @@ class SettingsModel extends ChangeNotifier {
 
   double _timeDelay = 2;
 
-  file _exportFile = file.CBoard;
+  scanningMethod _method = scanningMethod.Automatic;
 
   //Getters
   String get locale => _locale;
@@ -54,8 +54,7 @@ class SettingsModel extends ChangeNotifier {
   bool get folderVocal => _folderVocal;
   bool get boardScanned => _boardScanned;
   double get timeDelay => _timeDelay;
-  file get exportFile => _exportFile;
-
+  scanningMethod get method => _method;
   //Setters
   void updateLocale(String locale) {
     _locale = locale;
@@ -132,8 +131,8 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateExportFile(file newType) {
-    _exportFile = newType;
+  void updateMethod(scanningMethod newMedthod) {
+    _method = newMedthod;
     notifyListeners();
   }
 }
