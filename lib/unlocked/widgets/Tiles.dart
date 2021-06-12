@@ -69,7 +69,7 @@ class Tiles extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: MediaQuery.of(context).size.height / 8,
-                  color: light_yellow,
+                  color: tile.name != "Label" ? light_yellow : light_green,
                   child: Image.asset(
                     tile.imageUrl,
                     width: MediaQuery.of(context).size.width,

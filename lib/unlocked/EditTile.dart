@@ -5,6 +5,7 @@ import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/TileName.dart';
+import 'package:cboard_mobile/unlocked/VoiceRecorder.dart';
 
 class EditTileScreen extends StatefulWidget {
   final Tile tile;
@@ -65,11 +66,13 @@ class _EditTileScreenState extends State<EditTileScreen> {
               child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
             ),
             centerTitle: true,
-            title: Text(
-                'Edit'), // Debug: Change title to keep track of how many tiles
+            title: widget.tile.name != "Label"
+                ? Text('Edit')
+                : Text(
+                    "New Tile or Folder"), // Debug: Change title to keep track of how many tiles
           ),
         ),
-        body: Column(
+        body: ListView(
           children: <Widget>[
             SizedBox(
               height: screenSize.height / 75,
@@ -127,6 +130,41 @@ class _EditTileScreenState extends State<EditTileScreen> {
             ),
             Column(
               children: <Widget>[
+                widget.tile.name == "Label"
+                    ? Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: new BorderSide(color: Colors.black12),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              // Tile Name
+                              title: Text('Card Type',
+                                  style: CustomTypography.Typography.title()),
+                              subtitle: Text("Tile",
+                                  style:
+                                      CustomTypography.Typography.subTitle()),
+                              trailing: Wrap(
+                                children: [
+                                  Icon(Icons.keyboard_arrow_right,
+                                      size: 35.0, color: Colors.black54),
+                                ],
+                              ),
+                              onTap: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TileName(
+                                              tilename: widget.tile.name,
+                                            )))
+                              }, // Debug: change to edit
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -139,7 +177,10 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         // Tile Name
                         title: Text('Tile Name',
                             style: CustomTypography.Typography.title()),
-                        subtitle: Text(widget.tile.name,
+                        subtitle: Text(
+                            widget.tile.name != "Label"
+                                ? widget.tile.name
+                                : widget.tile.editName,
                             style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
@@ -283,8 +324,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                 size: 35.0, color: Colors.black54),
                           ],
                         ),
-                        onTap: () =>
-                            print('Tile Name'), // Debug: change to edit
+                        onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VoiceRecorder(
+                                        tileRecord: widget.tile.voiceRecorder,
+                                      )))
+                        }, // Debug: change to edit
                       ),
                     ],
                   ),

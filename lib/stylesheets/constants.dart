@@ -22,3 +22,4 @@ const Color light_purple = Color(0xffBA82DF);
 const Color bright_orange = Color(0xffF99E5C);
 const Color light_yellow = Color(0xffFFF6B1);
 const Color light_purple_A100 = Color(0xffF2E7FE);
+const Color light_green = Color(0xffE0F1BC);
