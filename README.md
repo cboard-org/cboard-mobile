@@ -36,7 +36,11 @@ Please clone and run the cboard-api repository within the cboard-org organziatio
 This project exists thanks to all the people who contribute.
 
 Darren Zhang
+
 Zachary Mothner
+
 Tung Tran
+
 Ngan Phan
+
 Tim Nguyen
