@@ -46,7 +46,7 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
             'Enable Dark Theme',
             'The theme specifies the color of the components, darkness of the surfaces, level of shadow, appropriate opacity of ink elements, etc.',
             settingModel.darkTheme,
-            (bool newValue) => settingModel.updateDarkTheme(newValue)),
+            (bool newValue) => settingModel.toggleDarkTheme(newValue)),
         DividerLine(),
         ListTileSection(
             'Enable Predictive Text',

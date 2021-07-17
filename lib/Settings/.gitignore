@@ -1,0 +1,7 @@
+#Settings
+#Dark Mode
+ThemeManager.dart
+#Shared preferences
+StorageManager.dart
+#Feedback screen
+Feedback.dart

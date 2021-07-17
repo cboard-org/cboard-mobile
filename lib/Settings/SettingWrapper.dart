@@ -1,7 +1,9 @@
 import 'package:cboard_mobile/Settings/routes.dart';
 import 'package:cboard_mobile/models/settings.dart';
+import 'package:cboard_mobile/shared/Themes.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/Settings/Feedback.dart' as feedback;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,7 @@ class SettingWrapper extends StatelessWidget {
     },
     'System': {
       'Export': new SettingListItem(Icons.cloud_upload, '/export'),
-      'Import': new SettingListItem(Icons.cloud_download, '/speech'),
+      'Import': new SettingListItem(Icons.cloud_download, '/import'),
       'Display': new SettingListItem(Icons.remove_red_eye, '/display'),
       'Scanning': new SettingListItem(Icons.center_focus_strong, '/scanner'),
       'Navigation': new SettingListItem(Icons.chevron_right, '/navigation')
@@ -27,23 +29,30 @@ class SettingWrapper extends StatelessWidget {
       'User Help': new SettingListItem(Icons.help, '/user help'),
       'About Cboard': new SettingListItem(Icons.info, '/about'),
       'Donate': new SettingListItem(Icons.monetization_on, '/donate'),
-      'Feedback': new SettingListItem(Icons.feedback, '/speech')
+      'Feedback': new SettingListItem(Icons.feedback, '/feedback')
     }
   };
   @override
   Widget build(BuildContext context) {
+    // var settingModel = Provider.of<SettingsModel>(context);
     return ChangeNotifierProvider(
       create: (BuildContext context) => SettingsModel(),
       child: MaterialApp(
         routes: getRoute(),
-        theme: ThemeData(
-          primaryColor: paua,
-          accentColor: fog,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          scaffoldBackgroundColor: Colors.white,
-        ),
+        // theme: ThemeData(
+        //   primaryColor: paua,
+        //   accentColor: fog,
+        //   visualDensity: VisualDensity.adaptivePlatformDensity,
+        //   scaffoldBackgroundColor: Colors.white,
+        // ),
+        themeMode: ThemeMode.system,
+        theme: Themes.lightTheme,
+        darkTheme: Themes.darkTheme,
         home: Scaffold(
             backgroundColor: mercury,
+            // Theme.of(context) == Themes.lightTheme
+            //     ? mercury
+            //     : Color(0xFF424242),
             appBar: BaseAppBar(
               title: Text('Settings'),
               appBar: AppBar(),
@@ -59,7 +68,7 @@ class SettingWrapper extends StatelessWidget {
                 return Container(
                   padding: EdgeInsets.all(16.0),
                   decoration: new BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(5.0)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,8 +85,7 @@ class SettingWrapper extends StatelessWidget {
                                     .values
                                     .elementAt(0)
                                     .icon,
-                                color: dark_violet,
-                                size: 20,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                               title: Text(section.values
                                   .elementAt(0)
@@ -106,12 +114,18 @@ class SettingWrapper extends StatelessWidget {
                                   (BuildContext context, int iconIndex) {
                                 return ListTile(
                                     onTap: () {
-                                      Navigator.of(context).pushNamed(section
-                                          .values
+                                      String routeName = section.values
                                           .elementAt(index)
                                           .values
                                           .elementAt(iconIndex)
-                                          .route);
+                                          .route;
+
+                                      if (routeName == "/feedback") {
+                                        feedback.Feedback.launchEmail();
+                                      } else {
+                                        Navigator.of(context)
+                                            .pushNamed(routeName);
+                                      }
                                     },
                                     leading: Icon(
                                       section.values
@@ -119,7 +133,7 @@ class SettingWrapper extends StatelessWidget {
                                           .values
                                           .elementAt(iconIndex)
                                           .icon,
-                                      color: dark_violet,
+                                      color: Theme.of(context).iconTheme.color,
                                       size: 20,
                                     ),
                                     title: Text(

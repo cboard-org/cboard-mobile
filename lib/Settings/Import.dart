@@ -106,7 +106,6 @@ class _ImportStateful extends State<ImportStateful> {
               });
             },
           ),
-          result == null ? Text("hello") : Text(result.files.first.path),
           // Text("hello"),
         ],
       ),

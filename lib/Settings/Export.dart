@@ -32,6 +32,7 @@ class _ExportStateful extends State<ExportStateful> {
   TapGestureRecognizer cBoard, openBoard;
   var exportSingle;
   var exportAll;
+  var board;
 
   List<DropdownMenuItem<dynamic>> items = [
     DropdownMenuItem<String>(
@@ -74,7 +75,7 @@ class _ExportStateful extends State<ExportStateful> {
       margin: EdgeInsets.all(20),
       child: ListView(
         children: <Widget>[
-          ListTile(
+          ChoiceListTile(
             title: Text("Export a single board"),
             subtitle: RichText(
               text: new TextSpan(
@@ -102,33 +103,41 @@ class _ExportStateful extends State<ExportStateful> {
               ),
             ),
             trailing: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 DropdownButton(
                   hint: Text("Boards"),
                   items: items,
+                  value: board,
+                  onChanged: (var newOpt) {
+                    setState(() {
+                      board = newOpt;
+                    });
+                  },
                 ),
                 DropdownButton(
-                    hint: Text("Export"),
-                    value: exportSingle,
-                    elevation: 16,
-                    style: const TextStyle(
-                      color: dark_gray,
-                    ),
-                    underline: Container(
-                      height: 2,
-                      color: dark_gray,
-                    ),
-                    onChanged: (var newOpt) {
-                      setState(() {
-                        exportSingle = newOpt;
-                      });
-                    },
-                    items: items),
+                  hint: Text("Export"),
+                  value: exportSingle,
+                  elevation: 16,
+                  style: const TextStyle(
+                    color: dark_gray,
+                  ),
+                  underline: Container(
+                    height: 2,
+                    color: dark_gray,
+                  ),
+                  onChanged: (var newOpt) {
+                    setState(() {
+                      exportSingle = newOpt;
+                    });
+                  },
+                  items: items,
+                ),
               ],
             ),
           ),
           DividerLine(),
-          ListTile(
+          ChoiceListTile(
             title: Text("Export all boards"),
             subtitle: RichText(
               text: new TextSpan(
@@ -177,9 +186,46 @@ class _ExportStateful extends State<ExportStateful> {
                   });
                 },
                 items: items),
-          )
+          ),
         ],
       ),
+    );
+  }
+}
+
+class ChoiceListTile extends StatelessWidget {
+  final Widget title;
+  final Widget subtitle;
+  final Widget leading;
+  final Widget trailing;
+  const ChoiceListTile(
+      {Key key, this.title, this.subtitle, this.leading, this.trailing})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: Column(
+            children: [
+              Align(
+                child: title,
+                alignment: Alignment.centerLeft,
+              ),
+              Align(
+                child: subtitle,
+                alignment: Alignment.centerLeft,
+              ),
+            ],
+          ),
+        ),
+        Spacer(
+          flex: 1,
+        ),
+        trailing
+      ],
     );
   }
 }

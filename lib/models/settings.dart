@@ -61,7 +61,7 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDarkTheme(bool newVal) {
+  void toggleDarkTheme(bool newVal) {
     _darkTheme = newVal;
     notifyListeners();
   }
