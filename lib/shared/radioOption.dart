@@ -3,13 +3,13 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RadioSection extends StatelessWidget {
+class RadioOption extends StatelessWidget {
   String title;
   String subtitle;
   size groupState;
   void Function(size) onChange;
 
-  RadioSection(
+  RadioOption(
       String title, String subtitle, size groupState, Function(size) onChange) {
     this.title = title;
     this.subtitle = subtitle;

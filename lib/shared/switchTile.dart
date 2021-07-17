@@ -2,12 +2,12 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ListTileSection extends StatelessWidget {
+class SwitchTile extends StatelessWidget {
   String title;
   String subTitle;
   bool value;
   void Function(bool) onChange;
-  ListTileSection(
+  SwitchTile(
       String title, String subTitle, bool value, Function(bool) onChange) {
     this.title = title;
     this.subTitle = subTitle;

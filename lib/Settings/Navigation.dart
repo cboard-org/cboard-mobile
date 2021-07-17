@@ -1,7 +1,7 @@
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/divider.dart';
-import 'package:cboard_mobile/shared/listTile.dart';
+import 'package:cboard_mobile/shared/switchTile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,25 +27,25 @@ class _MyStatefulWidget extends State<MyStatefulWidget> {
     var settingmodel = Provider.of<SettingsModel>(context);
     return ListView(
       children: <Widget>[
-        ListTileSection(
+        SwitchTile(
             'Enable context aware back button',
             'Shows big back buttons on top of the boards',
             settingmodel.backButton,
             (bool newVal) => settingmodel.updateBackButton()),
         DividerLine(),
-        ListTileSection(
+        SwitchTile(
             'Remove symbols from the output bar',
             "Shows 'x' button on each symbol in order to remove it",
             settingmodel.symbolRemovable,
             (bool newVal) => settingmodel.updateSymbolRemove()),
         DividerLine(),
-        ListTileSection(
+        SwitchTile(
             'Enable quick settings unlock',
             'Unlocks settings with a single click',
             settingmodel.quickSettingUnlock,
             (bool newVal) => settingmodel.updateQuickSetting()),
         DividerLine(),
-        ListTileSection(
+        SwitchTile(
             'Enable folder vocalization',
             "Reads folder's name out loud when folder is clicked",
             settingmodel.folderVocal,

@@ -2,6 +2,7 @@ import 'package:cboard_mobile/Settings/About.dart';
 import 'package:cboard_mobile/Settings/Donate.dart';
 import 'package:cboard_mobile/Settings/Export.dart';
 import 'package:cboard_mobile/Settings/Import.dart';
+import 'package:cboard_mobile/Settings/Language.dart';
 // import 'package:cboard_mobile/Settings/Feedback.dart';
 import 'package:cboard_mobile/Settings/Navigation.dart';
 import 'package:cboard_mobile/Settings/Speech.dart';
@@ -23,5 +24,6 @@ getRoute() {
     '/scanner': (context) => Scanner(),
     '/donate': (context) => Donate(),
     '/import': (context) => Import(),
+    '/language': (context) => Language(),
   };
 }
