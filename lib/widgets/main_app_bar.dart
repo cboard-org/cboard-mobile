@@ -16,77 +16,47 @@ class MainAppBar extends StatelessWidget {
       'display': CustomOverlayScreen(
         backgroundColor: Colors.transparent,
         content: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             SizedBox(
-              height: 400,
-              width: 300,
+              height: 200,
+              width: double.infinity,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        "Display",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.purple, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Divider(
-                      color: Colors.purple,
-                      height: 20,
-                      thickness: 1,
+                    Card(
+                      child: ListTile(
+                          leading: Icon(
+                            Icons.assignment,
+                            color: Theme.of(context).primaryColor,
+                            size: 30.0,
+                          ),
+                          title: Text('Board One'),
+                          onTap: () => print('Board Clicked')),
                     ),
                     Card(
                       child: ListTile(
-                          leading: FlutterLogo(),
-                          title: Text('One Column'),
-                          trailing: Icon(Icons.adjust),
-                          onTap: () {/* react to the tile being tapped */}),
+                          leading: Icon(
+                            Icons.assignment,
+                            color: Theme.of(context).primaryColor,
+                            size: 30.0,
+                          ),
+                          title: Text('Board Two'),
+                          onTap: () => print('Board Clicked')),
                     ),
                     Card(
                       child: ListTile(
-                          leading: FlutterLogo(),
-                          title: Text('Two Columns'),
-                          trailing: Icon(Icons.adjust),
-                          onTap: () {/* react to the tile being tapped */}),
+                          leading: Icon(
+                            Icons.backup,
+                            color: Theme.of(context).primaryColor,
+                            size: 30.0,
+                          ),
+                          title: Text('Board Three'),
+                          onTap: () => print('Board Clicked')),
                     ),
-                    Card(
-                      child: ListTile(
-                          leading: FlutterLogo(),
-                          title: Text('Three Columns'),
-                          trailing: Icon(Icons.adjust),
-                          onTap: () {/* react to the tile being tapped */}),
-                    ),
-                    Card(
-                      child: ListTile(
-                          leading: FlutterLogo(),
-                          title: Text('Four Columns'),
-                          trailing: Icon(Icons.adjust),
-                          onTap: () {/* react to the tile being tapped */}),
-                    ),
-                    FlatButton(
-                      color: Colors.purple,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.all(8.0),
-                      splashColor: Colors.purple,
-                      onPressed: () {
-                        /*...*/
-                      },
-                      child: Text(
-                        "UPDATE",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -94,19 +64,12 @@ class MainAppBar extends StatelessWidget {
           ],
         ),
       ),
-      'custom2': CustomOverlayScreen(
-        backgroundColor: Colors.yellow[400],
+      'edit_home': CustomOverlayScreen(
+        backgroundColor: Colors.transparent,
         content: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              Icons.check_circle_outline,
-              color: Colors.green,
-              size: 80.0,
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Text("Let's start!"))
+            SizedBox(),
           ],
         ),
       ),
@@ -128,23 +91,47 @@ class MainAppBar extends StatelessWidget {
                   onTap: () async {
                     OverlayScreen().show(
                       context,
-                      identifier: 'display',
+                      identifier: 'edit_home',
                     );
                   },
                   child: Icon(
-                    Icons.apps,
+                    Icons.filter_none,
                     color: Colors.white,
                     size: 25.0,
                   ),
                 ),
                 // Board Name
-                Text(
-                  'Board Name',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
+                GestureDetector(
+                  onTap: () async {
+                    OverlayScreen().show(
+                      context,
+                      identifier: 'display',
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Board Name",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        WidgetSpan(
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            size: 20.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 // Lock
                 GestureDetector(
-                  onTap: () => print('Lock'), // insert new screen here
+                  onTap: () => print('Lock'), // insert new homescreen here
                   child: Icon(
                     Icons.lock,
                     color: Colors.white,
