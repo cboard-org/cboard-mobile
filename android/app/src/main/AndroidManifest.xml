@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cboard_mobile">
    <application
+        android:usesCleartextTraffic="true"
         android:label="cboard_mobile"
         android:icon="@mipmap/ic_launcher">
         <activity

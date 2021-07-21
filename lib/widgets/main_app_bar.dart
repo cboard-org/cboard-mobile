@@ -69,9 +69,7 @@ class MainAppBar extends StatelessWidget {
         content: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-
-            ),
+            SizedBox(),
           ],
         ),
       ),
