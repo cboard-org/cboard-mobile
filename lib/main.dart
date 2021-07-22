@@ -1,11 +1,11 @@
-import 'package:cboard_mobile/Settings/SettingWrapper.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(SettingWrapper());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             contentPadding: new EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
-        home: Welcome(),
+        home: HomeScreen(),
       ),
     );
   }
