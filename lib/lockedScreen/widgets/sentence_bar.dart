@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'widgets.dart';
 
 class SentenceBar extends StatefulWidget {
+  static List<Tile> words = [];
   @override
   _SentenceBarState createState() => _SentenceBarState();
 }
@@ -24,7 +25,7 @@ class _SentenceBarState extends State<SentenceBar> {
               horizontal: 10.0,
             ),
             scrollDirection: Axis.horizontal,
-            itemCount: example.length,
+            itemCount: SentenceBar.words.length,
             itemBuilder: (BuildContext context, int index) {
               final Tile tile = example[index];
               return CreateTile(tile: tile, size: 90.0);
@@ -34,7 +35,12 @@ class _SentenceBarState extends State<SentenceBar> {
         SizedBox(width: 5.0),
         // Backspace Button
         GestureDetector(
-          onTap: () => print('Backspace'),
+          onTap: () {
+            setState(() {
+              SentenceBar.words.removeLast();
+              print(SentenceBar.words);
+            });
+          },
           child: Icon(
             Icons.backspace,
             color: Theme.of(context).primaryColor,

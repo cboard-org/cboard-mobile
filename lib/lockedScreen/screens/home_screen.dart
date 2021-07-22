@@ -1,6 +1,7 @@
-import 'package:cboard_mobile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
+import '../widgets/main_app_bar.dart';
+import '../widgets/sentence_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -35,10 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(screenSize.width, 146.0),
+        preferredSize: Size(screenSize.width, 156.0),
         child: Container(
           color: Colors.white,
-          height: 145,
           margin: EdgeInsets.only(
               top: 25.0), // avoid overlapping with phone's top display stuff
           child: Column(
@@ -61,9 +61,51 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (BuildContext context, int index) {
             final Tile tile = example[index];
-            return CreateTile(tile: tile, size: 120.0);
+            return createTile(tile, 120.0);
           },
         ),
+      ),
+    );
+  }
+
+  //Create tile
+  Widget createTile(Tile tile, double size) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          SentenceBar.words.add(tile);
+          print(SentenceBar.words);
+        });
+      },
+      child: Stack(
+        // alignment: Alignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 3.0),
+            height: size,
+            width: size,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(tile.imageUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 60,
+            child: SizedBox(
+              height: 20.0,
+              child: Text(
+                tile.name,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

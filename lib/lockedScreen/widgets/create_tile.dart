@@ -1,6 +1,8 @@
+import 'package:cboard_mobile/lockedScreen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 
+//Not used at the moment
 class CreateTile extends StatelessWidget {
   final Tile tile;
   final double size;
@@ -10,7 +12,10 @@ class CreateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print(tile.name),
+      onTap: () {
+        SentenceBar.words.add(tile);
+        print(SentenceBar.words);
+      },
       child: Stack(
         // alignment: Alignment.center,
         children: [

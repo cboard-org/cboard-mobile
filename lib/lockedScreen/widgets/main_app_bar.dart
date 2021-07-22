@@ -95,40 +95,72 @@ class MainAppBar extends StatelessWidget {
                     );
                   },
                   child: Icon(
-                    Icons.filter_none,
+                    Icons.notes_outlined,
                     color: Colors.white,
                     size: 25.0,
                   ),
                 ),
                 // Board Name
-                GestureDetector(
-                  onTap: () async {
-                    OverlayScreen().show(
-                      context,
-                      identifier: 'display',
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Board Name",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
+                SizedBox(
+                  height: 35,
+                  child: TextButton(
+                    onPressed: () async {
+                      OverlayScreen().show(
+                        context,
+                        identifier: 'display',
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Board Name",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
                           ),
-                        ),
-                        WidgetSpan(
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            size: 20.0,
-                            color: Colors.white,
+                          WidgetSpan(
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              size: 20.0,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
+                //Replaced by TextButton
+                // GestureDetector(
+                //   onTap: () async {
+                //     OverlayScreen().show(
+                //       context,
+                //       identifier: 'display',
+                //     );
+                //   },
+                //   child: RichText(
+                //     text: TextSpan(
+                //       children: [
+                //         TextSpan(
+                //           text: "Board Name",
+                //           style: TextStyle(
+                //             color: Colors.white,
+                //             fontSize: 20.0,
+                //           ),
+                //         ),
+                //         WidgetSpan(
+                //           child: Icon(
+                //             Icons.arrow_drop_down,
+                //             size: 20.0,
+                //             color: Colors.white,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 // Lock
                 GestureDetector(
                   onTap: () => print('Lock'), // insert new homescreen here
