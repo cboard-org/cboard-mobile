@@ -14,6 +14,7 @@ class _TileNameState extends State<TileName> {
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController()
       ..text = widget.tilename;
+    nameController.selection=TextSelection.fromPosition(TextPosition(offset: nameController.text.length));
 
     return Scaffold(
       appBar: PreferredSize(
@@ -26,9 +27,20 @@ class _TileNameState extends State<TileName> {
           title: Text('Tile Name'),
         ),
       ),
-      body: TextField(
-        controller: nameController,
-        decoration: InputDecoration(border: InputBorder.none),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: TextField(
+          controller: nameController,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            focusColor: Theme.of(context).primaryColor,
+            icon: Icon(Icons.edit,color: Theme.of(context).primaryColor,),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
+              // borderRadius: BorderRadius.circular(25.0),
+            ),
+          ),
+        ),
       ),
     );
   }

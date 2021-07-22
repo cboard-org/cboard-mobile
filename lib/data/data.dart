@@ -8,6 +8,8 @@ class Tile {
   final String vocalization;
   final String editName;
   final bool voiceRecorder;
+  final String backgroundColor;
+  final String textColor;
 
   const Tile({
     @required this.name,
@@ -16,6 +18,8 @@ class Tile {
     this.editName,
     this.imageUrl,
     this.vocalization,
+    this.backgroundColor = "E0F1BC",
+    this.textColor = "000000",
   });
 }
 

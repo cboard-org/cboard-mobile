@@ -6,9 +6,11 @@ import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/TileName.dart';
 import 'package:cboard_mobile/unlocked/VoiceRecorder.dart';
+import 'package:flutter/scheduler.dart';
 
 class EditTileScreen extends StatefulWidget {
   final Tile tile;
+  final bool isDelete;
   final Map<Text, IconData> modelBottom = {
     Text('Take Photos'): Icons.photo_camera,
     Text('Browse Albums'): Icons.insert_photo,
@@ -25,7 +27,7 @@ class EditTileScreen extends StatefulWidget {
     cinnabar
   ];
 
-  EditTileScreen({Key key, this.tile}) : super(key: key);
+  EditTileScreen({Key key, this.tile, this.isDelete = false}) : super(key: key);
 
   @override
   _EditTileScreenState createState() => _EditTileScreenState();
@@ -35,11 +37,89 @@ class _EditTileScreenState extends State<EditTileScreen> {
   ScrollController _scrollController;
   // double _scrollOffset = 0.0;
   bool lock = false;
-
+  String _bgColor;
+  String _textColor;
   @override
   void initState() {
-    _scrollController = ScrollController()..addListener(() {});
     super.initState();
+    _scrollController = ScrollController()..addListener(() {});
+    _bgColor=widget.tile.backgroundColor;
+    _textColor=widget.tile.textColor;
+    if (widget.isDelete) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Are you sure you want to delete this tile?",style: TextStyle(fontSize: 18),),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text("This action cannot be undone.", style: TextStyle(color: Colors.grey),),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        OutlinedButton(
+                          autofocus: true,
+                          style: OutlinedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor,
+                            backgroundColor: Colors.white,
+                            side: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            // minimumSize: Size(140,35),
+                          ),
+                          onPressed: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "YES",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                        ),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            side: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            // minimumSize: Size(140,35),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "NO",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+              );
+            });
+      });
+    }
   }
 
   @override
@@ -107,21 +187,37 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                 },
                               )
                             },
-                            child: Image.asset(
-                              widget.tile.imageUrl,
-                              width: screenSize.width / 2,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(int.parse("0xff" + _bgColor ?? widget.tile.backgroundColor))
+                              ),
+                              child: Stack(
+                                children: [
+                                  Image.asset(
+                                    widget.tile.imageUrl,
+                                    width: screenSize.width / 2,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(Icons.camera_alt_outlined),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height / 28,
-                        child: Text(widget.tile.name,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontFamily: "Robotto",
-                              fontWeight: FontWeight.w500,
-                            )),
+                        child: Center(
+                          child: Text(widget.tile.name,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                fontFamily: "Robotto",
+                                fontWeight: FontWeight.w500,
+                                color: Color(int.parse("0xff" + _textColor ?? widget.tile.textColor))
+                              )),
+                        ),
                       ),
                     ],
                   ),
@@ -241,16 +337,22 @@ class _EditTileScreenState extends State<EditTileScreen> {
                   child: Column(
                     children: [
                       ListTile(
+
                         title: Text('Title Background Color',
                             style: CustomTypography.Typography.title()),
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
+                            spacing: 26,
                             children: [
                               for (var colorCircular in widget.editColors)
                                 InkResponse(
+                                  onTap: (){
+                                    setState(() {
+                                      _bgColor=colorToHex(colorCircular);
+                                    });
+                                  },
                                   child: new Container(
-                                    margin: const EdgeInsets.only(right: 26.8),
                                     width: screenSize.width / 18,
                                     height: screenSize.width / 18,
                                     decoration: new BoxDecoration(
@@ -264,8 +366,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
                             ],
                           ),
                         ),
-                        onTap: () =>
-                            print('Tile Name'), // Debug: change to edit
+                        // onTap: () =>
+                        //     print('Tile Name'), // Debug: change to edit
                       ),
                     ],
                   ),
@@ -284,11 +386,17 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Wrap(
+                            spacing: 26,
                             children: [
                               for (var colorCircular in widget.editColors)
                                 InkResponse(
+                                  onTap: (){
+                                    setState(() {
+                                      _textColor = colorToHex(colorCircular);
+                                    });
+                                  },
                                   child: new Container(
-                                    margin: const EdgeInsets.only(right: 26.8),
+                                    // margin: const EdgeInsets.only(right: 26.8),
                                     width: screenSize.width / 18,
                                     height: screenSize.width / 18,
                                     decoration: new BoxDecoration(
@@ -341,12 +449,15 @@ class _EditTileScreenState extends State<EditTileScreen> {
             Center(
               child: Align(
                 alignment: Alignment.center,
-                child: RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  padding:
-                      EdgeInsets.only(top: 10, left: 65, right: 65, bottom: 10),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    // primary: ,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    padding:
+                    EdgeInsets.only(top: 10, left: 65, right: 65, bottom: 10),
+                  ),
                   child: Text(
                     "SAVE",
                     style: TextStyle(fontSize: 18.0, color: Colors.white),
@@ -359,4 +470,11 @@ class _EditTileScreenState extends State<EditTileScreen> {
         // BUTTONS
         );
   }
+
+  String colorToHex(Color color, {bool leadingHashSign = false}) => '${leadingHashSign ? '#' : ''}'
+      '${color.alpha.toRadixString(16).padLeft(2, '0')}'
+      '${color.red.toRadixString(16).padLeft(2, '0')}'
+      '${color.green.toRadixString(16).padLeft(2, '0')}'
+      '${color.blue.toRadixString(16).padLeft(2, '0')}';
+
 }

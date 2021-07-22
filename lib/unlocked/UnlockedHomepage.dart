@@ -90,7 +90,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
           ),
           crossAxisCount: 3,
           children: example.map((item) {
-            return Tiles(tile: item);
+            return Tiles(tile: item,size: screenSize.width*0.3,);
           }).toList(),
         ),
       ),
