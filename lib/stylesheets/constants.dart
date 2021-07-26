@@ -16,3 +16,7 @@ const Color cinnabar = Color(0xFFE53935);
 const Color tulip_tree = Color(0xFFE5BE35);
 const Color fruit_salad = Color(0xFF4CAF50);
 const Color pig_pink = Color(0xFFFFE7F0);
+
+const Color cosmic_latte = Color(0xFFE9FFEE);
+const Color white_smoke = Color(0xFFF8F8F8);
+const Color shalimar = Color(0xFFFFF6B1);

@@ -5,7 +5,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(SettingWrapper());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override

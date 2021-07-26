@@ -26,11 +26,13 @@ dependencies:
   overlay_screen: ^1.2.0+1
   flutter_markdown: ^0.5.2
   url_launcher: ^6.0.4
-  http: ^0.12.2
+  http: ^0.13.3
   provider: ^4.3.3
   flutter_native_splash: ^1.0.2
   flutter_tts: ^3.0.0
   file_picker: ^3.0.1
+  image_picker: ^0.8.2
+  image_cropper: ^1.4.1
 
 
   # The following adds the Cupertino Icons font to your application.

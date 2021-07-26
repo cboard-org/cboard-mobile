@@ -1,6 +1,7 @@
 import 'package:cboard_mobile/models/locale.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/sign-up--main.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
@@ -8,6 +9,7 @@ import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 
 class LanguageRegion extends StatefulWidget {
   const LanguageRegion({Key key}) : super(key: key);
@@ -101,7 +103,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpMain(),
+                          builder: (context) => SignUpTTS(),
                         ),
                       );
                     },
