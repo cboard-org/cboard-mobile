@@ -12,68 +12,47 @@ class MainAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OverlayScreen().saveScreens({
-      'display': CustomOverlayScreen(
-        backgroundColor: Colors.transparent,
-        content: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Card(
-                      child: ListTile(
-                          leading: Icon(
-                            Icons.assignment,
-                            color: Theme.of(context).primaryColor,
-                            size: 30.0,
-                          ),
-                          title: Text('Board One'),
-                          onTap: () => print('Board Clicked')),
-                    ),
-                    Card(
-                      child: ListTile(
-                          leading: Icon(
-                            Icons.assignment,
-                            color: Theme.of(context).primaryColor,
-                            size: 30.0,
-                          ),
-                          title: Text('Board Two'),
-                          onTap: () => print('Board Clicked')),
-                    ),
-                    Card(
-                      child: ListTile(
-                          leading: Icon(
-                            Icons.backup,
-                            color: Theme.of(context).primaryColor,
-                            size: 30.0,
-                          ),
-                          title: Text('Board Three'),
-                          onTap: () => print('Board Clicked')),
-                    ),
-                  ],
-                ),
+    //List of boards
+    final List<ListTile> boards = <ListTile>[
+      ListTile(
+          leading: Icon(
+            Icons.assignment,
+            color: Theme.of(context).primaryColor,
+            size: 30.0,
+          ),
+          title: Text('Board One'),
+          onTap: () => print('Board Clicked')),
+      ListTile(
+          leading: Icon(
+            Icons.assignment,
+            color: Theme.of(context).primaryColor,
+            size: 30.0,
+          ),
+          title: Text('Board Two'),
+          onTap: () => print('Board Clicked')),
+      ListTile(
+          leading: Icon(
+            Icons.backup,
+            color: Theme.of(context).primaryColor,
+            size: 30.0,
+          ),
+          title: Text('Board Three'),
+          onTap: () => print('Board Clicked')),
+    ];
+
+    //Create bottom sheet
+    void _showBottomSheet() => showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              height: 170,
+              child: Column(
+                children: boards,
               ),
-            ),
-          ],
-        ),
-      ),
-      'edit_home': CustomOverlayScreen(
-        backgroundColor: Colors.transparent,
-        content: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(),
-          ],
-        ),
-      ),
-    });
+            );
+          },
+        );
+
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 10.0,
@@ -95,7 +74,7 @@ class MainAppBar extends StatelessWidget {
                     );
                   },
                   child: Icon(
-                    Icons.notes_outlined,
+                    Icons.edit,
                     color: Colors.white,
                     size: 25.0,
                   ),
@@ -104,12 +83,7 @@ class MainAppBar extends StatelessWidget {
                 SizedBox(
                   height: 35,
                   child: TextButton(
-                    onPressed: () async {
-                      OverlayScreen().show(
-                        context,
-                        identifier: 'display',
-                      );
-                    },
+                    onPressed: () => _showBottomSheet(),
                     child: RichText(
                       text: TextSpan(
                         children: [
@@ -132,35 +106,6 @@ class MainAppBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                //Replaced by TextButton
-                // GestureDetector(
-                //   onTap: () async {
-                //     OverlayScreen().show(
-                //       context,
-                //       identifier: 'display',
-                //     );
-                //   },
-                //   child: RichText(
-                //     text: TextSpan(
-                //       children: [
-                //         TextSpan(
-                //           text: "Board Name",
-                //           style: TextStyle(
-                //             color: Colors.white,
-                //             fontSize: 20.0,
-                //           ),
-                //         ),
-                //         WidgetSpan(
-                //           child: Icon(
-                //             Icons.arrow_drop_down,
-                //             size: 20.0,
-                //             color: Colors.white,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 // Lock
                 GestureDetector(
                   onTap: () => print('Lock'), // insert new homescreen here
