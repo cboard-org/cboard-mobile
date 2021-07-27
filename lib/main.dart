@@ -1,5 +1,4 @@
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';

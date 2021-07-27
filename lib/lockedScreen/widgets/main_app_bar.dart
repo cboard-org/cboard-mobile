@@ -1,6 +1,5 @@
+import 'package:cboard_mobile/lockedScreen/widgets/edit_dialog.dart';
 import 'package:flutter/material.dart';
-// import 'widgets.dart';
-import 'package:overlay_screen/overlay_screen.dart';
 
 class MainAppBar extends StatelessWidget {
   final double scrollOffset;
@@ -67,11 +66,8 @@ class MainAppBar extends StatelessWidget {
               children: [
                 // Readability Settings
                 GestureDetector(
-                  onTap: () async {
-                    OverlayScreen().show(
-                      context,
-                      identifier: 'edit_home',
-                    );
+                  onTap: () {
+                    editDialog(context);
                   },
                   child: Icon(
                     Icons.edit,
