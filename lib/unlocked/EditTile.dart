@@ -279,42 +279,36 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       title: Text('Card Type',
                           style: CustomTypography.Typography.title()),
                       subtitle: Row(
-                        // mainAxisAlignment: MainAxisAlignment.,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: screenSize.width * 0.3,
-                            child: ListTile(
-                              title: Text("Tile",
-                                  style:
-                                      CustomTypography.Typography.subTitle()),
-                              leading: Radio<String>(
-                                value: 'Tile',
-                                groupValue: _type,
-                                onChanged: (String val) {
-                                  setState(() {
-                                    _type = val;
-                                  });
-                                  print(_type);
-                                },
-                              ),
+                          ListTile(
+                            title: Text("Tile",
+                                style:
+                                    CustomTypography.Typography.subTitle()),
+                            leading: Radio<String>(
+                              value: 'Tile',
+                              groupValue: _type,
+                              onChanged: (String val) {
+                                setState(() {
+                                  _type = val;
+                                });
+                                print(_type);
+                              },
                             ),
                           ),
-                          SizedBox(
-                            width: screenSize.width * 0.4,
-                            child: ListTile(
-                              title: Text("Folder",
-                                  style:
-                                      CustomTypography.Typography.subTitle()),
-                              leading: Radio<String>(
-                                value: 'Folder',
-                                groupValue: _type,
-                                onChanged: (String val) {
-                                  setState(() {
-                                    _type = val;
-                                  });
-                                  print(_type);
-                                },
-                              ),
+                          ListTile(
+                            title: Text("Folder",
+                                style:
+                                    CustomTypography.Typography.subTitle()),
+                            leading: Radio<String>(
+                              value: 'Folder',
+                              groupValue: _type,
+                              onChanged: (String val) {
+                                setState(() {
+                                  _type = val;
+                                });
+                                print(_type);
+                              },
                             ),
                           ),
                         ],
