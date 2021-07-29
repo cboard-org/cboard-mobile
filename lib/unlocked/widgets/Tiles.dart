@@ -74,7 +74,7 @@ class Tiles extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height / 8,
+                  height: MediaQuery.of(context).size.height / 10,
                   color: tile.name != "Label" ? light_yellow : light_green,
                   child: Image.asset(
                     tile.imageUrl,

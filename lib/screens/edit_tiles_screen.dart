@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditTileScreen extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class EditTileScreen extends StatefulWidget {
 
 class _EditTileScreenState extends State<EditTileScreen> {
   bool lock = false;
+
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
