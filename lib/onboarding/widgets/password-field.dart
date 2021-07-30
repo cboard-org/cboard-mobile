@@ -46,7 +46,7 @@ class _PasswordFieldState extends State<PasswordField> {
             if (value.isEmpty)
               return 'Please enter a password';
             else if (value.contains('@')) // Make server call instead?
-              return ' Invalid password';
+              return 'Invalid password';
             else
               return null;
           },

@@ -143,19 +143,27 @@ class LogIn extends StatelessWidget {
         title: Text('Log In'),
         appBar: AppBar(),
       ),
-      body: Column(
-        children: [
-          Header(),
-          Expanded(
-            child: Container(
-              child: LogInForm(),
-              color: white,
-              margin: EdgeInsets.only(top: 3),
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-            ),
+
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Header(),
+              Expanded(
+                child: Container(
+                  child: LogInForm(),
+                  color: white,
+                  margin: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        )
+      )
     );
   }
 }

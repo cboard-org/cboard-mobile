@@ -15,26 +15,30 @@ class UsernameField extends StatefulWidget {
 class _UsernameFieldState extends State<UsernameField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      decoration: InputDecoration(
-          labelText: 'Email',
-          hintText: 'Email',
-          suffixIcon:
-              RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(widget.controller.text)
-                  ? Icon(
-                      Icons.check,
-                      color: fruit_salad,
-                    )
-                  : null),
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value.isEmpty)
-          return 'Please enter a valid email';
-        else
-          return null;
-      },
+    return Column(
+      children: [
+        TextFormField(
+            controller: widget.controller,
+            decoration: InputDecoration(
+                labelText: 'Email',
+                hintText: 'Email',
+                suffixIcon:
+                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(widget.controller.text)
+                        ? Icon(
+                            Icons.check,
+                            color: fruit_salad,
+                          )
+                        : null),
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (value.isEmpty)
+                return 'Please enter a valid email';
+              else
+                return null;
+            },
+        )
+      ],
     );
   }
 
