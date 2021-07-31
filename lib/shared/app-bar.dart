@@ -4,10 +4,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Text title;
   final AppBar appBar;
   final List<Widget> widgets;
-  final Widget leading;
 
-  const BaseAppBar(
-      {Key key, this.title, this.appBar, this.widgets, this.leading})
+  const BaseAppBar({Key key, this.title, this.appBar, this.widgets})
       : super(key: key);
 
   @override
@@ -16,7 +14,6 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       centerTitle: true,
       actions: widgets,
-      leading: leading,
     );
   }
 
