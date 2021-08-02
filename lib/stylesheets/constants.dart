@@ -8,6 +8,8 @@ const Color white = Colors.white;
 const Color mine_shaft = Color(0xFF212121);
 const Color studio = Color(0xFF794FB0);
 const Color electric_violet = Color(0xFF6200EE);
+const Color pure_violet = Color(0xFF5600E8);
+const Color dark_violet = Color(0xFF391E75);
 const Color cinnabar = Color(0xFFE53935);
 const Color tulip_tree = Color(0xFFE5BE35);
 const Color fruit_salad = Color(0xFF4CAF50);
@@ -23,7 +25,13 @@ const Color bright_orange = Color(0xffF99E5C);
 const Color light_yellow = Color(0xffFFF6B1);
 const Color light_purple_A100 = Color(0xffF2E7FE);
 const Color light_green = Color(0xffE0F1BC);
+const Color dark_gray = Color(0xFF7C7C7C);
+const Color pig_pink = Color(0xFFFFE7F0);
 
 // recorder colors
 const Color grey = Color(0xFFF0F0F0);
 const Color red_stop = Color(0xFFED675C);
+
+
+
+

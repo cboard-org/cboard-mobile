@@ -113,7 +113,7 @@ class ImageDialog extends StatelessWidget {
           insetPadding: EdgeInsets.symmetric(horizontal: 0),
           content: Container(
             // alignment: Alignment.topCenter,
-            width: 277.11,
+            width: _screenSize.width*0.7,
             height: _screenSize.height*0.35,
             child: Card(
                 // margin: EdgeInsets.all(5),
@@ -123,7 +123,7 @@ class ImageDialog extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    height: 230.75,
+                    height: _screenSize.height*0.35 - 22,
                     color: light_yellow,
                     child: Image.asset(
                       tile.imageUrl,
@@ -132,13 +132,15 @@ class ImageDialog extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 21.44,
-                  child: Text(tile.name,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        fontFamily: "Robotto",
-                        fontWeight: FontWeight.w500,
-                      )),
+                  height: 22,
+                  child: Center(
+                    child: Text(tile.name,
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontFamily: "Robotto",
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
                 ),
               ],
             )),
@@ -184,7 +186,7 @@ class ImageDialog extends StatelessWidget {
                 ),
                 title: Text(
                   'Delete',
-                  style: TextStyle(color: Color(0xffC62828)),
+                  style: TextStyle(color: cinnabar),
                 ),
                 onTap: () => {
                   Navigator.push(context,
