@@ -1,9 +1,10 @@
-import 'package:cboard_mobile/lockedScreen/widgets/dialog_state.dart';
+import 'package:cboard_mobile/lockedScreen/screens/dialog_state.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Show dialog for editting tile layout
 Future<void> editDialog(BuildContext context) async {
   return await showDialog(
       context: context,
