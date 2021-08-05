@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
+import 'package:cboard_mobile/unlocked/widgets/UnlockedMainBar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: UnlockedHomeScreen(), // debug: change back to homescreen
+      home: UnlockedMainBar(), // debug: change back to homescreen
     );
   }
 }

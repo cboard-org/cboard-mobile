@@ -1,7 +1,6 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/unlocked/widgets/UnlockedMainBar.dart';
 import 'package:flutter/material.dart';
-
-import 'UnlockedHomepage.dart';
 
 class PublicBoards extends StatefulWidget {
   @override
@@ -59,7 +58,7 @@ class _PublicBoardsState extends State<PublicBoards> {
           leading: GestureDetector(
             onTap: () => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UnlockedHomeScreen()))
+                  MaterialPageRoute(builder: (context) => UnlockedMainBar()))
             },
             child: Icon(Icons.arrow_back, color: white, size: 25.0),
           ),
@@ -75,7 +74,7 @@ class _PublicBoardsState extends State<PublicBoards> {
               crossAxisCount: (orientation == Orientation.portrait) ? 3 : 4),
           itemBuilder: (BuildContext context, int index) {
             return new Card(
-              color: light_purple,
+              color: Colors.purple[200],
               child: new GridTile(
                 footer: Container(
                   color: Colors.white60,

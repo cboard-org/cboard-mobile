@@ -167,8 +167,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       trailing: Wrap(
                         spacing: 6,
                         children: <Widget>[
-                          Icon(Icons.mic,
-                              size: 35.0, color: Colors.black54),
+                          Icon(Icons.mic, size: 35.0, color: Colors.black54),
                           Icon(Icons.keyboard_arrow_right,
                               size: 35.0, color: Colors.black54),
                         ],

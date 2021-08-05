@@ -4,10 +4,11 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/EditBoard.dart';
 import 'package:cboard_mobile/unlocked/NewBoard.dart';
 import 'package:cboard_mobile/unlocked/Public.dart';
+import 'package:cboard_mobile/unlocked/widgets/UnlockedMainBar.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
-import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
+
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
 class ManageBoardsScreen extends StatefulWidget {
@@ -34,35 +35,35 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
 
   final List<List<String>> names = <List<String>>[
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
@@ -71,35 +72,35 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
   ];
   final List<List<String>> names2 = <List<String>>[
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'Public Board Tile ',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'Board Tile',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'Board Tile 2',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'Board Tile 3',
       'number of tiles',
       'made on',
       'offline'
     ],
     [
-      'assets/images/card_placeholder.png',
+      'assets/images/user.png',
       'title',
       'number of tiles',
       'made on',
@@ -143,7 +144,7 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
           leading: GestureDetector(
             onTap: () => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UnlockedHomeScreen()))
+                  MaterialPageRoute(builder: (context) => UnlockedMainBar()))
             },
             child: Icon(Icons.arrow_back, color: white, size: 25.0),
           ),

@@ -1,5 +1,4 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
-import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +36,7 @@ class _EditBoardState extends State<EditBoard> {
           child: Column(
             children: [
               Image.asset(
-                'assets/images/card_placeholder.png',
+                'assets/images/user.png',
                 height: 200,
                 width: 200,
               ),
