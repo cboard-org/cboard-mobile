@@ -1,39 +1,41 @@
-import 'package:cboard_mobile/lockedScreen/widgets/circle_color.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ColorBoard extends StatefulWidget {
+class ColorBoard extends StatelessWidget {
   final List<Color> colors;
+  final void Function(Color) colorChange;
+  final Color currentColor;
 
   const ColorBoard({
     Key key,
     @required this.colors,
+    @required this.colorChange,
+    @required this.currentColor,
   }) : super(key: key);
-  @override
-  _ColorBoard createState() => _ColorBoard();
-}
-
-class _ColorBoard extends State<ColorBoard> {
-  Color currentColor;
-
-  @override
-  void initState() {
-    super.initState();
-    currentColor = widget.colors[0]; // Later fetch from Provider
-  }
 
   @override
   Widget build(BuildContext context) {
+    final double circleSize = 20;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: widget.colors.map((color) {
-        return new CircleColor(
-          color: color,
-          isSelected: currentColor == color,
-          onColorChoose: (color) {
-            setState(() {
-              currentColor = color;
-            });
-          },
+      children: colors.map((color) {
+        return Material(
+          shape: const CircleBorder(),
+          child: GestureDetector(
+            //User taps will update value on the screen, not yet in Provider
+            onTap: () => colorChange(color),
+            child: CircleAvatar(
+              radius: circleSize * 2 / 3,
+              backgroundColor: color,
+              child: currentColor == color
+                  ? Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 15,
+                    )
+                  : null,
+            ),
+          ),
         );
       }).toList(),
     );
