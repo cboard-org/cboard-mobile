@@ -1,38 +1,126 @@
+import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class Tile {
+class TileData {
   final String name;
-  final String imageUrl;
+  final String content;
   final bool isFile;
+  final Color color;
 
-  const Tile({
+  const TileData({
+    this.color,
     @required this.name,
     @required this.isFile,
-    this.imageUrl,
+    this.content,
   });
 }
 
-final List<Tile> example = const [
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
-  Tile(name: 'Test', isFile: true, imageUrl: 'assets/images/test.png'),
+List<TileData> example = const [
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+    name: 'Test',
+    isFile: true,
+    content: 'assets/images/test.png',
+    color: dark_lime_green,
+  ),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
+  TileData(
+      name: 'Test',
+      isFile: true,
+      content: 'assets/images/test.png',
+      color: dark_lime_green),
 ];
