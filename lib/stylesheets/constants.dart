@@ -27,3 +27,6 @@ const Color soft_orange = Color(0xFFF99E5C);
 const Color bright_red = Color(0xFFE53935);
 
 //Set of background color
+
+//Add text tile color
+const Color soft_green = Color(0xFFE0F1BC);
