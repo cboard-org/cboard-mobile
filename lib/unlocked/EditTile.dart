@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/unlocked/ManageBoards.dart';
 import 'package:cboard_mobile/unlocked/TileVocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
@@ -58,10 +59,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
           child: AppBar(
             leading: GestureDetector(
               onTap: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UnlockedHomeScreen()))
+                Navigator.pop(context),
               },
               child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
             ),
@@ -223,10 +221,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TileVocalization(
-                                        tileVocalization:
-                                            widget.tile.vocalization,
-                                      )))
+                                  builder: (context) => ManageBoardsScreen()))
                         }, // Debug: change to edit
                       ),
                     ],

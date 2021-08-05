@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/ManageBoards.dart';
+import 'package:cboard_mobile/unlocked/NewBoard.dart';
 import 'package:flutter/material.dart';
 
 class UnlockedMainBar extends StatelessWidget {
@@ -51,6 +52,12 @@ class UnlockedMainBar extends StatelessWidget {
                                 color: paua,
                               ),
                               title: Text('New Board'),
+                              onTap: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NewBoard()))
+                              },
                             ),
                             ListTile(
                               leading: Icon(

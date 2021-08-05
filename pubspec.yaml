@@ -28,6 +28,7 @@ dependencies:
   provider: ^4.3.3
   flutter_native_splash: ^1.0.2
   flutter_tts: ^3.0.0
+  bubble_tab_indicator: "^0.1.5"
 
 
   # The following adds the Cupertino Icons font to your application.
