@@ -1,107 +1,57 @@
-import 'package:cboard_mobile/data/data.dart';
-import 'package:cboard_mobile/lockedScreen/widgets/color_board.dart';
-import 'package:cboard_mobile/lockedScreen/widgets/create_tile.dart';
-import 'package:cboard_mobile/shared/button.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/dialog_state.dart';
+import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> editDialog(BuildContext context) async {
-  List<Color> textColor = [
-    dark_blue,
-    dark_lime_green,
-    vivid_yellow,
-    soft_red,
-    soft_violet,
-    soft_orange,
-    bright_red
-  ];
-  String currentFont = "Comic Sans MS";
-
   return await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        int currentState =
+            context.select<DialogModel, int>((dialog) => dialog.currentState);
+        return Center(
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
             child: DefaultTabController(
-          length: 2,
-          child: SimpleDialog(
-            children: [
-              TabBar(
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: white.withAlpha(0),
-                tabs: [
-                  Text("TILE"),
-                  Text("FOLDER"),
-                ],
-              ),
-              Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              length: 2,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_back_ios),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: TabBar(
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.grey,
+                        indicatorColor: white.withAlpha(0),
+                        tabs: [
+                          Text("TILE"),
+                          Text("FOLDER"),
+                        ],
                       ),
-                      Text("Appearance"),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_forward_ios),
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: CreateTile(
-                        tile: Tile(
-                            isFile: true,
-                            name: 'Label',
-                            imageUrl: 'assets/images/test.png'),
-                        size: 120),
-                  ),
-                  ListTile(
-                    title: Text("Font"),
-                    subtitle: Text(currentFont),
-                    trailing: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () {}, //Update Provider
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Text',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  ColorBoard(
-                    colors: textColor,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Background',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  ColorBoard(
-                    colors: textColor,
-                  ),
-                  SizedBox(height: 15),
-                  Center(
-                    child: Button(
-                      label: Text(
-                        "Update",
-                      ),
-                      isPrimary: true,
-                      onPress: () {},
+                  SizedBox(
+                    height: (currentState == 1)
+                        ? 450
+                        : (currentState == 2)
+                            ? 350
+                            : 300,
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: TabBarView(
+                      children: [
+                        DialogState(type: "TILE"),
+                        DialogState(type: "FOLDER"),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ));
+        );
       });
 }
