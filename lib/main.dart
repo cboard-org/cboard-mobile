@@ -4,6 +4,8 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/dialog.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -12,6 +14,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
+        //Add Provider Listener to any change in edit_dialog
+        ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel())
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',
