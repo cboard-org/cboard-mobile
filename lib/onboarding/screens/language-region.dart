@@ -2,6 +2,8 @@ import 'package:cboard_mobile/models/locale.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/onboarding/screens/voice.dart';
+
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/button.dart';
@@ -135,7 +137,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpTTS(),
+                          builder: (context) => VoicePage(),
                         ),
                       );
                     },
