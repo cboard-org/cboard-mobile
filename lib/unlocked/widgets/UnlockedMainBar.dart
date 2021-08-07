@@ -11,6 +11,7 @@ class UnlockedMainBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _screenSize = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 10.0,
@@ -23,7 +24,7 @@ class UnlockedMainBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
@@ -82,7 +83,7 @@ class UnlockedMainBar extends StatelessWidget {
                             fontFamily: "Robotto",
                             fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.arrow_drop_down),
+                      Icon(Icons.arrow_drop_down,color: Theme.of(context).primaryColor,),
                     ],
                   ),
                 ),
@@ -118,7 +119,33 @@ class UnlockedMainBar extends StatelessWidget {
                     ),
                     SizedBox(width: 15),
                     GestureDetector(
-                      onTap: () => print('Lock'), // insert new screen here
+                      onTap: () {
+                        /// locked to unlocked transition
+                        showDialog(context: context,
+                            builder: (context){
+                              int unlock = 3;
+                              return AlertDialog(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                insetPadding: EdgeInsets.symmetric(horizontal: _screenSize.width*0.17),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                content: SizedBox(
+                                  width: _screenSize.width*0.3,
+                                  height: _screenSize.height*0.2,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(Icons.lock,color: white,size: 50,),
+                                      // SizedBox(height: 20,),
+                                      Text("Press $unlock more times to unlock",style: TextStyle(color: white, fontSize: 15,),textAlign: TextAlign.center,)
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      }, // insert new screen here
                       child: Icon(
                         Icons.lock_open,
                         color: paua,

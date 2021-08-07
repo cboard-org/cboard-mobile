@@ -25,46 +25,6 @@ class Tiles extends StatelessWidget {
             pageBuilder: (_,
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,) => ImageDialog(tile: tile));
-        // showModalBottomSheet(
-        //   context: context,
-        //   builder: (context) {
-        //     return Wrap(
-        //       children: [
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.edit,
-        //             color: paua,
-        //           ),
-        //           title: Text('Edit Tiles'),
-        //         ),
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.layers,
-        //             color: paua,
-        //           ),
-        //           title: Text('Duplicate'),
-        //         ),
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.visibility_off,
-        //             color: paua,
-        //           ),
-        //           title: Text('Hide'),
-        //         ),
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.delete,
-        //             color: paua,
-        //           ),
-        //           title: Text(
-        //             'Delete',
-        //             style: TextStyle(color: Color(0xffC62828)),
-        //           ),
-        //         ),
-        //       ],
-        //     );
-        //   },
-        // );
       },
       child: Container(
         child: Card(
@@ -73,22 +33,26 @@ class Tiles extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                  color: tile.name != "Label" ? light_yellow : light_green,
-                  child: Image.asset(
-                    tile.imageUrl,
-                    width: MediaQuery.of(context).size.width,
+                Expanded(
+                  child: Container(
+                    // height: MediaQuery.of(context).size.height / 10,
+                    color: tile.name != "Label" ? light_yellow : light_green,
+                    child: Image.asset(
+                      tile.imageUrl,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 38,
-                  child: Text(tile.name,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        fontFamily: "Robotto",
-                        fontWeight: FontWeight.w500,
-                      )),
+                  height: MediaQuery.of(context).size.height / 34,
+                  child: Center(
+                    child: Text(tile.name,
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontFamily: "Robotto",
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
                 ),
               ],
             )),

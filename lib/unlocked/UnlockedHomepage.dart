@@ -34,6 +34,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: white,
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 90),
         child: Container(
@@ -60,8 +61,8 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                           fontFamily: "Robotto",
                         ),
                       ),
-                      FlatButton(
-                        onPressed: () => {},
+                      InkWell(
+                        onTap: () => {},
                         child: Row(
                           // Replace with a Row for horizontal icon + text
                           children: <Widget>[
