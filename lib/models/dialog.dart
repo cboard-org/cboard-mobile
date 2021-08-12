@@ -17,11 +17,13 @@ class DialogModel with ChangeNotifier {
   labelSize get currentTileLabelSize => _tileLabelSizeOption;
   void updateTileLabelSize(labelSize newSize) {
     _tileLabelSizeOption = newSize;
+    notifyListeners();
   }
 
   labelSize get currentFolderLabelSize => _folderLabelSizeOption;
   void updateFolderLabelSize(labelSize newSize) {
     _folderLabelSizeOption = newSize;
+    notifyListeners();
   }
 
   int get currentState => _currentState;

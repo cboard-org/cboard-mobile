@@ -1,126 +1,32 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
-class TileData {
+class Data {
   final String name;
   final String content;
-  final bool isFile;
   final Color color;
 
-  const TileData({
-    this.color,
-    @required this.name,
-    @required this.isFile,
-    this.content,
-  });
+  Data(this.name, this.content, this.color);
 }
 
-List<TileData> example = const [
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-    name: 'Test',
-    isFile: true,
-    content: 'assets/images/test.png',
-    color: dark_lime_green,
-  ),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
-  TileData(
-      name: 'Test',
-      isFile: true,
-      content: 'assets/images/test.png',
-      color: dark_lime_green),
+class TileData extends Data {
+  TileData(String name, String content, Color color)
+      : super(name, content, color);
+}
+
+class FolderData extends Data {
+  final List<TileData> tiles;
+  FolderData(String name, String content, Color color, this.tiles)
+      : super(name, content, color);
+}
+
+List<Data> example = [
+  TileData('A', 'assets/symbols/A.svg', dark_lime_green),
+  TileData('B', 'assets/symbols/B.svg', dark_lime_green),
+  FolderData('Animal', 'assets/symbols/dolphin.svg', dark_lime_green, [
+    TileData('dolphin', 'assets/symbols/dolphin.svg', dark_lime_green),
+    TileData('fish', 'assets/symbols/fish.svg', dark_lime_green),
+    TileData('whale', 'assets/symbols/killer_whale.svg', dark_lime_green),
+    TileData('polar bear', 'assets/symbols/polar_bear.svg', dark_lime_green),
+  ]),
 ];

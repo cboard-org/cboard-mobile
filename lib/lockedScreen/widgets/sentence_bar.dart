@@ -2,12 +2,13 @@ import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
+import 'package:cboard_mobile/models/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SentenceBar extends StatefulWidget {
   //List containg all tiles that user tapped
-  static List<TileData> words = [];
+  // static List<TileData> words = [];
 
   @override
   _SentenceBarState createState() => _SentenceBarState();
@@ -17,11 +18,13 @@ class _SentenceBarState extends State<SentenceBar> {
   @override
   Widget build(BuildContext context) {
     final dialogModel = Provider.of<DialogModel>(context);
+    final homeModel = Provider.of<HomeModel>(context);
+    final words = homeModel.getWords();
     return Row(
       children: [
         SizedBox(width: 3),
         Expanded(
-          child: SentenceBar.words.length == 0
+          child: words.length == 0
               ? Text(
                   'Enter text or add tiles',
                 )
@@ -32,9 +35,9 @@ class _SentenceBarState extends State<SentenceBar> {
                   ),
                   //User can scroll tiles horizontally
                   scrollDirection: Axis.horizontal,
-                  itemCount: SentenceBar.words.length,
+                  itemCount: words.length,
                   itemBuilder: (BuildContext context, int index) {
-                    TileData tileData = SentenceBar.words[index];
+                    TileData tileData = words[index];
                     //If tile is for adding user text input, create TextTile()
                     if (tileData.name == "Edit") {
                       return TextTile();
@@ -43,7 +46,7 @@ class _SentenceBarState extends State<SentenceBar> {
                       return SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                         child: Tile(
-                          name: tileData.name,
+                          text: tileData.name,
                           content: tileData.content,
                           color: dialogModel.tileBackgroundColor,
                           labelPos: dialogModel.labelTop,
@@ -58,8 +61,8 @@ class _SentenceBarState extends State<SentenceBar> {
         GestureDetector(
           onTap: () {
             setState(() {
-              if (SentenceBar.words.length > 0) {
-                SentenceBar.words.removeLast();
+              if (words.length > 0) {
+                words.removeLast();
               }
             });
           },

@@ -79,8 +79,8 @@ class _EditMain extends State<EditAppearance> {
             child: Tile(
               labelPos: dialogModel.labelTop,
               color: currentBackgroundColor,
-              name: 'Label',
-              content: 'assets/images/test.png',
+              text: 'Label',
+              content: 'assets/symbols/A.svg',
             ),
           ),
         ),

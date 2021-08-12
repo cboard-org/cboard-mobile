@@ -61,8 +61,8 @@ class _EditLabel extends State<EditLabel> {
                   child: Tile(
                     labelPos: false,
                     color: currentBackgroundColor,
-                    name: 'Label',
-                    content: 'assets/images/test.png',
+                    text: 'Label',
+                    content: 'assets/symbols/A.svg',
                   ),
                 ),
                 Radio(
@@ -87,8 +87,8 @@ class _EditLabel extends State<EditLabel> {
                   child: Tile(
                     labelPos: true,
                     color: currentBackgroundColor,
-                    name: 'Label',
-                    content: 'assets/images/test.png',
+                    text: 'Label',
+                    content: 'assets/symbols/A.svg',
                   ),
                 ),
                 Radio(

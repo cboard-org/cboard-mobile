@@ -54,7 +54,7 @@ class _EditTile extends State<TextTile> {
       return SizedBox(
         width: MediaQuery.of(context).size.width * 0.2,
         child: Tile(
-          name: "Edit",
+          text: "Edit",
           content: sentence,
           color: fog,
           labelPos: dialogModel.labelTop,

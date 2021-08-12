@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/dialog.dart';
+import 'models/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
         //Add Provider Listener to any change in edit_dialog
-        ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel())
+        ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel()),
+        ChangeNotifierProvider<HomeModel>(create: (context) => HomeModel()),
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
             contentPadding: new EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
-        home: HomeScreen(),
+        home: HomeScreen(data: example),
       ),
     );
   }

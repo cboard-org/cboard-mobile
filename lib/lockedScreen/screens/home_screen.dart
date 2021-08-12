@@ -1,14 +1,18 @@
+import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/folder-tile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
+import 'package:cboard_mobile/models/home.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
 import 'package:provider/provider.dart';
 import '../widgets/main_app_bar.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  final List<Data> data;
+  const HomeScreen({Key key, this.data}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController;
   double _scrollOffset = 0.0;
+  FlutterTts flutterTts = FlutterTts();
 
   @override
   void initState() {
@@ -41,6 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     //Keep track Label Position
     final dialologModel = Provider.of<DialogModel>(context);
+    final homeModel = Provider.of<HomeModel>(context);
+
+    final data = widget.data;
+
+    Future _speak(String text) async {
+      await flutterTts.speak(text);
+    }
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
@@ -75,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-          itemCount: example.length + 2,
+          itemCount: data.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             // ignore: todo
@@ -87,40 +99,51 @@ class _HomeScreenState extends State<HomeScreen> {
             if (index == 0) {
               return Tile(
                 labelPos: dialologModel.labelTop,
-                name: "Add text",
-                content: 'assets/images/test.png',
+                text: "Add text",
+                content: 'assets/symbols/A.svg',
                 color: soft_green,
                 //User taps to add sentence in the top sentence bar
                 tapped: () => {
                   setState(() {
-                    SentenceBar.words
-                        .add(TileData(name: "Edit", isFile: true, content: ""));
+                    homeModel.add(TileData("Edit", "", paua));
                   }),
                 },
               );
 
               // 'Add tile/folder' tile
-            } else if (index == example.length + 1) {
+            } else if (index == data.length + 1) {
               return Tile(
                   labelPos: dialologModel.labelTop,
-                  name: "Add tile/folder",
-                  content: 'assets/images/AddTile.png',
+                  text: "Add tile/folder",
+                  content: 'assets/symbols/A.svg',
                   color: soft_green,
                   //Tapped function is null as user can't add tile in Unlocked Screen
                   tapped: () => {});
 
               //Normal tile
             } else {
-              final TileData tileData = example[index - 1];
-              return Tile(
-                labelPos: dialologModel.labelTop,
-                name: tileData.name,
-                content: tileData.content,
-                color: dialologModel.tileBackgroundColor,
-                tapped: () => setState(() {
-                  SentenceBar.words.add(tileData);
-                }),
-              );
+              final Data info = data[index - 1];
+              if (info is TileData) {
+                return Tile(
+                  labelPos: dialologModel.labelTop,
+                  text: info.name,
+                  content: info.content,
+                  color: dialologModel.tileBackgroundColor,
+                  tapped: () => {
+                    _speak(info.name),
+                    setState(() {
+                      homeModel.add(info);
+                    })
+                  },
+                );
+              } else {
+                FolderData folderdata = info;
+                return FolderTile(
+                  text: info.name,
+                  content: info.content,
+                  tiles: folderdata.tiles,
+                );
+              }
             }
           },
         ),
