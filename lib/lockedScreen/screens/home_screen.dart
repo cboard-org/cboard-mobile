@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:cboard_mobile/data/data.dart';
-import 'package:cboard_mobile/lockedScreen/widgets/folder-tile.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
@@ -50,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final data = widget.data;
 
+    //Flutter tts object
     Future _speak(String text) async {
       await flutterTts.speak(text);
     }
@@ -68,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
               // Sentence Creation Section
               Container(
                 height: screenSize.height * (2 / 15),
-                child: SentenceBar(),
+                child: SentenceBar(
+                  //Speak full sentence
+                  tapped: () => _speak(homeModel.getFullSent()),
+                ),
               ),
 
               // Main Navigation Bar
@@ -105,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //User taps to add sentence in the top sentence bar
                 tapped: () => {
                   setState(() {
-                    homeModel.add(TileData("Edit", "", paua));
+                    homeModel.addWords(TileData("Edit", "", paua));
                   }),
                 },
               );
@@ -130,9 +136,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   content: info.content,
                   color: dialologModel.tileBackgroundColor,
                   tapped: () => {
+                    //Speak word in the tile
                     _speak(info.name),
                     setState(() {
-                      homeModel.add(info);
+                      homeModel.addWords(info);
                     })
                   },
                 );

@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SentenceBar extends StatefulWidget {
-  //List containg all tiles that user tapped
-  // static List<TileData> words = [];
+  final Function() tapped;
+
+  const SentenceBar({Key key, this.tapped}) : super(key: key);
 
   @override
   _SentenceBarState createState() => _SentenceBarState();
@@ -28,32 +29,35 @@ class _SentenceBarState extends State<SentenceBar> {
               ? Text(
                   'Enter text or add tiles',
                 )
-              : ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 10.0,
+              : GestureDetector(
+                  onTap: widget.tapped,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 10.0,
+                    ),
+                    //User can scroll tiles horizontally
+                    scrollDirection: Axis.horizontal,
+                    itemCount: words.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      TileData tileData = words[index];
+                      //If tile is for adding user text input, create TextTile()
+                      if (tileData.name == "Edit") {
+                        return TextTile();
+                        //else create normal tile
+                      } else {
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Tile(
+                            text: tileData.name,
+                            content: tileData.content,
+                            color: dialogModel.tileBackgroundColor,
+                            labelPos: dialogModel.labelTop,
+                          ),
+                        );
+                      }
+                    },
                   ),
-                  //User can scroll tiles horizontally
-                  scrollDirection: Axis.horizontal,
-                  itemCount: words.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    TileData tileData = words[index];
-                    //If tile is for adding user text input, create TextTile()
-                    if (tileData.name == "Edit") {
-                      return TextTile();
-                      //else create normal tile
-                    } else {
-                      return SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        child: Tile(
-                          text: tileData.name,
-                          content: tileData.content,
-                          color: dialogModel.tileBackgroundColor,
-                          labelPos: dialogModel.labelTop,
-                        ),
-                      );
-                    }
-                  },
                 ),
         ),
         SizedBox(width: 5),
@@ -61,9 +65,7 @@ class _SentenceBarState extends State<SentenceBar> {
         GestureDetector(
           onTap: () {
             setState(() {
-              if (words.length > 0) {
-                words.removeLast();
-              }
+              homeModel.removeWords();
             });
           },
           child: Icon(
