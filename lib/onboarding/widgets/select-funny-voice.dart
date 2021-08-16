@@ -47,12 +47,12 @@ class _SelectFunnyVoiceState extends State<SelectFunnyVoice> {
                           ? ColorFilter.mode(Colors.white.withOpacity(0.2), BlendMode.dstATop)
                           : ColorFilter.mode(Colors.transparent, BlendMode.saturation),
                           child: Image(
-                            image: Image.asset("assets/images/test.png").image
+                            image: Image.asset("assets/images/funny.png").image
                           )
                       )
                     ),
 
-                    SizedBox(height: 23),
+                    SizedBox(height: 25.5),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 25,
