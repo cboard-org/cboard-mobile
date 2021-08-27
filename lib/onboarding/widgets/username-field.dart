@@ -37,7 +37,7 @@ class _UsernameFieldState extends State<UsernameField> {
                     : null
                   ),
           keyboardType: TextInputType.emailAddress,
-          onChanged: (text) => appState.setNameText(text),
+          onChanged: (text) => appState.setEmailText(text),
           validator: (value) {
             if (value.isEmpty)
               return 'Please enter a valid email';
