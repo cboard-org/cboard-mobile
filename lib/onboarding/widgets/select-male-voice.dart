@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/foundation.dart';
 import 'package:cboard_mobile/onboarding/widgets/checkmark.dart';
+import 'package:provider/provider.dart';
+import 'package:cboard_mobile/models/settings.dart';
 
 class SelectMaleVoice extends StatefulWidget {
   const SelectMaleVoice({Key key}) : super(key: key);
@@ -12,20 +14,14 @@ class SelectMaleVoice extends StatefulWidget {
 }
 
 class _SelectMaleVoiceState extends State<SelectMaleVoice> {
-  bool _selectedVoice = true;
-  void _toggle() {
-    setState(() {
-      _selectedVoice = !_selectedVoice;
-    });
-  }
-
   Widget build(BuildContext context) {
+    var settingmodel = Provider.of<SettingsModel>(context);
+
     return Padding(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
         child: InkWell(
             onTap: () {
-              _toggle();
-              print("selected is: " + _selectedVoice.toString());
+              settingmodel.updateVoice(voice.Male);
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -39,23 +35,20 @@ class _SelectMaleVoiceState extends State<SelectMaleVoice> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              _selectedVoice
-                                  ? Checkmark()
-                                  : Icon(null)
+                              settingmodel.voiceType == voice.Male ? Checkmark() : Icon(null)
                             ])),
-
                     Container(
-                      child: ColorFiltered(
-                        colorFilter: _selectedVoice 
-                          ? ColorFilter.mode(Colors.white.withOpacity(0.2), BlendMode.dstATop)
-                          : ColorFilter.mode(Colors.transparent, BlendMode.saturation),
-                          child: Image(
-                            image: Image.asset("assets/images/male.png").image
-                          )
-                      )
-                    ),
-
-                    SizedBox(height: 25.5),
+                        child: ColorFiltered(
+                            colorFilter: settingmodel.voiceType == voice.Male
+                                ? ColorFilter.mode(
+                                    Colors.white.withOpacity(0.2),
+                                    BlendMode.dstATop)
+                                : ColorFilter.mode(
+                                    Colors.transparent, BlendMode.saturation),
+                            child: Image(
+                                image: Image.asset("assets/images/male.png")
+                                    .image))),
+                    SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 25,

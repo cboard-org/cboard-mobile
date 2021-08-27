@@ -1,5 +1,7 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
+import 'package:provider/provider.dart';
 
 class NameField extends StatefulWidget {
   final TextEditingController controller;
@@ -15,6 +17,8 @@ class NameField extends StatefulWidget {
 class _NameFieldState extends State<NameField> {
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<PasswordConfirmProvider>(context);
+
     return Column(
       children: [
         TextFormField(
@@ -29,6 +33,7 @@ class _NameFieldState extends State<NameField> {
                           color: fruit_salad,
                         )
                       : null),
+          onChanged: (text) => appState.setNameText(text),
           validator: (value) {
             if (value.isEmpty)
               return 'Please enter your name';

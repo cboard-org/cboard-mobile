@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/foundation.dart';
 import 'package:cboard_mobile/onboarding/widgets/checkmark.dart';
+import 'package:provider/provider.dart';
+import 'package:cboard_mobile/models/settings.dart';
 
 class SelectFunnyVoice extends StatefulWidget {
   const SelectFunnyVoice({Key key}) : super(key: key);
@@ -10,19 +12,15 @@ class SelectFunnyVoice extends StatefulWidget {
 }
 
 class _SelectFunnyVoiceState extends State<SelectFunnyVoice> {
-  bool _selectedVoice = false;
-  void _toggle() {
-    setState(() {
-      _selectedVoice = !_selectedVoice;
-    });
-  }
 
   Widget build(BuildContext context) {
+    var settingmodel = Provider.of<SettingsModel>(context);
+
     return Padding(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
         child: InkWell(
             onTap: () {
-              _toggle();
+              settingmodel.updateVoice(voice.Funny);
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -36,23 +34,20 @@ class _SelectFunnyVoiceState extends State<SelectFunnyVoice> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              _selectedVoice
-                                  ? Checkmark()
-                                  : Icon(null)
+                              settingmodel.voiceType == voice.Funny ? Checkmark() : Icon(null)
                             ])),
-
                     Container(
-                      child: ColorFiltered(
-                        colorFilter: _selectedVoice 
-                          ? ColorFilter.mode(Colors.white.withOpacity(0.2), BlendMode.dstATop)
-                          : ColorFilter.mode(Colors.transparent, BlendMode.saturation),
-                          child: Image(
-                            image: Image.asset("assets/images/funny.png").image
-                          )
-                      )
-                    ),
-
-                    SizedBox(height: 25.5),
+                        child: ColorFiltered(
+                            colorFilter: settingmodel.voiceType == voice.Funny
+                                ? ColorFilter.mode(
+                                    Colors.white.withOpacity(0.2),
+                                    BlendMode.dstATop)
+                                : ColorFilter.mode(
+                                    Colors.transparent, BlendMode.saturation),
+                            child: Image(
+                                image: Image.asset("assets/images/funny.png")
+                                    .image))),
+                    SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 25,

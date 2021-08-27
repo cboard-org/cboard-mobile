@@ -24,7 +24,6 @@ class _LanguageRegionState extends State<LanguageRegion> {
   @override
   Widget build(BuildContext context) {
     final List<String> localesLanguages = LocaleModel.languageMap.keys.toList();
-
     final List<String> localesCountries = LocaleModel.countryList.toList();
 
     return Scaffold(
@@ -95,6 +94,8 @@ class _LanguageRegionState extends State<LanguageRegion> {
               ),
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.symmetric(horizontal: 30)),
+
+              
           if (localeValueCountry != null)
             Container(
               child: Row(

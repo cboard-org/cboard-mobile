@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/foundation.dart';
 import 'package:cboard_mobile/onboarding/widgets/checkmark.dart';
+import 'package:provider/provider.dart';
+import 'package:cboard_mobile/models/settings.dart';
 
 class SelectFemaleVoice extends StatefulWidget {
   const SelectFemaleVoice({Key key}) : super(key: key);
@@ -10,19 +12,16 @@ class SelectFemaleVoice extends StatefulWidget {
 }
 
 class _SelectFemaleVoiceState extends State<SelectFemaleVoice> {
-  bool _selectedVoice = false;
-  void _toggle() {
-    setState(() {
-      _selectedVoice = !_selectedVoice;
-    });
-  }
 
   Widget build(BuildContext context) {
+
+    var settingmodel = Provider.of<SettingsModel>(context);
+
     return Padding(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
         child: InkWell(
             onTap: () {
-              _toggle();
+              settingmodel.updateVoice(voice.Female);
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -36,14 +35,14 @@ class _SelectFemaleVoiceState extends State<SelectFemaleVoice> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              _selectedVoice
+                              settingmodel.voiceType == voice.Female
                                   ? Checkmark()
                                   : Icon(null)
                             ])),
 
                     Container(
                       child: ColorFiltered(
-                        colorFilter: _selectedVoice 
+                        colorFilter: settingmodel.voiceType == voice.Female
                           ? ColorFilter.mode(Colors.white.withOpacity(0.2), BlendMode.dstATop)
                           : ColorFilter.mode(Colors.transparent, BlendMode.saturation),
                           child: Image(
@@ -52,7 +51,7 @@ class _SelectFemaleVoiceState extends State<SelectFemaleVoice> {
                       )
                     ),
 
-                    SizedBox(height: 25.5),
+                    SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 25,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 
 class PasswordConfirmField extends StatefulWidget {
   final TextEditingController passwordController;
@@ -25,71 +27,74 @@ class _PasswordConfirmFieldState extends State<PasswordConfirmField> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appState = Provider.of<PasswordConfirmProvider>(context);
+
     return Material(
-        child: new Column(
-      children: [
-        TextFormField(
-          controller: widget.passwordController,
-          decoration: InputDecoration(
-            labelText: 'Password',
-            hintText: 'Password',
-            suffixIcon: IconButton(
-              icon: Icon(
-                Icons.remove_red_eye,
-                color: Colors.grey,
+      child: new Column(
+        children: [
+          TextFormField(
+            controller: widget.passwordController,
+            decoration: InputDecoration(
+              labelText: 'Password',
+              hintText: 'Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  _toggle();
+                },
               ),
-              onPressed: () {
-                _toggle();
-              },
             ),
+            obscureText: _obscureText,
+            enableSuggestions: false,
+            autocorrect: false,
+            onChanged: (text) => appState.setPasswordText(text),
+            validator: (value) {
+              if (value.isEmpty)
+                return 'Please enter a password';
+              else if (value.contains('@')) // Make server call instead?
+                return 'Invalid password';
+                return null;
+            },
           ),
-          obscureText: _obscureText,
-          enableSuggestions: false,
-          autocorrect: false,
-          validator: (value) {
-            if (value.isEmpty)
-              return 'Please enter a password';
-            else if (value.contains('@')) // Make server call instead?
-              return 'Invalid password';
-            else if (value.length < 6) {
-              return 'Passwords should be at least 6 characters';
-            }
+
+          SizedBox(height: 30),
+
+          TextFormField(
+            controller: widget.confirmController,
+            decoration: InputDecoration(
+              labelText: 'Confirm Password',
+              hintText: 'Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  _toggle();
+                },
+              ),
+            ),
+            obscureText: _obscureText,
+            enableSuggestions: false,
+            autocorrect: false,
+            onChanged: (text) => appState.setPasswordConfirmText(text),
+            validator: (value) {
+              if (value.isEmpty)
+                return 'Please enter a password';
+              else if (value.contains('@')) // Make server call instead?
+                return 'Invalid password';
+              else if (value != widget.passwordController.text) {
+                return 'Passwords do not match!';
+              } 
               return null;
-          },
-        ),
-        SizedBox(height: 30),
-        TextFormField(
-          controller: widget.confirmController,
-          decoration: InputDecoration(
-            labelText: 'Confirm Password',
-            hintText: 'Password',
-            suffixIcon: IconButton(
-              icon: Icon(
-                Icons.remove_red_eye,
-                color: Colors.grey,
-              ),
-              onPressed: () {
-                _toggle();
-              },
-            ),
-          ),
-          obscureText: _obscureText,
-          enableSuggestions: false,
-          autocorrect: false,
-          validator: (value) {
-            if (value.isEmpty)
-              return 'Please enter a password';
-            else if (value.contains('@')) // Make server call instead?
-              return 'Invalid password';
-            else if (value != widget.passwordController.text) {
-              return 'Passwords do not match!';
-            } else if (value.length < 6) {
-              return 'Passwords should be at least 6 characters';
-            }
-            return null;
-          },
-        )
-      ],
-    ));
+            },
+          )
+        ],
+      )
+    );
   }
 }

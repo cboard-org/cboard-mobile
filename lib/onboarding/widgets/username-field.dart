@@ -1,5 +1,7 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 
 class UsernameField extends StatefulWidget {
   final TextEditingController controller;
@@ -13,30 +15,38 @@ class UsernameField extends StatefulWidget {
 }
 
 class _UsernameFieldState extends State<UsernameField> {
+
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<PasswordConfirmProvider>(context);
+    
     return Column(
       children: [
         TextFormField(
-            controller: widget.controller,
-            decoration: InputDecoration(
-                labelText: 'Email',
-                hintText: 'Email',
-                suffixIcon:
-                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(widget.controller.text)
-                        ? Icon(
-                            Icons.check,
-                            color: fruit_salad,
-                          )
-                        : null),
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value.isEmpty)
-                return 'Please enter a valid email';
-              else
-                return null;
-            },
+          controller: widget.controller,
+          decoration: InputDecoration(
+              labelText: 'Email',
+              hintText: 'Email',
+              suffixIcon:
+                RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(widget.controller.text)
+                    ? Icon(
+                        Icons.check,
+                        color: fruit_salad,
+                      )
+                    : null
+                  ),
+          keyboardType: TextInputType.emailAddress,
+          onChanged: (text) => appState.setNameText(text),
+          validator: (value) {
+            if (value.isEmpty)
+              return 'Please enter a valid email';
+            else if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value) == false) {
+              return 'Please enter a valid email';
+            }
+              return null;
+          },
         )
       ],
     );
