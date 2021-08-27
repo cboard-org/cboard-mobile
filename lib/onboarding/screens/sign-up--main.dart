@@ -36,10 +36,12 @@ class SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    //_autoValidate = false;
     return ChangeNotifierProvider(
       create: (BuildContext context) => PasswordConfirmProvider(),
       child: Form(
         key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: <Widget>[
             Container(
