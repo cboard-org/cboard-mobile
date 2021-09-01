@@ -149,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: info.name,
                   content: info.content,
                   tiles: folderdata.tiles,
+                  color: dialologModel.folderBackgroundColor,
                 );
               }
             }

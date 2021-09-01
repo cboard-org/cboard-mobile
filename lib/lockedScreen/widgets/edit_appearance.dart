@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -76,12 +77,19 @@ class _EditMain extends State<EditAppearance> {
           child: SizedBox(
             height: 100,
             width: 100,
-            child: Tile(
-              labelPos: dialogModel.labelTop,
-              color: currentBackgroundColor,
-              text: 'Label',
-              content: 'assets/symbols/A.svg',
-            ),
+            child: widget.type == 'TILE'
+                ? Tile(
+                    labelPos: dialogModel.labelTop,
+                    color: currentBackgroundColor,
+                    text: 'Label',
+                    content: 'assets/symbols/A.svg',
+                  )
+                : FolderTile(
+                    text: 'Label',
+                    content: 'assets/symbols/A.svg',
+                    color: currentBackgroundColor,
+                    labelPos: dialogModel.labelTop,
+                  ),
           ),
         ),
 
