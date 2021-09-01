@@ -9,6 +9,8 @@ class Tile extends StatelessWidget {
   final String content;
   //Background color
   final Color color;
+  //Label color
+  final Color labelColor;
   final Function tapped;
   //Label Position, either top or bottom
   final bool labelPos;
@@ -23,6 +25,7 @@ class Tile extends StatelessWidget {
     this.tapped,
     this.labelPos,
     this.edittingTile = false,
+    this.labelColor,
   }) : super(key: key);
 
   @override
@@ -47,7 +50,8 @@ class Tile extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
+              color: labelColor,
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
             ),

@@ -52,7 +52,7 @@ class _SentenceBarState extends State<SentenceBar> {
                             text: tileData.name,
                             content: tileData.content,
                             color: dialogModel.tileBackgroundColor,
-                            labelPos: dialogModel.labelTop,
+                            labelPos: dialogModel.tileLabelTop,
                           ),
                         );
                       }

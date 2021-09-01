@@ -57,7 +57,7 @@ class _EditTile extends State<TextTile> {
           text: "Edit",
           content: sentence,
           color: fog,
-          labelPos: dialogModel.labelTop,
+          labelPos: dialogModel.tileLabelTop,
           edittingTile: true,
           tapped: () {
             setState(() {

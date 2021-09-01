@@ -79,16 +79,18 @@ class _EditMain extends State<EditAppearance> {
             width: 100,
             child: widget.type == 'TILE'
                 ? Tile(
-                    labelPos: dialogModel.labelTop,
+                    labelPos: dialogModel.tileLabelTop,
                     color: currentBackgroundColor,
                     text: 'Label',
                     content: 'assets/symbols/A.svg',
+                    labelColor: currentTextColor,
                   )
                 : FolderTile(
                     text: 'Label',
                     content: 'assets/symbols/A.svg',
                     color: currentBackgroundColor,
-                    labelPos: dialogModel.labelTop,
+                    labelPos: dialogModel.folderLabelTop,
+                    labelColor: currentTextColor,
                   ),
           ),
         ),
