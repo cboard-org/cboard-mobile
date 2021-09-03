@@ -1,21 +1,32 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
+import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 
 import 'package:cboard_mobile/unlocked/EditTile.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
-class Tiles extends StatelessWidget {
+class TilesWidget extends StatelessWidget {
   final Tile tile;
   final double size;
 
-  const Tiles({Key key, @required this.tile, @required this.size})
+  const TilesWidget({Key key, @required this.tile, @required this.size})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
-      onTap: () => {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditTileScreen(tile: tile)))
+      onTap: () {
+        if(tile.isFolder){
+          Provider.of<UnlockedHomeProvider>(context,listen: false).addToNavigation(tile.name);
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => UnlockedHomeScreen(tiles: tile.tiles,))).then((value) => {
+                    Provider.of<UnlockedHomeProvider>(context,listen: false).popNavigation()
+          });
+        }
       },
       onLongPress: (){
         showGeneralDialog(
@@ -26,37 +37,46 @@ class Tiles extends StatelessWidget {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,) => ImageDialog(tile: tile));
       },
-      child: Container(
-        child: Card(
-            margin: EdgeInsets.all(5),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    // height: MediaQuery.of(context).size.height / 10,
-                    color: tile.name != "Label" ? light_yellow : light_green,
-                    child: Image.asset(
-                      tile.imageUrl,
-                      width: MediaQuery.of(context).size.width,
+      child: Card(
+          margin: EdgeInsets.all(5),
+          elevation: 2,
+          child: Stack(
+            children: [
+              // tile.isFolder?Icon(
+              //   Icons.folder,
+              //   color: Color(int.parse("0xff"+tile.backgroundColor)),
+              //   size: 130,
+              // ):Container(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      color: Color(int.parse("0xff"+tile.backgroundColor)),
+                      child: SvgPicture.asset(
+                        tile.imageUrl,
+                        width: MediaQuery.of(context).size.width,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 34,
-                  child: Center(
-                    child: Text(tile.name,
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontFamily: "Robotto",
-                          fontWeight: FontWeight.w500,
-                        )),
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    color: white,
+                    height: MediaQuery.of(context).size.height / 34,
+                    child: Center(
+                      child: Text(tile.name,
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontFamily: "Robotto",
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ),
                   ),
-                ),
-              ],
-            )),
-      ),
+                ],
+              ),
+            ],
+          )),
     );
   }
 }
@@ -89,7 +109,7 @@ class ImageDialog extends StatelessWidget {
                   child: Container(
                     height: _screenSize.height*0.35 - 22,
                     color: light_yellow,
-                    child: Image.asset(
+                    child: SvgPicture.asset(
                       tile.imageUrl,
                       width: 277.11,
                     ),

@@ -1,5 +1,9 @@
+import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/models/home.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UnlockedMainBar extends StatelessWidget {
   final double scrollOffset;
@@ -121,30 +125,8 @@ class UnlockedMainBar extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         /// locked to unlocked transition
-                        showDialog(context: context,
-                            builder: (context){
-                              int unlock = 3;
-                              return AlertDialog(
-                                backgroundColor: Theme.of(context).primaryColor,
-                                insetPadding: EdgeInsets.symmetric(horizontal: _screenSize.width*0.17),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                content: SizedBox(
-                                  width: _screenSize.width*0.3,
-                                  height: _screenSize.height*0.2,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(Icons.lock,color: white,size: 50,),
-                                      // SizedBox(height: 20,),
-                                      Text("Press $unlock more times to unlock",style: TextStyle(color: white, fontSize: 15,),textAlign: TextAlign.center,)
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
+                        Provider.of<HomeModel>(context,listen: false).resetLock();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(data: example,)));
                       }, // insert new screen here
                       child: Icon(
                         Icons.lock_open,

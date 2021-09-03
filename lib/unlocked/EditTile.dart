@@ -8,6 +8,7 @@ import 'package:cboard_mobile/unlocked/TileName.dart';
 import 'package:cboard_mobile/unlocked/VoiceRecorder.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditTileScreen extends StatefulWidget {
@@ -171,7 +172,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => UnlockedHomeScreen()))
+                        builder: (context) => UnlockedHomeScreen(tiles: example1,)))
               },
               child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
             ),
@@ -233,7 +234,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                       widget.tile.backgroundColor))),
                               child: Stack(
                                 children: [
-                                  Image.asset(
+                                  SvgPicture.asset(
                                     widget.tile.imageUrl,
                                     width: screenSize.width / 2,
                                   ),
@@ -345,7 +346,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         subtitle: Text(
                             widget.tile.name != "Label"
                                 ? widget.tile.name
-                                : widget.tile.editName,
+                                : "",
                             style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
@@ -376,7 +377,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       ListTile(
                         title: Text('Vocalization',
                             style: CustomTypography.Typography.title()),
-                        subtitle: Text(widget.tile.vocalization,
+                        subtitle: Text(widget.tile.vocalization ?? " ",
                             style: CustomTypography.Typography.subTitle()),
                         trailing: Wrap(
                           children: [
@@ -406,7 +407,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                   child: Column(
                     children: [
                       ListTile(
-                        title: Text('Title Background Color',
+                        title: Text('Tile Background Color',
                             style: CustomTypography.Typography.title()),
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 10),
@@ -420,13 +421,25 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                       _bgColor = colorToHex(colorCircular);
                                     });
                                   },
-                                  child: new Container(
-                                    width: screenSize.width / 18,
-                                    height: screenSize.width / 18,
-                                    decoration: new BoxDecoration(
-                                        color: colorCircular,
-                                        shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: screenSize.width / 36,
+                                    backgroundColor: colorCircular,
+                                    child: Color(int.parse("0xff" + _bgColor)) == colorCircular
+                                        ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 15,
+                                    )
+                                        : null,
                                   ),
+                                  // new Container(
+                                  //   width: screenSize.width / 18,
+                                  //   height: screenSize.width / 18,
+                                  //   decoration: new BoxDecoration(
+                                  //       color: colorCircular,
+                                  //       shape: BoxShape.circle,
+                                  //   ),
+                                  // ),
                                 ),
                               // SizedBox(
                               //   width: 30,
@@ -461,13 +474,16 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                       _textColor = colorToHex(colorCircular);
                                     });
                                   },
-                                  child: new Container(
-                                    // margin: const EdgeInsets.only(right: 26.8),
-                                    width: screenSize.width / 18,
-                                    height: screenSize.width / 18,
-                                    decoration: new BoxDecoration(
-                                        color: colorCircular,
-                                        shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: screenSize.width / 36,
+                                    backgroundColor: colorCircular,
+                                    child: Color(int.parse("0xff" + _textColor)) == colorCircular
+                                        ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 15,
+                                    )
+                                        : null,
                                   ),
                                 ),
                             ],
@@ -503,7 +519,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => VoiceRecorder(
-                                        tileRecord: widget.tile.voiceRecorder,
+                                        tileRecord: widget.tile.isRecording ?? true,
+                                        tile: widget.tile,
                                       )))
                         }, // Debug: change to edit
                       ),

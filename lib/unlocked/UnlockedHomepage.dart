@@ -1,10 +1,13 @@
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:cboard_mobile/unlocked/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
+import 'package:provider/provider.dart';
 
 class UnlockedHomeScreen extends StatefulWidget {
-  const UnlockedHomeScreen({Key key}) : super(key: key);
+  final List<Tile> tiles;
+  const UnlockedHomeScreen({Key key, this.tiles}) : super(key: key);
   @override
   _UnlockedHomeScreenState createState() => _UnlockedHomeScreenState();
 }
@@ -53,14 +56,17 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Board Name>Folder',
-                        style: TextStyle(
-                          color: paua,
-                          fontSize: 14.0,
-                          fontFamily: "Robotto",
-                        ),
-                      ),
+                      Consumer<UnlockedHomeProvider>(
+                          builder: (context, unlockedHomeProvider, child) {
+                        return Text(
+                          unlockedHomeProvider.prettyNavigation(),
+                          style: TextStyle(
+                            color: paua,
+                            fontSize: 14.0,
+                            fontFamily: "Robotto",
+                          ),
+                        );
+                      }),
                       InkWell(
                         onTap: () => {},
                         child: Row(
@@ -90,9 +96,12 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
             horizontal: 7.0,
           ),
           crossAxisCount: 3,
-          children: example.map((item) {
-            return Tiles(tile: item,size: screenSize.width*0.3,);
-          }).toList(),
+          children: widget.tiles?.map((item) {
+            return TilesWidget(
+              tile: item,
+              size: screenSize.width * 0.3,
+            );
+          })?.toList(),
         ),
       ),
     );

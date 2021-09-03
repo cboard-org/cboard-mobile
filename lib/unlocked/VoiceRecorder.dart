@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
@@ -5,21 +9,23 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final bool tileRecord;
+  final Tile tile;
 
-  VoiceRecorder({Key key, this.tileRecord = false}) : super(key: key);
+  VoiceRecorder({Key key, this.tileRecord = false, this.tile}) : super(key: key);
   @override
-  _TileNameState createState() => _TileNameState();
+  _VoiceRecorderState createState() => _VoiceRecorderState();
 }
 
 const theSource = AudioSource.microphone;
 typedef _fn = void Function();
 typedef void OnError(Exception exception);
 
-class _TileNameState extends State<VoiceRecorder> {
+class _VoiceRecorderState extends State<VoiceRecorder> {
   FlutterSoundPlayer _mPlayer = FlutterSoundPlayer(logLevel: Level.debug);
   FlutterSoundRecorder _mRecorder = FlutterSoundRecorder(logLevel: Level.debug);
   bool _mPlayerIsInited = false;
@@ -28,9 +34,10 @@ class _TileNameState extends State<VoiceRecorder> {
   Duration _duration = new Duration();
   Duration _position = new Duration();
 
-  final String _mPath = 'flutter_sound_example.aac';
+  String _mPath = 'flutter_sound_example.aac';
 
   bool isRecord = false;
+
   @override
   void initState() {
     isRecord = widget.tileRecord;
@@ -62,7 +69,32 @@ class _TileNameState extends State<VoiceRecorder> {
     super.dispose();
   }
 
+  // Future<String> _getTempPath(String path) async {
+  //   var tempDir = await getTemporaryDirectory();
+  //   return tempDir.path + "/cboard/" + path;
+  // }
+
+  Future<String> _getDownloadPath(String path) async {
+    final directory = await getApplicationDocumentsDirectory();
+    Directory cboardDirectory = Directory(directory.path+"/cboard");
+    print(await cboardDirectory.exists());
+    await cboardDirectory.create();
+    return cboardDirectory.path + '/'+path;
+  }
+
+  Future<File> downloadFile(String path) async {
+    // File sourceFile = File(_mPath);
+    String _downloadPath = await _getDownloadPath(widget.tile.name+".mp3");
+    FlutterSoundHelper().convertFile(_mPath, Codec.aacADTS, _downloadPath, Codec.mp3);
+    // final newFile = await sourceFile.copy(_downloadPath);
+    // await sourceFile.delete();
+    return File(_downloadPath);
+  }
+
   Future<void> openTheRecorder() async {
+    // _mPath = await _getTempPath(widget.tile.name);
+    // _mPathMP3 = await _getTempPath('flutter_sound_example.mp3');
+
     if (!kIsWeb) {
       var status = await Permission.microphone.request();
       if (status != PermissionStatus.granted) {
@@ -130,6 +162,7 @@ class _TileNameState extends State<VoiceRecorder> {
         });
       });
     });
+
   }
 
   void pausePlayer() {
@@ -232,6 +265,18 @@ class _TileNameState extends State<VoiceRecorder> {
                           Text('Rerecord',style: TextStyle(color: red_stop),)
                         ],
                       ),
+                    ),
+                    Button(
+                      label: Text("Download"),
+                      isPrimary: true,
+                      onPress: (){
+                          downloadFile(widget.tile.name).then((value) => {
+                            if(value!=null)
+                              print("downloaded"+value.path)
+                            else
+                              print("Couldn't download")
+                          });
+                      },
                     )
                   ],
                 )

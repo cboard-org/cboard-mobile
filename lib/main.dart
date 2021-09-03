@@ -1,10 +1,14 @@
-import 'package:cboard_mobile/Settings/SettingWrapper.dart';
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
+import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'models/dialog.dart';
+import 'models/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +18,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
+        //Add Provider Listener to any change in edit_dialog
+        ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel()),
+        ChangeNotifierProvider<HomeModel>(create: (context) => HomeModel()),
+        ChangeNotifierProvider<UnlockedHomeProvider>(create: (context)=> UnlockedHomeProvider()),
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',
@@ -40,7 +48,8 @@ class MyApp extends StatelessWidget {
             contentPadding: new EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
-        home: UnlockedHomeScreen(),
+        // home: UnlockedHomeScreen(),
+        home: HomeScreen(data: example),
       ),
     );
   }
