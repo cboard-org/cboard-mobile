@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cboard_mobile/onboarding/widgets/name-field.dart';
 import 'package:cboard_mobile/onboarding/widgets/username-field.dart';
-import 'package:cboard_mobile/onboarding/widgets/password-field.dart';
 import 'package:cboard_mobile/onboarding/widgets/password-confirm-field.dart';
 import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 
