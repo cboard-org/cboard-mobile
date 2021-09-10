@@ -5,9 +5,11 @@ class HomeModel extends ChangeNotifier {
   List<TileData> words = [];
   String fullSent = "";
 
-  void addWords(TileData newWord) {
-    words.add(newWord);
-    fullSent += newWord.name + ". ";
+  void addWords(TileData newTile) {
+    words.add(newTile);
+    String newWord = newTile.name != "Edit" ? newTile.name : newTile.content;
+    fullSent += newWord + ". ";
+    print(fullSent);
     notifyListeners();
   }
 
