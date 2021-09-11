@@ -83,7 +83,7 @@ class _SentenceBarState extends State<SentenceBar> {
                         onSubmitted: (String text){
                           if(text != null && text.isNotEmpty){
                             final tile = _createTile(text);
-                            homeModel.add(tile);
+                            homeModel.addWords(tile);
                           }
                           setState(() {
                             _enterText = false;
@@ -113,7 +113,7 @@ class _SentenceBarState extends State<SentenceBar> {
                               text: tileData.name,
                               content: tileData.content,
                               color: dialogModel.tileBackgroundColor,
-                              labelPos: dialogModel.labelTop,
+                              labelPos: dialogModel.tileLabelTop,
                               edittingTile: tileData.isText,
                               tapped: (){
                                 print(tileData.isText);

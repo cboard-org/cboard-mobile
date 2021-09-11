@@ -112,7 +112,7 @@ class _ExpandTextScreenState extends State<ExpandTextScreen> {
                   print(text);
                   final tile = _createTile(text);
                   print(tile);
-                  homeModel.add(tile);
+                  homeModel.addWords(tile);
                   textController.clear();
                   Navigator.pop(context);
                 },

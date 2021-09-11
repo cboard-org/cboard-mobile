@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
             
             if (index == data.length) {
               return Tile(
-                  labelPos: dialologModel.labelTop,
+                  labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
                   content: 'assets/symbols/A.svg',
                   color: soft_green,
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (info is TileData) {
                 print(info.isText);
                 return Tile(
-                  labelPos: dialologModel.labelTop,
+                  labelPos: dialologModel.tileLabelTop,
                   text: info.name,
                   content: info.content,
                   color: dialologModel.tileBackgroundColor,
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       _speak(info.name);
                     }
                     setState(() {
-                      homeModel.add(info);
+                      homeModel.addWords(info);
                     });
                   },
                 );
