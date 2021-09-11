@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
+import 'dart:async';
 import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final homeModel = Provider.of<HomeModel>(context);
 
     final data = widget.data;
-
+    
     Future _speak(String text) async {
       await flutterTts.speak(text);
     }
@@ -69,6 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 height: screenSize.height * (2 / 15),
                 child: SentenceBar(),
+//                 child: SentenceBar(
+//                   //Speak full sentence
+//                   tapped: () => _speak(homeModel.getFullSent()),
+//                 ),
               ),
 
               // Main Navigation Bar
@@ -87,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
+
           itemCount: data.length + 1,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
@@ -96,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           itemBuilder: (BuildContext context, int index) {
             // 'Add text' tile
+
             // if (index == 0) {
             //   return Tile(
             //     labelPos: dialologModel.labelTop,
@@ -124,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Normal tile
             } else {
+
               final Data info = data[index];
               if (info is TileData) {
                 print(info.isText);
@@ -151,6 +159,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: info.name,
                   content: info.content,
                   tiles: folderdata.tiles,
+                  color: dialologModel.folderBackgroundColor,
+                  labelColor: dialologModel.folderTextColor,
+                  labelPos: dialologModel.folderLabelTop,
                 );
               }
             }
