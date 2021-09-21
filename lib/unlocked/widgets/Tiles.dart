@@ -16,68 +16,95 @@ class TilesWidget extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    return GestureDetector(
-      onTap: () {
-        if(tile.isFolder){
-          Provider.of<UnlockedHomeProvider>(context,listen: false).addToNavigation(tile.name);
-          Navigator.push(context,
-              MaterialPageRoute(
-                  builder: (context) => UnlockedHomeScreen(tiles: tile.tiles,))).then((value) => {
-                    Provider.of<UnlockedHomeProvider>(context,listen: false).popNavigation()
-          });
-        }
-      },
-      onLongPress: (){
-        showGeneralDialog(
-            context: context,
-            barrierDismissible: true,
-            barrierLabel: 'Image Dialog',
-            pageBuilder: (_,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,) => ImageDialog(tile: tile));
-      },
-      child: Card(
-          margin: EdgeInsets.all(5),
-          elevation: 2,
-          child: Stack(
-            children: [
-              // tile.isFolder?Icon(
-              //   Icons.folder,
-              //   color: Color(int.parse("0xff"+tile.backgroundColor)),
-              //   size: 130,
-              // ):Container(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      color: Color(int.parse("0xff"+tile.backgroundColor)),
-                      child: SvgPicture.asset(
-                        tile.imageUrl,
-                        width: MediaQuery.of(context).size.width,
+    return Consumer<UnlockedHomeProvider>(
+        builder: (context, unlockedHomeProvider, child) {
+      return GestureDetector(
+          onTap: () {
+            if(unlockedHomeProvider.selectMode){
+              if(!unlockedHomeProvider.selectList.containsKey(tile.name))
+                Provider.of<UnlockedHomeProvider>(context,listen: false).addToSelect(tile);
+              else
+                Provider.of<UnlockedHomeProvider>(context,listen: false).removeFromSelect(tile);
+            } else {
+              if (tile.isFolder) {
+                Provider.of<UnlockedHomeProvider>(context, listen: false)
+                    .addToNavigation(tile.name);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            UnlockedHomeScreen(
+                              tiles: tile.tiles,
+                            ))).then((value) =>
+                {
+                  Provider.of<UnlockedHomeProvider>(context, listen: false)
+                      .popNavigation()
+                });
+              }
+            }
+          },
+          onLongPress: () {
+            showGeneralDialog(
+                context: context,
+                barrierDismissible: true,
+                barrierLabel: 'Image Dialog',
+                pageBuilder: (
+                  _,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                ) =>
+                    ImageDialog(tile: tile));
+          },
+          child: Card(
+              margin: EdgeInsets.all(5),
+              elevation: 2,
+              child: Stack(
+                children: [
+                  // tile.isFolder?Icon(
+                  //   Icons.folder,
+                  //   color: Color(int.parse("0xff"+tile.backgroundColor)),
+                  //   size: 130,
+                  // ):Container(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          color:
+                              Color(int.parse("0xff" + tile.backgroundColor)),
+                          child: SvgPicture.asset(
+                            tile.imageUrl,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        color: white,
+                        height: MediaQuery.of(context).size.height / 34,
+                        child: Center(
+                          child: Text(tile.name,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontFamily: "Robotto",
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    color: white,
-                    height: MediaQuery.of(context).size.height / 34,
-                    child: Center(
-                      child: Text(tile.name,
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontFamily: "Robotto",
-                            fontWeight: FontWeight.w500,
-                          )),
+                  if (unlockedHomeProvider.selectMode &&
+                      unlockedHomeProvider.selectList.containsKey(tile.name))
+                    Container(
+                      color: Colors.black26,
+                      child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(Icons.check_circle,color: paua,)),
                     ),
-                  ),
                 ],
-              ),
-            ],
-          )),
-    );
+              )));
+    });
   }
 }
 
@@ -86,7 +113,7 @@ class ImageDialog extends StatelessWidget {
   const ImageDialog({Key key, @required this.tile}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final Size _screenSize= MediaQuery.of(context).size;
+    final Size _screenSize = MediaQuery.of(context).size;
     return Column(
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -97,8 +124,8 @@ class ImageDialog extends StatelessWidget {
           insetPadding: EdgeInsets.symmetric(horizontal: 0),
           content: Container(
             // alignment: Alignment.topCenter,
-            width: _screenSize.width*0.7,
-            height: _screenSize.height*0.35,
+            width: _screenSize.width * 0.7,
+            height: _screenSize.height * 0.35,
             child: Card(
                 // margin: EdgeInsets.all(5),
                 child: Column(
@@ -107,8 +134,8 @@ class ImageDialog extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    height: _screenSize.height*0.35 - 22,
-                    color: light_yellow,
+                    height: _screenSize.height * 0.35 - 22,
+                    color: Color(int.parse("0xff" + tile.backgroundColor)),
                     child: SvgPicture.asset(
                       tile.imageUrl,
                       width: 277.11,
@@ -132,11 +159,11 @@ class ImageDialog extends StatelessWidget {
         ),
         Spacer(),
         BottomSheet(
-          onClosing: (){
+          onClosing: () {
             print("Bottom Sheet Close");
           },
           // height: _screenSize.height*0.4,
-          builder:(context) => Wrap(
+          builder: (context) => Wrap(
             children: [
               ListTile(
                 leading: Icon(
@@ -145,8 +172,10 @@ class ImageDialog extends StatelessWidget {
                 ),
                 title: Text('Edit Tiles'),
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditTileScreen(tile: tile)))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditTileScreen(tile: tile)))
                 },
               ),
               ListTile(
@@ -173,8 +202,13 @@ class ImageDialog extends StatelessWidget {
                   style: TextStyle(color: cinnabar),
                 ),
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditTileScreen(tile: tile,isDelete: true,)))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditTileScreen(
+                                tile: tile,
+                                isDelete: true,
+                              )))
                 },
               ),
             ],
@@ -183,6 +217,4 @@ class ImageDialog extends StatelessWidget {
       ],
     );
   }
-
-
 }

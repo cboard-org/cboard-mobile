@@ -1,5 +1,8 @@
+import 'package:cboard_mobile/services/tts.dart';
+import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/TileVocalization.dart';
+import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
@@ -10,10 +13,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class EditTileScreen extends StatefulWidget {
+  final bool isMultiple;
   final Tile tile;
   final bool isDelete;
+  final int index;
   final Map<Text, IconData> modelBottom = {
     Text('Take Photos'): Icons.photo_camera,
     Text('Browse Albums'): Icons.insert_photo,
@@ -30,7 +36,7 @@ class EditTileScreen extends StatefulWidget {
     cinnabar
   ];
 
-  EditTileScreen({Key key, this.tile, this.isDelete = false}) : super(key: key);
+  EditTileScreen({Key key,this.isMultiple=false, this.tile, this.isDelete = false,this.index}) : super(key: key);
 
   @override
   _EditTileScreenState createState() => _EditTileScreenState();
@@ -55,6 +61,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
       image = _imageRes;
     });
   }
+
 
   _pickCamera() async {
     final XFile _imageRes =
@@ -348,14 +355,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                 ? widget.tile.name
                                 : "",
                             style: CustomTypography.Typography.subTitle()),
-                        trailing: Wrap(
-                          children: [
-                            Icon(Icons.keyboard_arrow_right,
-                                size: 35.0, color: Colors.black54),
-                          ],
-                        ),
+                        // trailing: Wrap(
+                        //   children: [
+                        //     Icon(Icons.keyboard_arrow_right,
+                        //         size: 35.0, color: Colors.black54),
+                        //   ],
+                        // ),
                         onTap: () => {
-                          Navigator.push(
+                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => TileName(
@@ -377,23 +384,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                       ListTile(
                         title: Text('Vocalization',
                             style: CustomTypography.Typography.title()),
-                        subtitle: Text(widget.tile.vocalization ?? " ",
-                            style: CustomTypography.Typography.subTitle()),
-                        trailing: Wrap(
-                          children: [
-                            Icon(Icons.keyboard_arrow_right,
-                                size: 35.0, color: Colors.black54),
-                          ],
-                        ),
-                        onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TileVocalization(
-                                        tileVocalization:
-                                            widget.tile.vocalization,
-                                      )))
-                        }, // Debug: change to edit
+                        // subtitle: Text(widget.tile.vocalization ?? " ",
+                        //     style: CustomTypography.Typography.subTitle()),
+                        trailing: IconButton(
+                          onPressed: () => TTS_Func.speak(widget.tile.name != "Label"
+                              ? widget.tile.name
+                              : ""),
+                          icon: Icon(Icons.play_arrow,color: paua,),
+                        ) // Debug: change to edit
                       ),
                     ],
                   ),
@@ -529,28 +527,71 @@ class _EditTileScreenState extends State<EditTileScreen> {
                 ),
               ],
             ),
-            Center(
-              child: Align(
-                alignment: Alignment.center,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    // primary: ,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
-                    padding: EdgeInsets.only(
-                        top: 10, left: 65, right: 65, bottom: 10),
-                  ),
-                  child: Text(
-                    "SAVE",
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
-                  onPressed: () {},
+
+            if(widget.isMultiple)
+              Center(
+              child: Button(
+                label: Text(
+                  "SAVE",
+                  style: TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
+                isPrimary: true,
+                padding: 10,
+                onPress: (){},
               ),
             ),
+
+            // Center(
+            //   child: Align(
+            //     alignment: Alignment.center,
+            //     child: OutlinedButton(
+            //       style: OutlinedButton.styleFrom(
+            //         // primary: ,
+            //         backgroundColor: Theme.of(context).primaryColor,
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(20.0)),
+            //         padding:
+            //       ),
+            //       child:
+            //       onPressed: () {},
+            //     ),
+            //   ),
+            // ),
           ],
-        )
+        ),
+        bottomNavigationBar: Consumer<EditTileProvider>(
+          builder: (context, editTileProvider, child) {
+            if (widget.isMultiple) {
+              return Container(
+                color: mercury,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    TextButton.icon(onPressed: (){
+                      Navigator.pop(context);
+                    }, icon: Icon(Icons.arrow_back_ios,color: paua,), label: Text('Back',style: TextStyle(color: paua),)),
+                    SizedBox(
+                      width: screenSize.width*0.5,
+                      child: LinearProgressIndicator(
+                        color: paua,
+                        value: (widget.index+1)/editTileProvider.editList.length,
+                        backgroundColor: grey,
+                      ),
+                    ),
+                    if((widget.index+1)<editTileProvider.editList.length)
+                    TextButton.icon(
+                        onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => EditTileScreen(tile: editTileProvider.editList[widget.index+1],isMultiple: true,index: widget.index+1,)));
+                    }, icon: Icon(Icons.arrow_forward_ios,color: paua,), label: Text('Next',style: TextStyle(color:paua),))
+                  ],
+                ),
+              );
+            }
+            return SizedBox(
+              height: 0.0,
+            );
+          },
+        ),
         // BUTTONS
         );
   }
