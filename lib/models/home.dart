@@ -7,7 +7,9 @@ class HomeModel extends ChangeNotifier {
 
   void addWords(TileData newTile) {
     words.add(newTile);
-    String newWord = newTile.name != "Edit" ? newTile.name : newTile.content;
+    //For adding sentence to top bar
+    // String newWord = newTile.name != "Edit" ? newTile.name : newTile.content;
+    String newWord = newTile.labelKey.split('.').last;
     fullSent += newWord + ". ";
     print(fullSent);
     notifyListeners();
@@ -19,8 +21,8 @@ class HomeModel extends ChangeNotifier {
 
   void removeWords() {
     if (words.length > 0) {
-      fullSent =
-          fullSent.substring(0, fullSent.length - words.last.name.length - 2);
+      fullSent = fullSent.substring(
+          0, fullSent.length - words.last.labelKey.split('.').last.length - 2);
       words.removeLast();
     }
     notifyListeners();

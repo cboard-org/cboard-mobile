@@ -1,6 +1,9 @@
 import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/data/jsonString.dart';
+import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/services/trialApp.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +48,8 @@ class MyApp extends StatelessWidget {
             contentPadding: new EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
-        home: HomeScreen(data: example),
+        home: HomeScreen(data: getData(jsonString).folder),
+        // home: TrialApp(),
       ),
     );
   }

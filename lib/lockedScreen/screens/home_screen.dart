@@ -13,7 +13,7 @@ import '../widgets/main_app_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<Data> data;
+  final Map<String, Advanced> data;
   const HomeScreen({Key key, this.data}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
 
-    final data = widget.data;
+    final Advanced data = widget.data['folder'];
 
     //Flutter tts object
     Future _speak(String text) async {
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-          itemCount: data.length + 2,
+          itemCount: data.tiles.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             // ignore: todo
@@ -104,20 +104,21 @@ class _HomeScreenState extends State<HomeScreen> {
             // 'Add text' tile
             if (index == 0) {
               return Tile(
-                labelPos: dialologModel.tileLabelTop,
-                text: "Add text",
-                content: 'assets/symbols/A.svg',
-                color: soft_green,
-                //User taps to add sentence in the top sentence bar
-                tapped: () => {
-                  setState(() {
-                    homeModel.addWords(TileData("Edit", "", paua));
-                  }),
-                },
-              );
+                  labelPos: dialologModel.tileLabelTop,
+                  text: "Add text",
+                  content: 'assets/symbols/A.svg',
+                  color: soft_green,
+                  //User taps to add sentence in the top sentence bar
+                  tapped: () => {}
+                  // () => {
+                  //   setState(() {
+                  //     homeModel.addWords(TileData("Edit", "", paua));
+                  //   }),
+                  // },
+                  );
 
               // 'Add tile/folder' tile
-            } else if (index == data.length + 1) {
+            } else if (index == data.tiles.length + 1) {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
@@ -128,27 +129,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Normal tile
             } else {
-              final Data info = data[index - 1];
-              if (info is TileData) {
+              final TileData info = data.tiles[index - 1];
+              String title = info.labelKey.split('.').last;
+              if (info.loadBoard != null) {
                 return Tile(
                   labelPos: dialologModel.tileLabelTop,
-                  text: info.name,
-                  content: info.content,
+                  text: title,
+                  content: 'assets' + info.image,
                   color: dialologModel.tileBackgroundColor,
                   labelColor: dialologModel.tileTextColor,
                   tapped: () => {
                     //Speak word in the tile
-                    _speak(info.name),
+                    _speak(title),
                     setState(() {
                       homeModel.addWords(info);
                     })
                   },
                 );
               } else {
-                FolderData folderdata = info;
+                TileData folderdata = info;
                 return FolderTile(
-                  text: info.name,
-                  content: info.content,
+                  text: info.labelKey.split('.').last,
+                  content: 'assets' + info.image,
                   tiles: folderdata.tiles,
                   color: dialologModel.folderBackgroundColor,
                   labelColor: dialologModel.folderTextColor,
