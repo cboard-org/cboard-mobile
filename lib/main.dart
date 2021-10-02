@@ -4,6 +4,7 @@ import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
+        ChangeNotifierProvider(create: (context) => PasswordConfirmProvider())
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',

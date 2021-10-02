@@ -1,5 +1,5 @@
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/select-voice.dart';
+import 'package:cboard_mobile/onboarding/widgets/select-male-voice.dart';
 import 'package:cboard_mobile/onboarding/widgets/TTS-dialog.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
