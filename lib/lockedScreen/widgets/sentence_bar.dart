@@ -23,6 +23,7 @@ class _SentenceBarState extends State<SentenceBar> {
     final homeModel = Provider.of<HomeModel>(context);
     final words = homeModel.getWords();
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(width: 3),
         Expanded(
@@ -33,10 +34,10 @@ class _SentenceBarState extends State<SentenceBar> {
               : GestureDetector(
                   onTap: widget.tapped,
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 10.0,
-                    ),
+                    // padding: const EdgeInsets.symmetric(
+                    //   vertical: 10.0,
+                    //   horizontal: 10.0,
+                    // ),
                     //User can scroll tiles horizontally
                     scrollDirection: Axis.horizontal,
                     itemCount: words.length,
