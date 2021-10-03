@@ -1,4 +1,5 @@
-import 'package:cboard_mobile/data/mockData.dart';
+// import 'package:cboard_mobile/data/mockData.dart';
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
@@ -40,22 +41,33 @@ class _SentenceBarState extends State<SentenceBar> {
                     scrollDirection: Axis.horizontal,
                     itemCount: words.length,
                     itemBuilder: (BuildContext context, int index) {
-                      TileData tileData = words[index];
-                      //If tile is for adding user text input, create TextTile()
-                      if (tileData.name == "Edit") {
-                        return TextTile();
-                        //else create normal tile
-                      } else {
-                        return SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Tile(
-                            text: tileData.name,
-                            content: tileData.content,
-                            color: dialogModel.tileBackgroundColor,
-                            labelPos: dialogModel.tileLabelTop,
-                          ),
-                        );
-                      }
+                      TileData tileInfo = words[index];
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        child: Tile(
+                          text: tileInfo.labelKey.split('.').last,
+                          content: 'assets' + tileInfo.image,
+                          color: dialogModel.tileBackgroundColor,
+                          labelPos: dialogModel.tileLabelTop,
+                          labelColor: dialogModel.tileTextColor,
+                        ),
+                      );
+                      // //If tile is for adding user text input, create TextTile()
+                      // if (tileData.name == "Edit") {
+                      //   return TextTile();
+                      //   //else create normal tile
+                      // }
+                      // else {
+                      //   return SizedBox(
+                      //     width: MediaQuery.of(context).size.width * 0.2,
+                      //     child: Tile(
+                      //       text: tileData.name,
+                      //       content: tileData.content,
+                      //       color: dialogModel.tileBackgroundColor,
+                      //       labelPos: dialogModel.tileLabelTop,
+                      //     ),
+                      //   );
+                      // }
                     },
                   ),
                 ),

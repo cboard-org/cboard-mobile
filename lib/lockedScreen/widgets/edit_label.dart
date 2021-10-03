@@ -62,7 +62,7 @@ class _EditLabel extends State<EditLabel> {
                     labelPos: false,
                     color: currentBackgroundColor,
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   ),
                 ),
                 Radio(
@@ -88,7 +88,7 @@ class _EditLabel extends State<EditLabel> {
                     labelPos: true,
                     color: currentBackgroundColor,
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   ),
                 ),
                 Radio(

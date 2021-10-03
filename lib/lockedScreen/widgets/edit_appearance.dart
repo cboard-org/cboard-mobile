@@ -82,12 +82,12 @@ class _EditMain extends State<EditAppearance> {
                     labelPos: dialogModel.tileLabelTop,
                     color: currentBackgroundColor,
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                     labelColor: currentTextColor,
                   )
                 : FolderTile(
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                     color: currentBackgroundColor,
                     labelPos: dialogModel.folderLabelTop,
                     labelColor: currentTextColor,

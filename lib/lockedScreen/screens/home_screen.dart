@@ -13,8 +13,9 @@ import '../widgets/main_app_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Map<String, Advanced> data;
-  const HomeScreen({Key key, this.data}) : super(key: key);
+  final Map<String, Folder> data;
+  final String folderId;
+  const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
 
-    final Advanced data = widget.data['folder'];
+    final Folder folder = widget.data[widget.folderId];
 
     //Flutter tts object
     Future _speak(String text) async {
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-          itemCount: data.tiles.length + 2,
+          itemCount: folder.subItems.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             // ignore: todo
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add text",
-                  content: 'assets/symbols/A.svg',
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   color: soft_green,
                   //User taps to add sentence in the top sentence bar
                   tapped: () => {}
@@ -118,40 +119,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
 
               // 'Add tile/folder' tile
-            } else if (index == data.tiles.length + 1) {
+            } else if (index == folder.subItems.length + 1) {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
-                  content: 'assets/symbols/A.svg',
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   color: soft_green,
                   //Tapped function is null as user can't add tile in Unlocked Screen
                   tapped: () => {});
 
               //Normal tile
             } else {
-              final TileData info = data.tiles[index - 1];
-              String title = info.labelKey.split('.').last;
-              if (info.loadBoard != null) {
+              final TileData tileInfo = folder.subItems[index - 1];
+              String title = tileInfo.labelKey.split('.').last;
+              if (tileInfo.loadBoard == null) {
                 return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: title,
-                  content: 'assets' + info.image,
+                  content: 'assets' + tileInfo.image,
                   color: dialologModel.tileBackgroundColor,
                   labelColor: dialologModel.tileTextColor,
                   tapped: () => {
                     //Speak word in the tile
                     _speak(title),
                     setState(() {
-                      homeModel.addWords(info);
+                      homeModel.addWords(tileInfo);
                     })
                   },
                 );
               } else {
-                TileData folderdata = info;
+                TileData folderInfo = tileInfo;
                 return FolderTile(
-                  text: info.labelKey.split('.').last,
-                  content: 'assets' + info.image,
-                  tiles: folderdata.tiles,
+                  text: tileInfo.labelKey.split('.').last,
+                  content: 'assets' + tileInfo.image,
+                  folderId: folderInfo.loadBoard,
                   color: dialologModel.folderBackgroundColor,
                   labelColor: dialologModel.folderTextColor,
                   labelPos: dialologModel.folderLabelTop,

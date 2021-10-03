@@ -11,31 +11,34 @@ String postToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
     this.beginner,
-    this.advanced,
-    this.folder,
+    // this.advanced,
+    this.folders,
   });
 
   List<dynamic> beginner;
-  List<Advanced> advanced;
-  Map<String, Advanced> folder;
+  // List<Folder> advanced;
+  Map<String, Folder> folders;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         beginner: json["beginner"] as List<dynamic>,
-        advanced: json["advanced"].map((x) => Advanced.fromJson(x)).toList(),
-        folder: <String, Advanced>{
-          for (var value in (json["advanced"] as List<Map<String, dynamic>>))
-            value["id"]: Advanced.fromJson(value)
+        // advanced:
+        //     json["advanced"].map<Folder>((x) => Folder.fromJson(x)).toList(),
+        folders: <String, Folder>{
+          for (Folder value in json["advanced"]
+              .map<Folder>((x) => Folder.fromJson(x))
+              .toList())
+            value.id: value
         },
       );
 
   Map<String, dynamic> toJson() => {
         "beginner": beginner,
-        "advanced": advanced.map((x) => x.toJson()).toList(),
+        // "advanced": advanced.map((x) => x.toJson()).toList(),
       };
 }
 
-class Advanced {
-  Advanced({
+class Folder {
+  Folder({
     this.id,
     this.name,
     this.nameKey,
@@ -43,7 +46,7 @@ class Advanced {
     this.email,
     this.isPublic,
     this.hidden,
-    this.tiles,
+    this.subItems,
     this.caption,
   });
 
@@ -54,10 +57,10 @@ class Advanced {
   Email email;
   bool isPublic;
   bool hidden;
-  List<TileData> tiles;
+  List<TileData> subItems;
   String caption;
 
-  factory Advanced.fromJson(Map<String, dynamic> json) => Advanced(
+  factory Folder.fromJson(Map<String, dynamic> json) => Folder(
         id: json["id"],
         name: json["name"],
         nameKey: json["nameKey"],
@@ -65,7 +68,8 @@ class Advanced {
         email: emailValues.map[json["email"]],
         isPublic: json["isPublic"],
         hidden: json["hidden"],
-        tiles: json["tiles"].map((x) => TileData.fromJson(x)).toList(),
+        subItems:
+            json["tiles"].map<TileData>((x) => TileData.fromJson(x)).toList(),
         caption: json["caption"],
       );
 
@@ -77,7 +81,7 @@ class Advanced {
         "email": emailValues.reverse[email],
         "isPublic": isPublic,
         "hidden": hidden,
-        "tiles": tiles.map((x) => x.toJson()).toList(),
+        "tiles": subItems.map((x) => x.toJson()).toList(),
         "caption": caption,
       };
 }
