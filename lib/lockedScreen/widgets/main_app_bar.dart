@@ -52,70 +52,65 @@ class MainAppBar extends StatelessWidget {
           },
         );
 
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 5.0,
-        horizontal: 10.0,
-      ),
-      color: Theme.of(context).primaryColor,
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Readability Settings
-                GestureDetector(
-                  onTap: () {
-                    editDialog(context);
-                  },
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                    size: 25.0,
-                  ),
-                ),
-                // Board Name
-                SizedBox(
-                  height: 35,
-                  child: TextButton(
-                    onPressed: () => _showBottomSheet(),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Board Name",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          WidgetSpan(
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              size: 20.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      double textSize = constraints.maxHeight * 0.4;
+      return Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 5.0,
+          horizontal: 10.0,
+        ),
+        color: Theme.of(context).primaryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Readability Settings
+            GestureDetector(
+              onTap: () {
+                editDialog(context);
+              },
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+                size: textSize,
+              ),
+            ),
+            // Board Name
+            TextButton(
+              onPressed: () => _showBottomSheet(),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Board Name",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: textSize,
                       ),
                     ),
-                  ),
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.arrow_drop_down,
+                        size: textSize,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                // Lock
-                GestureDetector(
-                  onTap: () => print('Lock'), // insert new homescreen here
-                  child: Icon(
-                    Icons.lock,
-                    color: Colors.white,
-                    size: 25.0,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+            // Lock
+            GestureDetector(
+              onTap: () => print('Lock'), // insert new homescreen here
+              child: Icon(
+                Icons.lock,
+                color: Colors.white,
+                size: textSize,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

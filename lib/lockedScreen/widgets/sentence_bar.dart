@@ -22,6 +22,7 @@ class _SentenceBarState extends State<SentenceBar> {
     final homeModel = Provider.of<HomeModel>(context);
     final words = homeModel.getWords();
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(width: 3),
         Expanded(
@@ -32,10 +33,10 @@ class _SentenceBarState extends State<SentenceBar> {
               : GestureDetector(
                   onTap: widget.tapped,
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 10.0,
-                    ),
+                    // padding: const EdgeInsets.symmetric(
+                    //   vertical: 10.0,
+                    //   horizontal: 10.0,
+                    // ),
                     //User can scroll tiles horizontally
                     scrollDirection: Axis.horizontal,
                     itemCount: words.length,
@@ -46,8 +47,19 @@ class _SentenceBarState extends State<SentenceBar> {
                         return TextTile();
                         //else create normal tile
                       } else {
-                        return SizedBox(
+                        return
+                            // Expanded(
+                            //   // width: MediaQuery.of(context).size.width * 0.2,
+                            //   child: Tile(
+                            //     text: tileData.name,
+                            //     content: tileData.content,
+                            //     color: dialogModel.tileBackgroundColor,
+                            //     labelPos: dialogModel.tileLabelTop,
+                            //   ),
+                            // );
+                            SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
+                          // width: double.infinity,
                           child: Tile(
                             text: tileData.name,
                             content: tileData.content,

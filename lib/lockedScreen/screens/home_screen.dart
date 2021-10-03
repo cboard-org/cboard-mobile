@@ -69,16 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               // Sentence Creation Section
-              Container(
-                height: screenSize.height * (2 / 15),
+              Expanded(
+                flex: 3,
+                // height: screenSize.height * (2 / 15),
                 child: SentenceBar(
                   //Speak full sentence
                   tapped: () => _speak(homeModel.getFullSent()),
                 ),
               ),
-
               // Main Navigation Bar
               Expanded(
+                flex: 2,
                 child: MainAppBar(scrollOffset: _scrollOffset),
               ),
             ],
