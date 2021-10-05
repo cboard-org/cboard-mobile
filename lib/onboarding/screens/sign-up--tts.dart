@@ -22,7 +22,7 @@ class SignUpTTS extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            child: UserHeader(shouldSetPhoto: false, locale: locale),
+            child: UserHeader(shouldSetPhoto: false, locale: (locale.languageCode + "-"  + locale.countryCode)),
             margin: EdgeInsets.only(bottom: 3),
           ),
           Container(

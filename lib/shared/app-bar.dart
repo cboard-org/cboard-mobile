@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/widgets/text_locale.dart';
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
