@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 
+import 'package:cboard_mobile/models/manageBoard.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/EditBoard.dart';
 import 'package:cboard_mobile/unlocked/NewBoard.dart';
@@ -8,7 +10,7 @@ import 'package:cboard_mobile/unlocked/widgets/UnlockedMainBar.dart';
 import 'package:flutter/material.dart';
 import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
-
+import 'package:http/http.dart' as http;
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
 class ManageBoardsScreen extends StatefulWidget {
@@ -33,6 +35,17 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
     super.dispose();
   }
 
+  /////
+  Future<ManageBoard> fetchPost() async {
+    final response = await http.get('http://192.168.1.111:10010/languages');
+    if (response.statusCode == 200) {
+      print('done');
+    } else {
+      throw Exception('Failed to load post');
+    }
+  }
+
+  ////
   final List<List<String>> names = <List<String>>[
     [
       'assets/images/user.png',
@@ -74,35 +87,40 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
     [
       'assets/images/user.png',
       'Public Board Tile ',
-      'number of tiles',
+      'made by name'
+          'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile',
-      'number of tiles',
+      'made by name'
+          'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile 2',
-      'number of tiles',
+      'made by name'
+          'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile 3',
-      'number of tiles',
+      'made by name'
+          'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'title',
-      'number of tiles',
+      'made by name'
+          'number of tiles',
       'made on',
       'offline'
     ],
@@ -211,10 +229,11 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                       child: IconButton(
                         icon: Icon(Icons.add),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NewBoard()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => NewBoard()),
+                          // );
+                          fetchPost();
                         },
                       ),
                     ),
@@ -368,7 +387,7 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                           ),
                                           SizedBox(height: 40),
                                           GestureDetector(
-                                            child: Icon(Icons.info_sharp),
+                                            child: Icon(Icons.info_rounded),
                                             onTap: () {
                                               showDialog(
                                                 context: context,
@@ -409,6 +428,10 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                                           RaisedButton(
                                                             disabledColor:
                                                                 Colors.white,
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             shape: RoundedRectangleBorder(
                                                                 side: BorderSide(
                                                                     color:
@@ -495,7 +518,8 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                                 names2[index][2],
                                               ),
                                               Text(names2[index][3]),
-                                              Text(names2[index][4])
+                                              Text(names2[index][4]),
+                                              Text(names2[index][5])
                                             ],
                                           ),
                                         ),
@@ -600,7 +624,7 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                           ),
                                           SizedBox(height: 40),
                                           GestureDetector(
-                                            child: Icon(Icons.info_sharp),
+                                            child: Icon(Icons.info_rounded),
                                             onTap: () {
                                               showDialog(
                                                 context: context,
@@ -640,6 +664,10 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                                           RaisedButton(
                                                             disabledColor:
                                                                 Colors.white,
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             shape: RoundedRectangleBorder(
                                                                 side: BorderSide(
                                                                     color:
