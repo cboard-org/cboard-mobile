@@ -35,17 +35,6 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
     super.dispose();
   }
 
-  /////
-  Future<ManageBoard> fetchPost() async {
-    final response = await http.get('http://192.168.1.111:10010/languages');
-    if (response.statusCode == 200) {
-      print('done');
-    } else {
-      throw Exception('Failed to load post');
-    }
-  }
-
-  ////
   final List<List<String>> names = <List<String>>[
     [
       'assets/images/user.png',
@@ -229,11 +218,10 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                       child: IconButton(
                         icon: Icon(Icons.add),
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => NewBoard()),
-                          // );
-                          fetchPost();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NewBoard()),
+                          );
                         },
                       ),
                     ),
