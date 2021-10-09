@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cboard_mobile/models/error.dart';
-import 'package:cboard_mobile/screens/home_screen.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/onboarding/widgets/header.dart';
