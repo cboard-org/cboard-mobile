@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
 import 'dart:async';
 import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
