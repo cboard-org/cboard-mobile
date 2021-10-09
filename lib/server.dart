@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 void main() => runApp(MyJson());
 
@@ -16,7 +14,7 @@ class _MyJson extends State<MyJson> {
   @override
   void initState() {
     super.initState();
-    post = fetchPost();
+    // post = fetchPost();
   }
 
   @override
@@ -51,17 +49,17 @@ class _MyJson extends State<MyJson> {
   }
 }
 
-Future<Post> fetchPost() async {
-  final response = await http.get('https://api.app.qa.cboard.io/board/public');
+// Future<Post> fetchPost() async {
+//   final response = await http.get("https://api.app.qa.cboard.io/board/public")
 
-  if (response.statusCode == 200) {
-    var post = Post.fromJson(json.decode(response.body));
-    print(post);
-    return post;
-  } else {
-    throw Exception('Failed to load post');
-  }
-}
+//   if (response.statusCode == 200) {
+//     var post = Post.fromJson(json.decode(response.body));
+//     print(post);
+//     return post;
+//   } else {
+//     throw Exception('Failed to load post');
+//   }
+// }
 
 class Post {
   Post({

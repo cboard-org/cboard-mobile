@@ -5,7 +5,7 @@ import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
 import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:cboard_mobile/unlocked/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:provider/provider.dart';
 
 class UnlockedHomeScreen extends StatefulWidget {

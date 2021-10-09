@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
@@ -13,11 +13,10 @@ import '../widgets/main_app_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-
   final Map<String, Folder> data;
   final String folderId;
   const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
-  
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

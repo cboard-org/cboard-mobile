@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:flutter/material.dart';
 
 class UnlockedHomeProvider extends ChangeNotifier {
@@ -6,7 +6,6 @@ class UnlockedHomeProvider extends ChangeNotifier {
   bool selectMode = false;
   List<Tile> hideList = [];
   Map<String, Tile> selectList = {};
-
 
   switchSelectionMode() {
     selectMode = !selectMode;
@@ -59,5 +58,4 @@ class UnlockedHomeProvider extends ChangeNotifier {
     });
     return t;
   }
-
 }

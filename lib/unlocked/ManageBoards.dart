@@ -8,7 +8,7 @@ import 'package:cboard_mobile/unlocked/NewBoard.dart';
 import 'package:cboard_mobile/unlocked/Public.dart';
 import 'package:cboard_mobile/unlocked/widgets/UnlockedMainBar.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:http/http.dart' as http;
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';

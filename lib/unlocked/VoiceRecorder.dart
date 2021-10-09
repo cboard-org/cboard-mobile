@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +10,15 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final bool tileRecord;
   final Tile tile;
 
-  VoiceRecorder({Key key, this.tileRecord = false, this.tile}) : super(key: key);
+  VoiceRecorder({Key key, this.tileRecord = false, this.tile})
+      : super(key: key);
   @override
   _VoiceRecorderState createState() => _VoiceRecorderState();
 }
@@ -76,16 +78,17 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
 
   Future<String> _getDownloadPath(String path) async {
     final directory = await getApplicationDocumentsDirectory();
-    Directory cboardDirectory = Directory(directory.path+"/cboard");
+    Directory cboardDirectory = Directory(directory.path + "/cboard");
     print(await cboardDirectory.exists());
     await cboardDirectory.create();
-    return cboardDirectory.path + '/'+path;
+    return cboardDirectory.path + '/' + path;
   }
 
   Future<File> downloadFile(String path) async {
     // File sourceFile = File(_mPath);
-    String _downloadPath = await _getDownloadPath(widget.tile.name+".mp3");
-    FlutterSoundHelper().convertFile(_mPath, Codec.aacADTS, _downloadPath, Codec.mp3);
+    String _downloadPath = await _getDownloadPath(widget.tile.name + ".mp3");
+    FlutterSoundHelper()
+        .convertFile(_mPath, Codec.aacADTS, _downloadPath, Codec.mp3);
     // final newFile = await sourceFile.copy(_downloadPath);
     // await sourceFile.delete();
     return File(_downloadPath);
@@ -136,7 +139,11 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
     if (!_mPlayerIsInited || !_mplaybackReady || !_mRecorder.isStopped) {
       return null;
     }
-    return _mPlayer.isPlaying ? pausePlayer : _mPlayer.isPaused ? resumePlayer : play;
+    return _mPlayer.isPlaying
+        ? pausePlayer
+        : _mPlayer.isPaused
+            ? resumePlayer
+            : play;
     // return _mPlayer.isStopped ? play : stopPlayer;
   }
 
@@ -162,7 +169,6 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
         });
       });
     });
-
   }
 
   void pausePlayer() {
@@ -185,6 +191,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
       setState(() {});
     });
   }
+
   Widget slider() {
     return Slider(
         value: _position.inSeconds.toDouble(),
@@ -234,63 +241,67 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
               ],
             ),
           ),
-            SizedBox(
-              height: 200,
-            ),
-            Visibility(
+          SizedBox(
+            height: 200,
+          ),
+          Visibility(
               visible: isRecord,
-                child: (_mPlayerIsInited && _mplaybackReady)
-                    ? Column(
-                  children: [
-                    slider(),
-                    IconButton(
-                        color: Theme
-                            .of(context)
-                            .primaryColor,
-                        iconSize: 50,
-                        onPressed: getPlaybackFn(),
-                        icon: _mPlayer.isPlaying
-                            ? Icon(Icons.pause_circle_filled_outlined)
-                            : Icon(Icons.play_circle_fill_outlined)),
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          _mplaybackReady = false;
-                        });
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.delete,color: red_stop,),
-                          Text('Rerecord',style: TextStyle(color: red_stop),)
-                        ],
-                      ),
-                    ),
-                    Button(
-                      label: Text("Download"),
-                      isPrimary: true,
-                      onPress: (){
-                          downloadFile(widget.tile.name).then((value) => {
-                            if(value!=null)
-                              print("downloaded"+value.path)
-                            else
-                              print("Couldn't download")
-                          });
-                      },
+              child: (_mPlayerIsInited && _mplaybackReady)
+                  ? Column(
+                      children: [
+                        slider(),
+                        IconButton(
+                            color: Theme.of(context).primaryColor,
+                            iconSize: 50,
+                            onPressed: getPlaybackFn(),
+                            icon: _mPlayer.isPlaying
+                                ? Icon(Icons.pause_circle_filled_outlined)
+                                : Icon(Icons.play_circle_fill_outlined)),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _mplaybackReady = false;
+                            });
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.delete,
+                                color: red_stop,
+                              ),
+                              Text(
+                                'Rerecord',
+                                style: TextStyle(color: red_stop),
+                              )
+                            ],
+                          ),
+                        ),
+                        Button(
+                          label: Text("Download"),
+                          isPrimary: true,
+                          onPress: () {
+                            downloadFile(widget.tile.name).then((value) => {
+                                  if (value != null)
+                                    print("downloaded" + value.path)
+                                  else
+                                    print("Couldn't download")
+                                });
+                          },
+                        )
+                      ],
                     )
-                  ],
-                )
-                    : IconButton(
-                    onPressed: getRecorderFn(),
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
-                    iconSize: 40,
-                    icon: _mRecorder.isRecording
-                        ? Icon(Icons.stop_circle_outlined, color: red_stop,size: 40,)
-                        : Icon(Icons.mic))
-            ),
-
+                  : IconButton(
+                      onPressed: getRecorderFn(),
+                      color: Theme.of(context).primaryColor,
+                      iconSize: 40,
+                      icon: _mRecorder.isRecording
+                          ? Icon(
+                              Icons.stop_circle_outlined,
+                              color: red_stop,
+                              size: 40,
+                            )
+                          : Icon(Icons.mic))),
         ],
       ),
     );

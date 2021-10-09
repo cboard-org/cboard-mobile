@@ -4,7 +4,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/TileVocalization.dart';
 import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/TileName.dart';

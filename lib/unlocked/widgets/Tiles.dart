@@ -2,7 +2,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/unlocked/data.dart';
 
 import 'package:cboard_mobile/unlocked/EditTile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,11 +20,13 @@ class TilesWidget extends StatelessWidget {
         builder: (context, unlockedHomeProvider, child) {
       return GestureDetector(
           onTap: () {
-            if(unlockedHomeProvider.selectMode){
-              if(!unlockedHomeProvider.selectList.containsKey(tile.name))
-                Provider.of<UnlockedHomeProvider>(context,listen: false).addToSelect(tile);
+            if (unlockedHomeProvider.selectMode) {
+              if (!unlockedHomeProvider.selectList.containsKey(tile.name))
+                Provider.of<UnlockedHomeProvider>(context, listen: false)
+                    .addToSelect(tile);
               else
-                Provider.of<UnlockedHomeProvider>(context,listen: false).removeFromSelect(tile);
+                Provider.of<UnlockedHomeProvider>(context, listen: false)
+                    .removeFromSelect(tile);
             } else {
               if (tile.isFolder) {
                 Provider.of<UnlockedHomeProvider>(context, listen: false)
@@ -32,14 +34,12 @@ class TilesWidget extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            UnlockedHomeScreen(
+                        builder: (context) => UnlockedHomeScreen(
                               tiles: tile.tiles,
-                            ))).then((value) =>
-                {
-                  Provider.of<UnlockedHomeProvider>(context, listen: false)
-                      .popNavigation()
-                });
+                            ))).then((value) => {
+                      Provider.of<UnlockedHomeProvider>(context, listen: false)
+                          .popNavigation()
+                    });
               }
             }
           },
@@ -100,7 +100,10 @@ class TilesWidget extends StatelessWidget {
                       color: Colors.black26,
                       child: Align(
                           alignment: Alignment.bottomRight,
-                          child: Icon(Icons.check_circle,color: paua,)),
+                          child: Icon(
+                            Icons.check_circle,
+                            color: paua,
+                          )),
                     ),
                 ],
               )));

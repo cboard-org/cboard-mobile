@@ -1,4 +1,5 @@
-import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/Settings/SettingWrapper.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/models/home.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -119,7 +120,11 @@ class UnlockedMainBar extends StatelessWidget {
                     // Setting
                     SizedBox(width: 15),
                     GestureDetector(
-                      onTap: () => print('Settings'), // insert new screen here
+                      onTap: () => (Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SettingWrapper()))), // insert new screen here
                       child: Icon(
                         Icons.settings,
                         color: paua,
@@ -136,7 +141,7 @@ class UnlockedMainBar extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen(
-                                      data: example,
+                                      data: defaultBoards,
                                     )));
                       }, // insert new screen here
                       child: Icon(
