@@ -1,4 +1,6 @@
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
+// import 'package:cboard_mobile/data/mockData.dart';
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +19,8 @@ class FolderTile extends StatelessWidget {
   final Function tapped;
   //Label Position, either top or bottom
   final bool labelPos;
-  final List<TileData> tiles;
+  // final List<TileData> tiles;
+  final String folderId;
 
   const FolderTile(
       {Key key,
@@ -26,8 +29,9 @@ class FolderTile extends StatelessWidget {
       this.color,
       this.tapped,
       this.labelPos,
-      this.tiles,
-      this.labelColor})
+      // this.tiles,
+      this.labelColor,
+      this.folderId})
       : super(key: key);
 
   @override
@@ -36,9 +40,9 @@ class FolderTile extends StatelessWidget {
       Expanded(
         flex: 3,
         child: Container(
-          child: SvgPicture.asset(
-            content,
-          ),
+          child: content.endsWith("svg")
+              ? SvgPicture.asset(content)
+              : Image.asset(content),
           // Image.asset(content),
         ),
       ),
@@ -66,7 +70,8 @@ class FolderTile extends StatelessWidget {
         context,
         MaterialPageRoute(
             builder: (context) => HomeScreen(
-                  data: tiles,
+                  data: defaultBoards,
+                  folderId: folderId,
                 )),
       ),
       child: Container(

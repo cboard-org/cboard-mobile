@@ -38,7 +38,10 @@ class Tile extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(5),
           //If tile is for adding text, put text as main content else put image
-          child: edittingTile ? Text(content) : SvgPicture.asset(content),
+          // child: edittingTile ? Text(content) : SvgPicture.asset(content),
+          child: content.endsWith("svg")
+              ? SvgPicture.asset(content)
+              : Image.asset(content),
           // Image.asset(content),
         ),
       ),

@@ -12,8 +12,9 @@ import '../widgets/main_app_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<Data> data;
-  const HomeScreen({Key key, this.data}) : super(key: key);
+  final Map<String, Folder> data;
+  final String folderId;
+  const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -48,9 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
     //Keep track Label Position
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
-
     final data = widget.data;
-    
+    final Folder folder = widget.data[widget.folderId];
+
+    //Flutter tts object
+
     Future _speak(String text) async {
       await flutterTts.speak(text);
     }
@@ -75,9 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
 //                   tapped: () => _speak(homeModel.getFullSent()),
 //                 ),
               ),
-
               // Main Navigation Bar
               Expanded(
+                flex: 2,
                 child: MainAppBar(scrollOffset: _scrollOffset),
               ),
             ],
@@ -124,21 +127,24 @@ class _HomeScreenState extends State<HomeScreen> {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
-                  content: 'assets/symbols/A.svg',
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   color: soft_green,
                   //Tapped function is null as user can't add tile in Unlocked Screen
                   tapped: () => {});
 
               //Normal tile
             } else {
-
               final Data info = data[index];
               if (info is TileData) {
                 print(info.isText);
+              }
+              final TileData tileInfo = folder.subItems[index - 1];
+              String title = tileInfo.labelKey.split('.').last;
+              if (tileInfo.loadBoard == null) {
                 return Tile(
                   labelPos: dialologModel.tileLabelTop,
-                  text: info.name,
-                  content: info.content,
+                  text: title,
+                  content: 'assets' + tileInfo.image,
                   color: dialologModel.tileBackgroundColor,
                   edittingTile: info.isText,
                   tapped: () {
@@ -151,14 +157,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {
                       homeModel.addWords(info);
                     });
+                  labelColor: dialologModel.tileTextColor,
+                  tapped: () => {
+                    //Speak word in the tile
+                    _speak(title),
+                    setState(() {
+                      homeModel.addWords(tileInfo);
+                    })
                   },
                 );
               } else {
-                FolderData folderdata = info;
+                TileData folderInfo = tileInfo;
                 return FolderTile(
-                  text: info.name,
-                  content: info.content,
-                  tiles: folderdata.tiles,
+                  text: tileInfo.labelKey.split('.').last,
+                  content: 'assets' + tileInfo.image,
+                  folderId: folderInfo.loadBoard,
                   color: dialologModel.folderBackgroundColor,
                   labelColor: dialologModel.folderTextColor,
                   labelPos: dialologModel.folderLabelTop,

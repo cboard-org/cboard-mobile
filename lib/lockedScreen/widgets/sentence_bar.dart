@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/expand_text_screen.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
+// import 'package:cboard_mobile/data/mockData.dart';
+import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/models/home.dart';
@@ -221,6 +223,7 @@ class _SentenceBarState extends State<SentenceBar> {
 
     /*
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(width: 3),
         Expanded(
@@ -231,30 +234,41 @@ class _SentenceBarState extends State<SentenceBar> {
               : GestureDetector(
                   onTap: widget.tapped,
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 10.0,
-                    ),
+                    // padding: const EdgeInsets.symmetric(
+                    //   vertical: 10.0,
+                    //   horizontal: 10.0,
+                    // ),
                     //User can scroll tiles horizontally
                     scrollDirection: Axis.horizontal,
                     itemCount: words.length,
                     itemBuilder: (BuildContext context, int index) {
-                      TileData tileData = words[index];
-                      //If tile is for adding user text input, create TextTile()
-                      if (tileData.name == "Edit") {
-                        return TextTile();
-                        //else create normal tile
-                      } else {
-                        return SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Tile(
-                            text: tileData.name,
-                            content: tileData.content,
-                            color: dialogModel.tileBackgroundColor,
-                            labelPos: dialogModel.tileLabelTop,
-                          ),
-                        );
-                      }
+                      TileData tileInfo = words[index];
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        child: Tile(
+                          text: tileInfo.labelKey.split('.').last,
+                          content: 'assets' + tileInfo.image,
+                          color: dialogModel.tileBackgroundColor,
+                          labelPos: dialogModel.tileLabelTop,
+                          labelColor: dialogModel.tileTextColor,
+                        ),
+                      );
+                      // //If tile is for adding user text input, create TextTile()
+                      // if (tileData.name == "Edit") {
+                      //   return TextTile();
+                      //   //else create normal tile
+                      // }
+                      // else {
+                      //   return SizedBox(
+                      //     width: MediaQuery.of(context).size.width * 0.2,
+                      //     child: Tile(
+                      //       text: tileData.name,
+                      //       content: tileData.content,
+                      //       color: dialogModel.tileBackgroundColor,
+                      //       labelPos: dialogModel.tileLabelTop,
+                      //     ),
+                      //   );
+                      // }
                     },
                   ),
                 ),

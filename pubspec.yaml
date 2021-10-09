@@ -59,7 +59,9 @@ flutter:
     - assets/help/
     - assets/markdown/About/
     - assets/markdown/User-help/
-    - assets/symbols/
+    - assets/symbols/arasaac/
+    - assets/symbols/cboard/
+    - assets/symbols/mulberry/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
