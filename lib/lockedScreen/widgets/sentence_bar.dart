@@ -1,5 +1,5 @@
-// import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/models/home.dart';

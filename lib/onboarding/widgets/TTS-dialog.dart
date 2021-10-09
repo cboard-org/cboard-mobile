@@ -1,3 +1,4 @@
+import 'package:cboard_mobile/onboarding/screens/sign-up-complete.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class TTSDialog extends StatelessWidget {
                 label: Text('OK'),
                 padding: 50,
                 onPress: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpComplete(username: "Resham")));
                 },
               ),
             ],

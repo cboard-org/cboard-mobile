@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// Is this class used anywhere? Can maybe be deleted? 
 
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
@@ -46,7 +47,7 @@ class _PasswordFieldState extends State<PasswordField> {
             if (value.isEmpty)
               return 'Please enter a password';
             else if (value.contains('@')) // Make server call instead?
-              return ' Invalid password';
+              return 'Invalid password';
             else
               return null;
           },
