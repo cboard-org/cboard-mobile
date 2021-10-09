@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:cboard_mobile/data/jsonString.dart';
+
+Map<String, Folder> defaultBoards = getData(jsonString).folders;
+
 Data getData(String str) => Data.fromJson(json.decode(str));
 
 String postToJson(Data data) => json.encode(data.toJson());

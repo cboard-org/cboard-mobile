@@ -3515,7 +3515,7 @@ String jsonString = '''{
         },
         {
           "labelKey": "cboard.symbol.my",
-          "image": "/symbols/arasaac/my",
+          "image": "/symbols/arasaac/my.png",
           "id": "HkyrNC5am9KZ",
           "backgroundColor": "rgb(255, 241, 118)"
         },

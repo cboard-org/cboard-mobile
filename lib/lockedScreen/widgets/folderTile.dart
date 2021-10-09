@@ -1,6 +1,5 @@
 // import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/data/data.dart';
-import 'package:cboard_mobile/data/jsonString.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,9 +39,9 @@ class FolderTile extends StatelessWidget {
       Expanded(
         flex: 3,
         child: Container(
-          child: SvgPicture.asset(
-            content,
-          ),
+          child: content.endsWith("svg")
+              ? SvgPicture.asset(content)
+              : Image.asset(content),
           // Image.asset(content),
         ),
       ),
@@ -69,7 +68,7 @@ class FolderTile extends StatelessWidget {
         context,
         MaterialPageRoute(
             builder: (context) => HomeScreen(
-                  data: getData(jsonString).folders,
+                  data: defaultBoards,
                   folderId: folderId,
                 )),
       ),
