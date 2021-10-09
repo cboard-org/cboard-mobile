@@ -28,8 +28,8 @@ typedef _fn = void Function();
 typedef void OnError(Exception exception);
 
 class _VoiceRecorderState extends State<VoiceRecorder> {
-  FlutterSoundPlayer _mPlayer = FlutterSoundPlayer(logLevel: Level.debug);
-  FlutterSoundRecorder _mRecorder = FlutterSoundRecorder(logLevel: Level.debug);
+  FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
+  FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
   bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
   bool _mplaybackReady = false;

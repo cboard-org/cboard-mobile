@@ -56,10 +56,7 @@ class _PublicBoardsState extends State<PublicBoards> {
         preferredSize: Size.fromHeight(screenSize.height) / 15,
         child: AppBar(
           leading: GestureDetector(
-            onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UnlockedMainBar()))
-            },
+            onTap: () => {Navigator.pop(context)},
             child: Icon(Icons.arrow_back, color: white, size: 25.0),
           ),
           centerTitle: true,

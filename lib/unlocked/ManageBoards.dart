@@ -76,40 +76,35 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
     [
       'assets/images/user.png',
       'Public Board Tile ',
-      'made by name'
-          'number of tiles',
+      'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile',
-      'made by name'
-          'number of tiles',
+      'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile 2',
-      'made by name'
-          'number of tiles',
+      'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'Board Tile 3',
-      'made by name'
-          'number of tiles',
+      'number of tiles',
       'made on',
       'offline'
     ],
     [
       'assets/images/user.png',
       'title',
-      'made by name'
-          'number of tiles',
+      'number of tiles',
       'made on',
       'offline'
     ],
@@ -150,8 +145,7 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
         child: AppBar(
           leading: GestureDetector(
             onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UnlockedMainBar()))
+              Navigator.pop(context),
             },
             child: Icon(Icons.arrow_back, color: white, size: 25.0),
           ),
@@ -507,7 +501,6 @@ class _ManageBoardsScreenState extends State<ManageBoardsScreen>
                                               ),
                                               Text(names2[index][3]),
                                               Text(names2[index][4]),
-                                              Text(names2[index][5])
                                             ],
                                           ),
                                         ),

@@ -1,3 +1,5 @@
+import 'package:cboard_mobile/lockedScreen/data.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import 'package:cboard_mobile/onboarding/widgets/select-funny-voice.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 
 import 'package:cboard_mobile/shared/button.dart';
-
 
 class VoicePage extends StatefulWidget {
   @override
@@ -55,7 +56,11 @@ class _VoicePageState extends State<VoicePage> {
                   onPress: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Welcome()),
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                data: defaultBoards,
+                                folderId: "root",
+                              )),
                     );
                   },
                 ),
@@ -67,9 +72,6 @@ class _VoicePageState extends State<VoicePage> {
           SizedBox(height: 40.0),
         ],
       ),
-      
-      
     );
   }
 }
-
