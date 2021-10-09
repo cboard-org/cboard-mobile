@@ -22,12 +22,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
-        ChangeNotifierProvider(create: (context) => PasswordConfirmProvider())
+        ChangeNotifierProvider(create: (context) => PasswordConfirmProvider()),
         //Add Provider Listener to any change in edit_dialog
         ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel()),
         ChangeNotifierProvider<HomeModel>(create: (context) => HomeModel()),
-        ChangeNotifierProvider<UnlockedHomeProvider>(create: (context)=> UnlockedHomeProvider()),
-        ChangeNotifierProvider<EditTileProvider>(create: (context)=> EditTileProvider()),
+        ChangeNotifierProvider<UnlockedHomeProvider>(
+            create: (context) => UnlockedHomeProvider()),
+        ChangeNotifierProvider<EditTileProvider>(
+            create: (context) => EditTileProvider()),
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',

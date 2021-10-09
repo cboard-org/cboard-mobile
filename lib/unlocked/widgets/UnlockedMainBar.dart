@@ -5,6 +5,8 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../ManageBoards.dart';
+
 class UnlockedMainBar extends StatelessWidget {
   final double scrollOffset;
 
@@ -41,13 +43,13 @@ class UnlockedMainBar extends StatelessWidget {
                                 color: paua,
                               ),
                               title: Text('Manage Boards'),
-                              // onTap: () => {
-                              //   Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //           builder: (context) =>
-                              //               ManageBoardsScreen()))
-                              // },
+                              onTap: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ManageBoardsScreen()))
+                              },
                             ),
                             ListTile(
                               leading: Icon(
@@ -87,7 +89,10 @@ class UnlockedMainBar extends StatelessWidget {
                             fontFamily: "Robotto",
                             fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.arrow_drop_down,color: Theme.of(context).primaryColor,),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ],
                   ),
                 ),
@@ -125,8 +130,14 @@ class UnlockedMainBar extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         /// locked to unlocked transition
-                        Provider.of<HomeModel>(context,listen: false).resetLock();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(data: example,)));
+                        Provider.of<HomeModel>(context, listen: false)
+                            .resetLock();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                      data: example,
+                                    )));
                       }, // insert new screen here
                       child: Icon(
                         Icons.lock_open,

@@ -42,12 +42,13 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
     return Scaffold(
       backgroundColor: white,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_back,color: paua,),
+        child: Icon(
+          Icons.arrow_back,
+          color: paua,
+        ),
         onPressed: () => Navigator.pop(context),
         backgroundColor: white,
-        shape: CircleBorder(
-          side: BorderSide(color: paua)
-        ),
+        shape: CircleBorder(side: BorderSide(color: paua)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       appBar: PreferredSize(
@@ -231,23 +232,27 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                     builder: (context, editTileProvider, child) {
                       return IconButton(
                           onPressed: () {
-                            if(unlockedHomeProvider.selectList.isNotEmpty) {
+                            if (unlockedHomeProvider.selectList.isNotEmpty) {
                               Provider.of<EditTileProvider>(context,
-                                  listen: false)
-                                  .addAllEditList(
-                                  unlockedHomeProvider.selectList.values.toList());
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) =>
-                                      EditTileScreen(
-                                        isMultiple: true,
-                                        tile: editTileProvider.editList[0],
-                                        index: 0,
-                                      )));
+                                      listen: false)
+                                  .addAllEditList(unlockedHomeProvider
+                                      .selectList.values
+                                      .toList());
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditTileScreen(
+                                            isMultiple: true,
+                                            tile: editTileProvider.editList[0],
+                                            index: 0,
+                                          )));
                             }
                           },
                           icon: Icon(
                             Icons.edit,
-                            color: unlockedHomeProvider.selectList.isEmpty ? grey: white,
+                            color: unlockedHomeProvider.selectList.isEmpty
+                                ? grey
+                                : white,
                           ));
                     },
                   ),
