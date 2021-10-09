@@ -1,7 +1,9 @@
 import 'package:cboard_mobile/models/locale.dart';
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/sign-up--main.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up--tts.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/onboarding/screens/voice.dart';
+
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/shared/button.dart';
@@ -16,11 +18,13 @@ class LanguageRegion extends StatefulWidget {
 }
 
 class _LanguageRegionState extends State<LanguageRegion> {
-  String localeValue;
+  String localeValueLanguage;
+  String localeValueCountry;
 
   @override
   Widget build(BuildContext context) {
-    final List<String> locales = LocaleModel.languageMap.keys.toList();
+    final List<String> localesLanguages = LocaleModel.languageMap.keys.toList();
+    final List<String> localesCountries = LocaleModel.countryList.toList();
 
     return Scaffold(
       appBar: BaseAppBar(
@@ -32,7 +36,7 @@ class _LanguageRegionState extends State<LanguageRegion> {
           UserHeader(),
           Container(
               child: DropdownButtonFormField(
-                icon: localeValue == null
+                icon: localeValueLanguage == null
                     ? Icon(Icons.arrow_drop_down, color: electric_violet)
                     : Icon(
                         Icons.check,
@@ -45,10 +49,10 @@ class _LanguageRegionState extends State<LanguageRegion> {
                 style: TextStyle(color: electric_violet),
                 onChanged: (String newValue) {
                   setState(() {
-                    localeValue = newValue;
+                    localeValueLanguage = newValue;
                   });
                 },
-                items: locales
+                items: localesLanguages
                     .map(
                       (String value) => DropdownMenuItem(
                         value: value,
@@ -59,7 +63,40 @@ class _LanguageRegionState extends State<LanguageRegion> {
               ),
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.symmetric(horizontal: 30)),
-          if (localeValue != null)
+
+
+          Container(
+              child: DropdownButtonFormField(
+                icon: localeValueCountry == null
+                    ? Icon(Icons.arrow_drop_down, color: electric_violet)
+                    : Icon(
+                        Icons.check,
+                        color: fruit_salad,
+                      ),
+                decoration: InputDecoration(
+                    hintText: 'Select Country',
+                    hintStyle: TextStyle(color: electric_violet)),
+                isExpanded: true,
+                style: TextStyle(color: electric_violet),
+                onChanged: (String newValue) {
+                  setState(() {
+                    localeValueCountry = newValue;
+                  });
+                },
+                items: localesCountries
+                    .map(
+                      (String value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(value),
+                      ),
+                    )
+                    .toList(),
+              ),
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.symmetric(horizontal: 30)),
+
+              
+          if (localeValueCountry != null)
             Container(
               child: Row(
                 children: [
@@ -97,11 +134,11 @@ class _LanguageRegionState extends State<LanguageRegion> {
                     padding: 40,
                     onPress: () {
                       Provider.of<SettingsModel>(context, listen: false)
-                          .updateLocale(localeValue);
+                          .updateLocale(localeValueLanguage);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpMain(),
+                          builder: (context) => VoicePage(),
                         ),
                       );
                     },

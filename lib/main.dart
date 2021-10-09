@@ -7,6 +7,7 @@ import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
 import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 
 import 'models/dialog.dart';
 import 'models/home.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
+        ChangeNotifierProvider(create: (context) => PasswordConfirmProvider())
         //Add Provider Listener to any change in edit_dialog
         ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel()),
         ChangeNotifierProvider<HomeModel>(create: (context) => HomeModel()),
