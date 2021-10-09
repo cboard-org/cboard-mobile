@@ -10,6 +10,7 @@ import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 
 class LanguageRegion extends StatefulWidget {
   const LanguageRegion({Key key}) : super(key: key);
