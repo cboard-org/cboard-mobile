@@ -2,20 +2,22 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class TileWidget extends StatelessWidget {
+class Tile extends StatelessWidget {
   //Label name
   final String text;
   //Main content, either Image or Text
   final String content;
   //Background color
   final Color color;
+  //Label color
+  final Color labelColor;
   final Function tapped;
   //Label Position, either top or bottom
   final bool labelPos;
   //Check if tile is for adding text or not
   final bool edittingTile;
 
-  const TileWidget({
+  const Tile({
     Key key,
     this.content,
     this.text,
@@ -23,6 +25,7 @@ class TileWidget extends StatelessWidget {
     this.tapped,
     this.labelPos,
     this.edittingTile = false,
+    this.labelColor,
   }) : super(key: key);
 
   @override
@@ -34,7 +37,10 @@ class TileWidget extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(5),
           //If tile is for adding text, put text as main content else put image
-          child: edittingTile ? Text(content) : SvgPicture.asset(content),
+          // child: edittingTile ? Text(content) : SvgPicture.asset(content),
+          child: content.endsWith("svg")
+              ? SvgPicture.asset(content)
+              : Image.asset(content),
           // Image.asset(content),
         ),
       ),
@@ -47,7 +53,8 @@ class TileWidget extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
+              color: labelColor,
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
             ),

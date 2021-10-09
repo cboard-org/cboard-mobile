@@ -53,11 +53,11 @@ class _EditTile extends State<TextTile> {
       //else show normal tile with text as main content
       return SizedBox(
         width: MediaQuery.of(context).size.width * 0.2,
-        child: TileWidget(
+        child: Tile(
           text: "Edit",
           content: sentence,
           color: fog,
-          labelPos: dialogModel.labelTop,
+          labelPos: dialogModel.tileLabelTop,
           edittingTile: true,
           tapped: () {
             setState(() {

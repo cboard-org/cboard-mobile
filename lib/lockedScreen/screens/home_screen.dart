@@ -13,8 +13,11 @@ import '../widgets/main_app_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<Data> data;
-  const HomeScreen({Key key, this.data}) : super(key: key);
+
+  final Map<String, Folder> data;
+  final String folderId;
+  const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -50,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
 
-    final data = widget.data;
+    final Folder folder = widget.data[widget.folderId];
 
     //Flutter tts object
     Future _speak(String text) async {
@@ -69,16 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               // Sentence Creation Section
-              Container(
-                height: screenSize.height * (2 / 15),
+              Expanded(
+                flex: 3,
+                // height: screenSize.height * (2 / 15),
                 child: SentenceBar(
                   //Speak full sentence
                   tapped: () => _speak(homeModel.getFullSent()),
                 ),
               ),
-
               // Main Navigation Bar
               Expanded(
+                flex: 2,
                 child: MainAppBar(scrollOffset: _scrollOffset),
               ),
             ],
@@ -93,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-          itemCount: data.length + 2,
+          itemCount: folder.subItems.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             // ignore: todo
@@ -103,52 +107,58 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (BuildContext context, int index) {
             // 'Add text' tile
             if (index == 0) {
-              return TileWidget(
-                labelPos: dialologModel.labelTop,
-                text: "Add text",
-                content: 'assets/symbols/A.svg',
-                color: soft_green,
-                //User taps to add sentence in the top sentence bar
-                tapped: () => {
-                  setState(() {
-                    homeModel.addWords(TileData(name: "Edit", content: "",));
-                  }),
-                },
-              );
+              return Tile(
+                  labelPos: dialologModel.tileLabelTop,
+                  text: "Add text",
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
+                  color: soft_green,
+                  //User taps to add sentence in the top sentence bar
+                  tapped: () => {}
+                  // () => {
+                  //   setState(() {
+                  //     homeModel.addWords(TileData("Edit", "", paua));
+                  //   }),
+                  // },
+                  );
 
               // 'Add tile/folder' tile
-            } else if (index == data.length + 1) {
-              return TileWidget(
-                  labelPos: dialologModel.labelTop,
+            } else if (index == folder.subItems.length + 1) {
+              return Tile(
+                  labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
-                  content: 'assets/symbols/A.svg',
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   color: soft_green,
                   //Tapped function is null as user can't add tile in Unlocked Screen
                   tapped: () => {});
 
               //Normal tile
             } else {
-              final Data info = data[index - 1];
-              if (info is TileData) {
-                return TileWidget(
-                  labelPos: dialologModel.labelTop,
-                  text: info.name,
-                  content: info.content,
+              final TileData tileInfo = folder.subItems[index - 1];
+              String title = tileInfo.labelKey.split('.').last;
+              if (tileInfo.loadBoard == null) {
+                return Tile(
+                  labelPos: dialologModel.tileLabelTop,
+                  text: title,
+                  content: 'assets' + tileInfo.image,
                   color: dialologModel.tileBackgroundColor,
+                  labelColor: dialologModel.tileTextColor,
                   tapped: () => {
                     //Speak word in the tile
-                    _speak(info.name),
+                    _speak(title),
                     setState(() {
-                      homeModel.addWords(info);
+                      homeModel.addWords(tileInfo);
                     })
                   },
                 );
               } else {
-                FolderData folderdata = info;
+                TileData folderInfo = tileInfo;
                 return FolderTile(
-                  text: info.name,
-                  content: info.content,
-                  tiles: folderdata.tiles,
+                  text: tileInfo.labelKey.split('.').last,
+                  content: 'assets' + tileInfo.image,
+                  folderId: folderInfo.loadBoard,
+                  color: dialologModel.folderBackgroundColor,
+                  labelColor: dialologModel.folderTextColor,
+                  labelPos: dialologModel.folderLabelTop,
                 );
               }
             }

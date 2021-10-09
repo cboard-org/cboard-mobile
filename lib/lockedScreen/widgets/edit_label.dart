@@ -19,7 +19,7 @@ class _EditLabel extends State<EditLabel> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final dialogModel = Provider.of<DialogModel>(context);
-    labelPos = dialogModel.labelTop;
+    labelPos = dialogModel.tileLabelTop;
   }
 
   @override
@@ -58,11 +58,11 @@ class _EditLabel extends State<EditLabel> {
                 SizedBox(
                   height: 100,
                   width: 100,
-                  child: TileWidget(
+                  child: Tile(
                     labelPos: false,
                     color: currentBackgroundColor,
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   ),
                 ),
                 Radio(
@@ -84,11 +84,11 @@ class _EditLabel extends State<EditLabel> {
                 SizedBox(
                   height: 100,
                   width: 100,
-                  child: TileWidget(
+                  child: Tile(
                     labelPos: true,
                     color: currentBackgroundColor,
                     text: 'Label',
-                    content: 'assets/symbols/A.svg',
+                    content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   ),
                 ),
                 Radio(
@@ -113,7 +113,9 @@ class _EditLabel extends State<EditLabel> {
           isPrimary: true,
           onPress: () {
             //Update label position in Provider
-            dialogModel.updatelabelPos(labelPos);
+            widget.type == 'TILE'
+                ? dialogModel.updateTileLabelPos(labelPos)
+                : dialogModel.updateFolderLabelPos(labelPos);
             Navigator.pop(context);
           },
         ),

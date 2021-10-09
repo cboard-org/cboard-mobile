@@ -12,7 +12,8 @@ class DialogModel with ChangeNotifier {
   Color _folderBackgroundColor = dark_blue;
   labelSize _tileLabelSizeOption = labelSize.Large;
   labelSize _folderLabelSizeOption = labelSize.Large;
-  bool _labelTop = false;
+  bool _tileLabelTop = false;
+  bool _folderLabelTop = false;
 
   labelSize get currentTileLabelSize => _tileLabelSizeOption;
   void updateTileLabelSize(labelSize newSize) {
@@ -55,10 +56,15 @@ class DialogModel with ChangeNotifier {
     _folderBackgroundColor = newColor;
     notifyListeners();
   }
+  bool get tileLabelTop => _tileLabelTop;
+  void updateTileLabelPos(bool newPos) {
+    _tileLabelTop = newPos;
+    notifyListeners();
+  }
 
-  bool get labelTop => _labelTop;
-  void updatelabelPos(bool newPos) {
-    _labelTop = newPos;
+  bool get folderLabelTop => _folderLabelTop;
+  void updateFolderLabelPos(bool newPos) {
+    _folderLabelTop = newPos;
     notifyListeners();
   }
 }
