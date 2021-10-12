@@ -25,17 +25,18 @@ dependencies:
     sdk: flutter
   overlay_screen: ^1.2.0+1
   http: ^0.13.2
-  provider: ^5.0.0
+  provider: ^6.0.0
   flutter_native_splash: ^1.0.2
   flutter_tts: ^3.0.0
   image_picker: ^0.8.2
-  flutter_sound: ^8.2.5
+  flutter_sound: ^8.4.1
   permission_handler: ^8.1.4+1
   flutter_markdown: ^0.5.2
   url_launcher: ^6.0.4
   file_picker: ^3.0.1
   flutter_svg: ^0.22.0
   path_provider: ^2.0.3
+  logger: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
