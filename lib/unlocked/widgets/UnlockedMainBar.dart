@@ -142,6 +142,7 @@ class UnlockedMainBar extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen(
                                       data: defaultBoards,
+                                      folderId: "root",
                                     )));
                       }, // insert new screen here
                       child: Icon(

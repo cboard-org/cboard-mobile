@@ -35,6 +35,19 @@ class Tile {
       this.backgroundColor = "E0F1BC",
       this.textColor = "000000",
       this.tiles});
+  // Tile.fromJson(Map<String,dynamic> json){
+//   Map<String,dynamic> json1 = {
+//     "labelKey": "symbol.foodMealsAndSnacks.soup",
+//     "image": "/symbols/mulberry/soup.svg",
+//     "loadBoard": "SkEF6D2DaW",
+//     "id": "rkCHGA9TQ5F-",
+//     "backgroundColor": "rgb(187, 222, 251)"
+//   };
+//   imageUrl = json["image"];
+//   backgroundColor = json["backgroundColor"];
+//   isFolder = json["loadBoard"] != null;
+//
+// }
 }
 
 final List<Tile> example1 = [

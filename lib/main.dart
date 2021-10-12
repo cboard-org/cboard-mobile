@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: paua,
           accentColor: fog,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          scaffoldBackgroundColor: mercury,
+          scaffoldBackgroundColor: white,
           inputDecorationTheme: InputDecorationTheme(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: electric_violet),

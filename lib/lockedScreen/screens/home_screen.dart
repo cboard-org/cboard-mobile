@@ -15,7 +15,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 class HomeScreen extends StatefulWidget {
   final Map<String, Folder> data;
   final String folderId;
-  const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+  const HomeScreen({Key key,@required this.data,@required this.folderId}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

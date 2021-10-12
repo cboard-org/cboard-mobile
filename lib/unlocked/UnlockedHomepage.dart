@@ -195,18 +195,25 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
         ),
       ),
       body: Container(
-        child: GridView.count(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
           padding: const EdgeInsets.symmetric(
             vertical: 10.0,
             horizontal: 7.0,
           ),
-          crossAxisCount: 3,
-          children: widget.tiles?.map((item) {
-            return TilesWidget(
-              tile: item,
-              size: screenSize.width * 0.3,
-            );
-          })?.toList(),
+          itemCount: widget.tiles.length+1,
+          itemBuilder: (context,index){
+            if(index < widget.tiles.length)
+              return TilesWidget(
+                tile: widget.tiles[index],
+                size: screenSize.width * 0.3,
+              );
+            return AddWidget(size: screenSize.width * 0.3);
+            // else
+            //   return TilesWidget(tile: tile, size: size)
+          },
         ),
       ),
       bottomNavigationBar: Consumer<UnlockedHomeProvider>(

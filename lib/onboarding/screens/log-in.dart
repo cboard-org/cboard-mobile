@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cboard_mobile/data/jsonString.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/models/error.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/shared/button.dart';
@@ -127,7 +129,7 @@ class LogInFormState extends State<LogInForm> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
+                                builder: (context) => HomeScreen(data: getData(jsonString).folders,folderId: "root",)),
                           );
                         }
                       },

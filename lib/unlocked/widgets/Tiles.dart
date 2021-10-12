@@ -1,4 +1,6 @@
+import 'package:cboard_mobile/models/settings.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
+import 'package:cboard_mobile/unlocked/AddTile.dart';
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
 import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +62,12 @@ class TilesWidget extends StatelessWidget {
               elevation: 2,
               child: Stack(
                 children: [
-                  // tile.isFolder?Icon(
-                  //   Icons.folder,
-                  //   color: Color(int.parse("0xff"+tile.backgroundColor)),
-                  //   size: 130,
-                  // ):Container(),
+                  if(tile.isFolder)
+                  Icon(
+                    Icons.folder,
+                    color: Color(int.parse("0xff"+tile.backgroundColor)),
+                    size: 130,
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,6 +113,66 @@ class TilesWidget extends StatelessWidget {
     });
   }
 }
+
+class AddWidget extends StatelessWidget {
+  final double size;
+  const AddWidget({Key key, @required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddTileScreen()));
+      },
+      child: Card(
+        margin: EdgeInsets.all(5),
+        elevation: 2,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                color:
+                shalimar,
+                child: SvgPicture.asset(
+                  "assets/symbols/mulberry/add.svg",
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              color: white,
+              height: MediaQuery.of(context).size.height / 34,
+              child: Center(
+                child: Text("Add",
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontFamily: "Robotto",
+                      fontWeight: FontWeight.w500,
+                    )),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// class FolderWidget extends StatelessWidget {
+//   final Tile tile;
+//   final double size;
+//
+//   const FolderWidget({Key key,@required Tile tile,@required double size}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
 
 class ImageDialog extends StatelessWidget {
   final Tile tile;

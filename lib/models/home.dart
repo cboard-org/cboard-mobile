@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/lockedScreen/data.dart';
+// import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/unlocked/data.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/unlocked/UnlockedHomepage.dart';
@@ -45,7 +46,6 @@ class HomeModel extends ChangeNotifier {
       showDialog(
           context: context,
           builder: (context) {
-            int unlock = 2;
             return AlertDialog(
               backgroundColor: Theme.of(context).primaryColor,
               insetPadding:
@@ -67,7 +67,7 @@ class HomeModel extends ChangeNotifier {
                     ),
                     // SizedBox(height: 20,),
                     Text(
-                      "Press $unlock more times to unlock",
+                      "Press 2 more times to unlock",
                       style: TextStyle(
                         color: white,
                         fontSize: 15,

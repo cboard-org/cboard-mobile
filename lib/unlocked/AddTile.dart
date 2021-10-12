@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:cboard_mobile/services/tts.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -15,18 +17,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-class EditTileScreen extends StatefulWidget {
-  final bool isMultiple;
-  final Tile tile;
-  final bool isDelete;
-  final int index;
+class AddTileScreen extends StatefulWidget {
+
   final Map<Text, IconData> modelBottom = {
     Text('Take Photos'): Icons.photo_camera,
     Text('Browse Albums'): Icons.insert_photo,
     Text('Search Community'): Icons.search
   };
 
-  final List<Color> editColors = [
+  final List<Color> colors = [
     light_blue,
     dark_green,
     bold_yellow,
@@ -36,19 +35,15 @@ class EditTileScreen extends StatefulWidget {
     cinnabar
   ];
 
-  EditTileScreen(
-      {Key key,
-      this.isMultiple = false,
-      this.tile,
-      this.isDelete = false,
-      this.index})
+  AddTileScreen(
+      {Key key})
       : super(key: key);
 
   @override
-  _EditTileScreenState createState() => _EditTileScreenState();
+  _AddTileScreenState createState() => _AddTileScreenState();
 }
 
-class _EditTileScreenState extends State<EditTileScreen> {
+class _AddTileScreenState extends State<AddTileScreen> {
   ScrollController _scrollController;
   // double _scrollOffset = 0.0;
   bool lock = false;
@@ -62,7 +57,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
 
   _pickGallery() async {
     final XFile _imageRes =
-        await _imagePicker.pickImage(source: ImageSource.gallery);
+    await _imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       image = _imageRes;
     });
@@ -70,7 +65,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
 
   _pickCamera() async {
     final XFile _imageRes =
-        await _imagePicker.pickImage(source: ImageSource.camera);
+    await _imagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       image = _imageRes;
     });
@@ -79,91 +74,9 @@ class _EditTileScreenState extends State<EditTileScreen> {
   @override
   void initState() {
     super.initState();
-
     _scrollController = ScrollController()..addListener(() {});
-    _bgColor = widget.tile?.backgroundColor;
-    _textColor = widget.tile?.textColor;
-    if (widget.isDelete) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Are you sure you want to delete this tile?",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "This action cannot be undone.",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        OutlinedButton(
-                          autofocus: true,
-                          style: OutlinedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor,
-                            backgroundColor: Colors.white,
-                            side: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            // minimumSize: Size(140,35),
-                          ),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "YES",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                          ),
-                        ),
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Theme.of(context).primaryColor,
-                            side: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            // minimumSize: Size(140,35),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "NO",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-              );
-            });
-      });
-    }
+    _bgColor = colorToHex(widget.colors[0]);
+    _textColor = colorToHex(widget.colors[0]);
   }
 
   @override
@@ -175,8 +88,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-    TextEditingController nameController = TextEditingController()
-      ..text = widget.tile.name;
+    TextEditingController nameController = TextEditingController();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenSize.height) / 15,
@@ -187,19 +99,18 @@ class _EditTileScreenState extends State<EditTileScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => UnlockedHomeScreen(
-                            tiles: example1,
-                          )))
+                        tiles: example1,
+                      )))
             },
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
           ),
           centerTitle: true,
-          title: widget.tile?.name != "Label"
-              ? Text('Edit')
-              : Text(
-                  "New Tile or Folder"), // Debug: Change title to keep track of how many tiles
+          title: Text(
+              "New Tile or Folder"), // Debug: Change title to keep track of how many tiles
         ),
       ),
       body: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           SizedBox(
             height: screenSize.height / 75,
@@ -246,12 +157,11 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color(int.parse("0xff" + _bgColor ??
-                                    widget.tile.backgroundColor))),
+                                color: Color(int.parse("0xff" + _bgColor ))),
                             child: Stack(
                               children: [
                                 SvgPicture.asset(
-                                  widget.tile.imageUrl,
+                                  "assets/symbols/mulberry/add.svg",
                                   width: screenSize.width / 2,
                                 ),
                                 Align(
@@ -267,13 +177,12 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     Container(
                       height: MediaQuery.of(context).size.height / 28,
                       child: Center(
-                        child: Text(widget.tile.name,
+                        child: Text("",
                             style: TextStyle(
                                 fontSize: 14.0,
                                 fontFamily: "Robotto",
                                 fontWeight: FontWeight.w500,
-                                color: Color(int.parse("0xff" + _textColor ??
-                                    widget.tile.textColor)))),
+                                color: Color(int.parse("0xff" + _textColor)))),
                       ),
                     ),
                   ],
@@ -282,26 +191,25 @@ class _EditTileScreenState extends State<EditTileScreen> {
             ),
           ),
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Visibility(
-                visible: widget.tile.name == "Label",
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: new BorderSide(color: Colors.black12),
-                    ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: new BorderSide(color: Colors.black12),
                   ),
-                  child: ListTile(
-                    // Tile Name
-                    title: Text('Card Type',
-                        style: CustomTypography.Typography.title()),
-                    subtitle: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ListTile(
-                          title: Text("Tile",
-                              style: CustomTypography.Typography.subTitle()),
-                          leading: Radio<String>(
+                ),
+                child: Column(
+                  // Tile Name
+                  children: [
+                    ListTile(
+                      title: Text('Card Type',
+                          style: CustomTypography.Typography.title()),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(flex: 1,),
+                          Radio<String>(
                             value: 'Tile',
                             groupValue: _type,
                             onChanged: (String val) {
@@ -311,11 +219,12 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               print(_type);
                             },
                           ),
-                        ),
-                        ListTile(
-                          title: Text("Folder",
+                          Text("Tile",
                               style: CustomTypography.Typography.subTitle()),
-                          leading: Radio<String>(
+                          Spacer(
+                            flex: 2,
+                          ),
+                          Radio<String>(
                             value: 'Folder',
                             groupValue: _type,
                             onChanged: (String val) {
@@ -325,17 +234,15 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               print(_type);
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                    // trailing: Wrap(
-                    //   children: [
-                    //     Icon(Icons.keyboard_arrow_right,
-                    //         size: 35.0, color: Colors.black54),
-                    //   ],
-                    // ),
-                    // Debug: change to edit
-                  ),
+                          Text("Folder",
+                              style: CustomTypography.Typography.subTitle()),
+                          Spacer(
+                            flex: 1,
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
               Container(
@@ -386,15 +293,13 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         //     style: CustomTypography.Typography.subTitle()),
                         trailing: IconButton(
                           onPressed: () => TTS_Func.speak(
-                              widget.tile.name != "Label"
-                                  ? widget.tile.name
-                                  : ""),
+                              ""),
                           icon: Icon(
                             Icons.play_arrow,
                             color: paua,
                           ),
                         ) // Debug: change to edit
-                        ),
+                    ),
                   ],
                 ),
               ),
@@ -414,7 +319,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         child: Wrap(
                           spacing: 26,
                           children: [
-                            for (var colorCircular in widget.editColors)
+                            for (var colorCircular in widget.colors)
                               InkResponse(
                                 onTap: () {
                                   setState(() {
@@ -425,12 +330,12 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   radius: screenSize.width / 36,
                                   backgroundColor: colorCircular,
                                   child: Color(int.parse("0xff" + _bgColor)) ==
-                                          colorCircular
+                                      colorCircular
                                       ? Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                          size: 15,
-                                        )
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  )
                                       : null,
                                 ),
                                 // new Container(
@@ -468,7 +373,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         child: Wrap(
                           spacing: 26,
                           children: [
-                            for (var colorCircular in widget.editColors)
+                            for (var colorCircular in widget.colors)
                               InkResponse(
                                 onTap: () {
                                   setState(() {
@@ -479,14 +384,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                                   radius: screenSize.width / 36,
                                   backgroundColor: colorCircular,
                                   child:
-                                      Color(int.parse("0xff" + _textColor)) ==
-                                              colorCircular
-                                          ? Icon(
-                                              Icons.check,
-                                              color: Colors.white,
-                                              size: 15,
-                                            )
-                                          : null,
+                                  Color(int.parse("0xff" + _textColor)) ==
+                                      colorCircular
+                                      ? Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  )
+                                      : null,
                                 ),
                               ),
                           ],
@@ -522,10 +427,10 @@ class _EditTileScreenState extends State<EditTileScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => VoiceRecorder(
-                                      tileRecord:
-                                          widget.tile.isRecording ?? true,
-                                      tile: widget.tile,
-                                    )))
+                                  tileRecord:
+                                  true,
+                                  // tile: widget.tile,
+                                )))
                       }, // Debug: change to edit
                     ),
                   ],
@@ -533,8 +438,6 @@ class _EditTileScreenState extends State<EditTileScreen> {
               ),
             ],
           ),
-
-          if (widget.isMultiple)
             Center(
               child: Button(
                 label: Text(
@@ -565,73 +468,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
           // ),
         ],
       ),
-      bottomNavigationBar: Consumer<EditTileProvider>(
-        builder: (context, editTileProvider, child) {
-          if (widget.isMultiple) {
-            return Container(
-              color: mercury,
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  TextButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: paua,
-                      ),
-                      label: Text(
-                        'Back',
-                        style: TextStyle(color: paua),
-                      )),
-                  SizedBox(
-                    width: screenSize.width * 0.5,
-                    child: LinearProgressIndicator(
-                      color: paua,
-                      value:
-                          (widget.index + 1) / editTileProvider.editList.length,
-                      backgroundColor: grey,
-                    ),
-                  ),
-                  if ((widget.index + 1) < editTileProvider.editList.length)
-                    TextButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EditTileScreen(
-                                        tile: editTileProvider
-                                            .editList[widget.index + 1],
-                                        isMultiple: true,
-                                        index: widget.index + 1,
-                                      )));
-                        },
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                          color: paua,
-                        ),
-                        label: Text(
-                          'Next',
-                          style: TextStyle(color: paua),
-                        ))
-                ],
-              ),
-            );
-          }
-          return SizedBox(
-            height: 0.0,
-          );
-        },
-      ),
       // BUTTONS
     );
   }
 
   String colorToHex(Color color, {bool leadingHashSign = false}) =>
       '${leadingHashSign ? '#' : ''}'
-      '${color.alpha.toRadixString(16).padLeft(2, '0')}'
-      '${color.red.toRadixString(16).padLeft(2, '0')}'
-      '${color.green.toRadixString(16).padLeft(2, '0')}'
-      '${color.blue.toRadixString(16).padLeft(2, '0')}';
+          '${color.alpha.toRadixString(16).padLeft(2, '0')}'
+          '${color.red.toRadixString(16).padLeft(2, '0')}'
+          '${color.green.toRadixString(16).padLeft(2, '0')}'
+          '${color.blue.toRadixString(16).padLeft(2, '0')}';
 }
