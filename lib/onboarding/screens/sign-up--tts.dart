@@ -1,5 +1,5 @@
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/select-voice.dart';
+import 'package:cboard_mobile/onboarding/widgets/select-male-voice.dart';
 import 'package:cboard_mobile/onboarding/widgets/TTS-dialog.dart';
 import 'package:cboard_mobile/onboarding/widgets/header-user.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
@@ -22,9 +22,19 @@ class SignUpTTS extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            child: UserHeader(shouldSetPhoto: false, locale: locale),
+            child: UserHeader(),
             margin: EdgeInsets.only(bottom: 3),
           ),
+          // Container(
+          //   child: Text(
+          //     'Please follow these steps to download the ' +
+          //         locale ?? "English" +
+          //         ' TTS:',
+          //     style: CustomTypography.Typography.subheader(),
+          //     textAlign: TextAlign.center,
+          //   ),
+          //   margin: EdgeInsets.only(top: 20),
+          // ),
           Container(
             child: Column(
               children: [

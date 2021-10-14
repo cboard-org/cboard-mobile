@@ -1,6 +1,9 @@
 import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
 import 'dart:async';
+import 'dart:async';
+
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
@@ -15,7 +18,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 class HomeScreen extends StatefulWidget {
   final Map<String, Folder> data;
   final String folderId;
-  const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+  // const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+  const HomeScreen({Key key,@required this.data,@required this.folderId}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -54,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final Folder folder = widget.data[widget.folderId];
 
     //Flutter tts object
-
     Future _speak(String text) async {
       await flutterTts.speak(text);
     }
@@ -71,13 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               // Sentence Creation Section
-              Container(
-                height: screenSize.height * (2 / 15),
-                child: SentenceBar(),
-//                 child: SentenceBar(
-//                   //Speak full sentence
-//                   tapped: () => _speak(homeModel.getFullSent()),
-//                 ),
+              Expanded(
+                flex: 3,
+                // height: screenSize.height * (2 / 15),
+                child: SentenceBar(
+                  //Speak full sentence
+                  tapped: () => _speak(homeModel.getFullSent()),
+                ),
               ),
               // Main Navigation Bar
               Expanded(
@@ -96,8 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-
-          itemCount: data.length + 1,
+          itemCount: folder.subItems.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             // ignore: todo
@@ -124,7 +127,24 @@ class _HomeScreenState extends State<HomeScreen> {
             //   // 'Add tile/folder' tile
             // } else
             
-            if (index == data.length) {
+            // if (index == data.length) {
+            if (index == 0) {
+              return Tile(
+                  labelPos: dialologModel.tileLabelTop,
+                  text: "Add text",
+                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
+                  color: soft_green,
+                  //User taps to add sentence in the top sentence bar
+                  tapped: () => {}
+                  // () => {
+                  //   setState(() {
+                  //     homeModel.addWords(TileData("Edit", "", paua));
+                  //   }),
+                  // },
+                  );
+
+              // 'Add tile/folder' tile
+            } else if (index == folder.subItems.length + 1) {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add tile/folder",
@@ -135,10 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Normal tile
             } else {
-              final Data info = data[index];
-              if (info is TileData) {
-                print(info.isText);
-              }
               final TileData tileInfo = folder.subItems[index - 1];
               String title = tileInfo.labelKey.split('.').last;
               if (tileInfo.loadBoard == null) {
@@ -147,17 +163,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: title,
                   content: 'assets' + tileInfo.image,
                   color: dialologModel.tileBackgroundColor,
-                  edittingTile: info.isText,
-                  tapped: () {
-                    if(info.isText){
-                      _speak(info.content);
-                    }
-                    else{
-                      _speak(info.name);
-                    }
-                    setState(() {
-                      homeModel.addWords(info);
-                    });
                   labelColor: dialologModel.tileTextColor,
                   tapped: () => {
                     //Speak word in the tile

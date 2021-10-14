@@ -1,6 +1,7 @@
 import 'package:cboard_mobile/lockedScreen/data/data.dart';
 // import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,51 +76,6 @@ class FolderTile extends StatelessWidget {
                 )),
       ),
       child: Container(
-
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Icon(
-              Icons.folder,
-              color: soft_orange,
-              size: 130,
-            ),
-            // ColorFiltered(
-            //   child: Image.asset('assets/images/folder-tile.png'),
-            //   colorFilter: ColorFilter.mode(soft_orange, BlendMode.color),
-            // ),
-            Container(
-              height: 100,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      child: SvgPicture.asset(content),
-                      // Image.asset(content),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      color: white,
-                      child: Text(
-                        text,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-/*
         child: Card(
           child: Stack(
             alignment: Alignment.bottomCenter,
@@ -138,7 +94,6 @@ class FolderTile extends StatelessWidget {
               )
             ],
           ),
- */
         ),
       ),
     );

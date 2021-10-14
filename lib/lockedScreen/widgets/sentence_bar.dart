@@ -11,10 +11,15 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
+import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
+import 'package:cboard_mobile/models/dialog.dart';
+import 'package:cboard_mobile/models/home.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SentenceBar extends StatefulWidget {
-  //List containg all tiles that user tapped
-  // static List<TileData> words = [];
   final Function() tapped;
 
   const SentenceBar({Key key, this.tapped}) : super(key: key);

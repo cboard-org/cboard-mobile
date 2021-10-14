@@ -1,16 +1,15 @@
-import 'package:cboard_mobile/data/data.dart';
-import 'package:cboard_mobile/data/jsonString.dart';
-import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
-import 'package:cboard_mobile/services/trialApp.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cboard_mobile/Settings/SettingWrapper.dart';
-import 'package:cboard_mobile/lockedScreen/data/data.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/models/home.dart';
+import 'models/dialog.dart';
+import 'models/home.dart';
+import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
+import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
+import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +22,12 @@ class MyApp extends StatelessWidget {
         //Add Provider Listener to any change in edit_dialog
         ChangeNotifierProvider<DialogModel>(create: (context) => DialogModel()),
         ChangeNotifierProvider<HomeModel>(create: (context) => HomeModel()),
+        ChangeNotifierProvider(create: (context) => PasswordConfirmProvider()),
+        //Add Provider Listener to any change in edit_dialog
+        ChangeNotifierProvider<UnlockedHomeProvider>(
+            create: (context) => UnlockedHomeProvider()),
+        ChangeNotifierProvider<EditTileProvider>(
+            create: (context) => EditTileProvider()),
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: paua,
           accentColor: fog,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          scaffoldBackgroundColor: mercury,
+          scaffoldBackgroundColor: white,
           inputDecorationTheme: InputDecorationTheme(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: electric_violet),
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
             contentPadding: new EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
-        home: HomeScreen(data: getData(jsonString).folder),
+        home: Welcome(),
         // home: TrialApp(),
       ),
     );
