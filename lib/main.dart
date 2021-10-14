@@ -26,24 +26,24 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    FlutterTts tts = new FlutterTts();
-    var _langs;
+    // FlutterTts tts = new FlutterTts();
+    // var _langs;
 
-    Future _fetchLanguages() async{
-      _langs = await tts.getLanguages;
-    }
+    // Future _fetchLanguages() async{
+    //   _langs = await tts.getLanguages;
+    // }
 
-    List<Locale> _getSupportedLanguages(){
-      List<Locale> languages = [];
-      _fetchLanguages();
-      for(var lang in _langs){
-        languages.add(lang);
-      }
-      if(languages == null){
-        languages.add(Locale('en', 'US'));
-      }
-      return languages;
-    }
+    // List<Locale> _getSupportedLanguages(){
+    //   List<Locale> languages = [];
+    //   _fetchLanguages();
+    //   for(var lang in _langs){
+    //     languages.add(lang);
+    //   }
+    //   if(languages == null){
+    //     languages.add(Locale('en', 'US'));
+    //   }
+    //   return languages;
+    // }
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => SettingsModel()),
@@ -59,8 +59,12 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'C-Board Mobile',
-        supportedLocales: _getSupportedLanguages(),
-        locale: Provider.of<SettingsModel>(context).locale,
+        // This list should be fetched from the languages supported by the TTS (Google/Samsung)
+        supportedLocales: [
+          Locale('en', 'US')
+        ],
+        // This locale should be fetched from provider
+        locale: Locale('en', 'US'),
         localizationsDelegates: [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -38,29 +38,33 @@ class SettingWrapper extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
-    var settingModel = Provider.of<SettingsModel>(context);
-    FlutterTts tts = new FlutterTts();
-    var _langs;
+    // var settingModel = Provider.of<SettingsModel>(context);
+    // FlutterTts tts = new FlutterTts();
+    // var _langs;
 
-    Future _fetchLanguages() async{
-      _langs = await tts.getLanguages;
-    }
+    // Future _fetchLanguages() async{
+    //   _langs = await tts.getLanguages;
+    // }
 
-    List<Locale> _getSupportedLanguages(){
-      List<Locale> languages = [];
-      _fetchLanguages();
-      for(var lang in _langs){
-        languages.add(lang);
-      }
-      return languages;
-    }
+    // List<Locale> _getSupportedLanguages(){
+    //   List<Locale> languages = [];
+    //   _fetchLanguages();
+    //   for(var lang in _langs){
+    //     languages.add(lang);
+    //   }
+    //   return languages;
+    // }
 
     return ChangeNotifierProvider(
       create: (BuildContext context) => SettingsModel(),
       child: MaterialApp(
         routes: getRoute(),
-        supportedLocales: _getSupportedLanguages(),
-        locale: settingModel.locale,
+        // This list should be fetched from languages supported by the TTS (Google or Samsung)
+        supportedLocales: [
+          Locale('en', 'US')
+        ],
+        // This locale should be fetched from provider
+        locale: Locale('en', 'US'),
         localizationsDelegates: [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

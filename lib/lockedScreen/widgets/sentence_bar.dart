@@ -48,7 +48,7 @@ class _SentenceBarState extends State<SentenceBar> {
   }
   
   _createTile(String text){
-    return TileData(id: text.split(" ")[0], labelKey: text);
+    return TileData(id: text.split(" ")[0], labelKey: text, image: null);
   }
     
   @override
@@ -112,25 +112,37 @@ class _SentenceBarState extends State<SentenceBar> {
                       scrollDirection: Axis.horizontal,
                       itemCount: words.length,
                       itemBuilder: (BuildContext context, int index) {
-                        TileData tileData = words[index];
+                        TileData tileInfo = words[index];
+                        String title = tileInfo.labelKey.split('.').last;
                          return SizedBox(
                             width: MediaQuery.of(context).size.width * 0.2,
                             child: Tile(
-                              text: tileData.id,
-                              content: (tileData.image == null) ? tileData.labelKey : tileData.image,
-                              color: dialogModel.tileBackgroundColor,
-                              labelPos: dialogModel.tileLabelTop,
-                              edittingTile: true,
-                              tapped: (){
-                                // print(tileData.isText);
-                                if(tileData.image == null){
-                                  _speak(tileData.labelKey);
-                                }
-                                else{
-                                  _speak(tileData.id);
-                                }
-                              }
-                            ),
+                                  labelPos: dialogModel.tileLabelTop,
+                                  text: title,
+                                  content: (tileInfo.image != null)?"assets"+tileInfo.image:"assets/symbols/A.svg",
+                                  color: dialogModel.tileBackgroundColor,
+                                  labelColor: dialogModel.tileTextColor,
+                                  tapped: () => {
+                                    //Speak word in the tile
+                                    _speak(title),
+                                  },
+                                )
+                            // Tile(
+                            //   text: tileData.id,
+                            //   content: (tileData.image == null) ? tileData.labelKey : tileData.image,
+                            //   color: dialogModel.tileBackgroundColor,
+                            //   labelPos: dialogModel.tileLabelTop,
+                            //   edittingTile: true,
+                            //   tapped: (){
+                            //     // print(tileData.isText);
+                            //     if(tileData.image == null){
+                            //       _speak(tileData.labelKey);
+                            //     }
+                            //     else{
+                            //       _speak(tileData.id);
+                            //     }
+                            //   }
+                            // ),
                           );
                         // // //If tile is for adding user text input, create TextTile()
                         // // if (tileData.name == "Edit") {
