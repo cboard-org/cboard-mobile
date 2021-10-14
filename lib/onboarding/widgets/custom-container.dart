@@ -1,3 +1,5 @@
+import 'package:cboard_mobile/lockedScreen/data.dart';
+import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -41,7 +43,12 @@ class _CustomContainerState extends State<CustomContainer> {
                   label: Text('DONE'),
                   padding: 50,
                   onPress: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                      HomeScreen(
+                        data: defaultBoards,
+                        folderId: "root",
+                      )),
+                    );
                   },
                 ),
               )

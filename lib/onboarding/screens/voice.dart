@@ -1,5 +1,7 @@
 import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up-complete.dart';
+import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'package:cboard_mobile/onboarding/widgets/select-funny-voice.dart';
 import 'package:cboard_mobile/onboarding/screens/welcome.dart';
 
 import 'package:cboard_mobile/shared/button.dart';
+import 'package:provider/provider.dart';
 
 class VoicePage extends StatefulWidget {
   @override
@@ -20,6 +23,7 @@ class VoicePage extends StatefulWidget {
 class _VoicePageState extends State<VoicePage> {
   @override
   Widget build(BuildContext context) {
+    final loginModel = Provider.of<PasswordConfirmProvider>(context);
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('Select Voice'),
@@ -57,10 +61,9 @@ class _VoicePageState extends State<VoicePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HomeScreen(
-                                data: defaultBoards,
-                                folderId: "root",
-                              )),
+                          builder: (context) => SignUpComplete(
+                            username: loginModel.nameText,
+                          ))
                     );
                   },
                 ),
