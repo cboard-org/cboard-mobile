@@ -1,9 +1,8 @@
 import 'dart:ui';
-import 'package:cboard_mobile/lockedScreen/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/expand_text_screen.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/textTile.dart';
 // import 'package:cboard_mobile/data/mockData.dart';
-import 'package:cboard_mobile/data/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
 import 'package:cboard_mobile/models/dialog.dart';
 import 'package:cboard_mobile/models/home.dart';
@@ -49,7 +48,7 @@ class _SentenceBarState extends State<SentenceBar> {
   }
   
   _createTile(String text){
-    return TileData(text.split(" ")[0], text, paua, true);
+    return TileData(id: text.split(" ")[0], labelKey: text);
   }
     
   @override
@@ -117,18 +116,18 @@ class _SentenceBarState extends State<SentenceBar> {
                          return SizedBox(
                             width: MediaQuery.of(context).size.width * 0.2,
                             child: Tile(
-                              text: tileData.name,
-                              content: tileData.content,
+                              text: tileData.id,
+                              content: (tileData.image == null) ? tileData.labelKey : tileData.image,
                               color: dialogModel.tileBackgroundColor,
                               labelPos: dialogModel.tileLabelTop,
-                              edittingTile: tileData.isText,
+                              edittingTile: true,
                               tapped: (){
-                                print(tileData.isText);
-                                if(tileData.isText){
-                                  _speak(tileData.content);
+                                // print(tileData.isText);
+                                if(tileData.image == null){
+                                  _speak(tileData.labelKey);
                                 }
                                 else{
-                                  _speak(tileData.name);
+                                  _speak(tileData.id);
                                 }
                               }
                             ),

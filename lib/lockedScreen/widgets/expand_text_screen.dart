@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/lockedScreen/data/data.dart';
+import 'package:cboard_mobile/lockedScreen/data.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tts_speak_button.dart';
 import 'package:cboard_mobile/models/home.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -37,7 +37,7 @@ class _ExpandTextScreenState extends State<ExpandTextScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     _createTile(String text){
-      return TileData(text.split(" ")[0], text, paua, true);
+      return TileData(id: text.split(" ")[0], labelKey: text, image: null);
     }
 
     _previousButton(){
