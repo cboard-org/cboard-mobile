@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'change_tile_pic.dart';
-import 'delete_tile_modal.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cboard_mobile/screens(edit_tiles)/change_tile_pic.dart';
+import 'package:cboard_mobile/screens(edit_tiles)/delete_tile_modal.dart';
 
 class EditTileScreen extends StatefulWidget {
   @override

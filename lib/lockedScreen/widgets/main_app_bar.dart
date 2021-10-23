@@ -1,5 +1,7 @@
 import 'package:cboard_mobile/lockedScreen/widgets/edit_dialog.dart';
+import 'package:cboard_mobile/models/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainAppBar extends StatelessWidget {
   final double scrollOffset;
@@ -101,11 +103,12 @@ class MainAppBar extends StatelessWidget {
             ),
             // Lock
             GestureDetector(
-              onTap: () => print('Lock'), // insert new homescreen here
+              onTap: () => Provider.of<HomeModel>(context, listen: false)
+                  .tapUnlock(context), // insert new homescreen here
               child: Icon(
                 Icons.lock,
                 color: Colors.white,
-                size: textSize,
+                size: 25.0,
               ),
             ),
           ],
