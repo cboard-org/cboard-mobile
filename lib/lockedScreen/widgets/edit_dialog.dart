@@ -4,7 +4,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//Show dialog for editting tile layout
+//Show dialog for editting tile/folder layout
 Future<void> editDialog(BuildContext context) async {
   return await showDialog(
       context: context,

@@ -1,296 +1,297 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+//Test cboard API
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
 
-void main() => runApp(MyJson());
+// void main() => runApp(MyJson());
 
-class MyJson extends StatefulWidget {
-  @override
-  _MyJson createState() => _MyJson();
-}
+// class MyJson extends StatefulWidget {
+//   @override
+//   _MyJson createState() => _MyJson();
+// }
 
-class _MyJson extends State<MyJson> {
-  Future<Post> post;
+// class _MyJson extends State<MyJson> {
+//   Future<Post> post;
 
-  @override
-  void initState() {
-    super.initState();
-    // post = fetchPost();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     // post = fetchPost();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fetch Data Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Fetch Data Example'),
-        ),
-        body: Center(
-          child: FutureBuilder<Post>(
-            future: post,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(
-                    snapshot.data.data.elementAt(1).tiles.elementAt(1).image);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Fetch Data Example',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Fetch Data Example'),
+//         ),
+//         body: Center(
+//           child: FutureBuilder<Post>(
+//             future: post,
+//             builder: (context, snapshot) {
+//               if (snapshot.hasData) {
+//                 return Text(
+//                     snapshot.data.data.elementAt(1).tiles.elementAt(1).image);
+//               } else if (snapshot.hasError) {
+//                 return Text('${snapshot.error}');
+//               }
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Future<Post> fetchPost() async {
-//   final response = await http.get("https://api.app.qa.cboard.io/board/public")
-
-//   if (response.statusCode == 200) {
-//     var post = Post.fromJson(json.decode(response.body));
-//     print(post);
-//     return post;
-//   } else {
-//     throw Exception('Failed to load post');
+//               // By default, show a loading spinner.
+//               return const CircularProgressIndicator();
+//             },
+//           ),
+//         ),
+//       ),
+//     );
 //   }
 // }
 
-class Post {
-  Post({
-    this.total,
-    this.page,
-    this.limit,
-    this.offset,
-    this.sort,
-    this.search,
-    this.data,
-  });
+// // Future<Post> fetchPost() async {
+// //   final response = await http.get("https://api.app.qa.cboard.io/board/public")
 
-  int total;
-  int page;
-  int limit;
-  int offset;
-  String sort;
-  String search;
-  List<Datum> data;
+// //   if (response.statusCode == 200) {
+// //     var post = Post.fromJson(json.decode(response.body));
+// //     print(post);
+// //     return post;
+// //   } else {
+// //     throw Exception('Failed to load post');
+// //   }
+// // }
 
-  factory Post.fromJson(Map<String, dynamic> json) => Post(
-        total: json["total"],
-        page: json["page"],
-        limit: json["limit"],
-        offset: json["offset"],
-        sort: json["sort"],
-        search: json["search"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-      );
+// class Post {
+//   Post({
+//     this.total,
+//     this.page,
+//     this.limit,
+//     this.offset,
+//     this.sort,
+//     this.search,
+//     this.data,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        "total": total,
-        "page": page,
-        "limit": limit,
-        "offset": offset,
-        "sort": sort,
-        "search": search,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
-}
+//   int total;
+//   int page;
+//   int limit;
+//   int offset;
+//   String sort;
+//   String search;
+//   List<Datum> data;
 
-class Datum {
-  Datum({
-    this.isPublic,
-    this.tiles,
-    this.cellSize,
-    this.locale,
-    this.format,
-    this.description,
-    this.isFixed,
-    this.name,
-    this.author,
-    this.email,
-    this.caption,
-    this.lastEdited,
-    this.id,
-    this.grid,
-  });
+//   factory Post.fromJson(Map<String, dynamic> json) => Post(
+//         total: json["total"],
+//         page: json["page"],
+//         limit: json["limit"],
+//         offset: json["offset"],
+//         sort: json["sort"],
+//         search: json["search"],
+//         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+//       );
 
-  bool isPublic;
-  List<Tile> tiles;
-  String cellSize;
-  String locale;
-  String format;
-  String description;
-  bool isFixed;
-  String name;
-  String author;
-  String email;
-  String caption;
-  DateTime lastEdited;
-  String id;
-  Grid grid;
+//   Map<String, dynamic> toJson() => {
+//         "total": total,
+//         "page": page,
+//         "limit": limit,
+//         "offset": offset,
+//         "sort": sort,
+//         "search": search,
+//         "data": List<dynamic>.from(data.map((x) => x.toJson())),
+//       };
+// }
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        isPublic: json["isPublic"],
-        tiles: List<Tile>.from(json["tiles"].map((x) => Tile.fromJson(x))),
-        cellSize: json["cellSize"],
-        locale: json["locale"],
-        format: json["format"],
-        description: json["description"],
-        isFixed: json["isFixed"],
-        name: json["name"],
-        author: json["author"],
-        email: json["email"],
-        caption: json["caption"],
-        lastEdited: DateTime.parse(json["lastEdited"]),
-        id: json["id"],
-        grid: json["grid"] == null ? null : Grid.fromJson(json["grid"]),
-      );
+// class Datum {
+//   Datum({
+//     this.isPublic,
+//     this.tiles,
+//     this.cellSize,
+//     this.locale,
+//     this.format,
+//     this.description,
+//     this.isFixed,
+//     this.name,
+//     this.author,
+//     this.email,
+//     this.caption,
+//     this.lastEdited,
+//     this.id,
+//     this.grid,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        "isPublic": isPublic,
-        "tiles": List<dynamic>.from(tiles.map((x) => x.toJson())),
-        "cellSize": cellSize,
-        "locale": locale,
-        "format": format,
-        "description": description,
-        "isFixed": isFixed,
-        "name": name,
-        "author": author,
-        "email": email,
-        "caption": caption,
-        "lastEdited": lastEdited.toIso8601String(),
-        "id": id,
-        "grid": grid == null ? null : grid.toJson(),
-      };
-}
+//   bool isPublic;
+//   List<Tile> tiles;
+//   String cellSize;
+//   String locale;
+//   String format;
+//   String description;
+//   bool isFixed;
+//   String name;
+//   String author;
+//   String email;
+//   String caption;
+//   DateTime lastEdited;
+//   String id;
+//   Grid grid;
 
-class Grid {
-  Grid({
-    this.rows,
-    this.columns,
-    this.order,
-  });
+//   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+//         isPublic: json["isPublic"],
+//         tiles: List<Tile>.from(json["tiles"].map((x) => Tile.fromJson(x))),
+//         cellSize: json["cellSize"],
+//         locale: json["locale"],
+//         format: json["format"],
+//         description: json["description"],
+//         isFixed: json["isFixed"],
+//         name: json["name"],
+//         author: json["author"],
+//         email: json["email"],
+//         caption: json["caption"],
+//         lastEdited: DateTime.parse(json["lastEdited"]),
+//         id: json["id"],
+//         grid: json["grid"] == null ? null : Grid.fromJson(json["grid"]),
+//       );
 
-  int rows;
-  int columns;
-  List<List<String>> order;
+//   Map<String, dynamic> toJson() => {
+//         "isPublic": isPublic,
+//         "tiles": List<dynamic>.from(tiles.map((x) => x.toJson())),
+//         "cellSize": cellSize,
+//         "locale": locale,
+//         "format": format,
+//         "description": description,
+//         "isFixed": isFixed,
+//         "name": name,
+//         "author": author,
+//         "email": email,
+//         "caption": caption,
+//         "lastEdited": lastEdited.toIso8601String(),
+//         "id": id,
+//         "grid": grid == null ? null : grid.toJson(),
+//       };
+// }
 
-  factory Grid.fromJson(Map<String, dynamic> json) => Grid(
-        rows: json["rows"],
-        columns: json["columns"],
-        order: List<List<String>>.from(json["order"]
-            .map((x) => List<String>.from(x.map((x) => x == null ? null : x)))),
-      );
+// class Grid {
+//   Grid({
+//     this.rows,
+//     this.columns,
+//     this.order,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        "rows": rows,
-        "columns": columns,
-        "order": List<dynamic>.from(order.map(
-            (x) => List<dynamic>.from(x.map((x) => x == null ? null : x)))),
-      };
-}
+//   int rows;
+//   int columns;
+//   List<List<String>> order;
 
-class Tile {
-  Tile({
-    this.label,
-    this.vocalization,
-    this.image,
-    this.loadBoard,
-    this.sound,
-    this.type,
-    this.backgroundColor,
-    this.linkedBoard,
-    this.id,
-    this.labelKey,
-  });
+//   factory Grid.fromJson(Map<String, dynamic> json) => Grid(
+//         rows: json["rows"],
+//         columns: json["columns"],
+//         order: List<List<String>>.from(json["order"]
+//             .map((x) => List<String>.from(x.map((x) => x == null ? null : x)))),
+//       );
 
-  String label;
-  String vocalization;
-  String image;
-  LoadBoard loadBoard;
-  String sound;
-  Type type;
-  BackgroundColor backgroundColor;
-  bool linkedBoard;
-  String id;
-  String labelKey;
+//   Map<String, dynamic> toJson() => {
+//         "rows": rows,
+//         "columns": columns,
+//         "order": List<dynamic>.from(order.map(
+//             (x) => List<dynamic>.from(x.map((x) => x == null ? null : x)))),
+//       };
+// }
 
-  factory Tile.fromJson(Map<String, dynamic> json) => Tile(
-        label: json["label"],
-        vocalization: json["vocalization"],
-        image: json["image"],
-        loadBoard: loadBoardValues.map[json["loadBoard"]],
-        sound: json["sound"],
-        type: typeValues.map[json["type"]],
-        backgroundColor: backgroundColorValues.map[json["backgroundColor"]],
-        linkedBoard: json["linkedBoard"],
-        id: json["id"],
-        labelKey: json["labelKey"] == null ? null : json["labelKey"],
-      );
+// class Tile {
+//   Tile({
+//     this.label,
+//     this.vocalization,
+//     this.image,
+//     this.loadBoard,
+//     this.sound,
+//     this.type,
+//     this.backgroundColor,
+//     this.linkedBoard,
+//     this.id,
+//     this.labelKey,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        "label": label,
-        "vocalization": vocalization,
-        "image": image,
-        "loadBoard": loadBoardValues.reverse[loadBoard],
-        "sound": sound,
-        "type": typeValues.reverse[type],
-        "backgroundColor": backgroundColorValues.reverse[backgroundColor],
-        "linkedBoard": linkedBoard,
-        "id": id,
-        "labelKey": labelKey == null ? null : labelKey,
-      };
-}
+//   String label;
+//   String vocalization;
+//   String image;
+//   LoadBoard loadBoard;
+//   String sound;
+//   Type type;
+//   BackgroundColor backgroundColor;
+//   bool linkedBoard;
+//   String id;
+//   String labelKey;
 
-enum BackgroundColor {
-  BBDEFB,
-  FFF176,
-  THE_4_CAF50,
-  THE_2196_F3,
-  CE93_D8,
-  FFFFFF
-}
+//   factory Tile.fromJson(Map<String, dynamic> json) => Tile(
+//         label: json["label"],
+//         vocalization: json["vocalization"],
+//         image: json["image"],
+//         loadBoard: loadBoardValues.map[json["loadBoard"]],
+//         sound: json["sound"],
+//         type: typeValues.map[json["type"]],
+//         backgroundColor: backgroundColorValues.map[json["backgroundColor"]],
+//         linkedBoard: json["linkedBoard"],
+//         id: json["id"],
+//         labelKey: json["labelKey"] == null ? null : json["labelKey"],
+//       );
 
-final backgroundColorValues = EnumValues({
-  "#bbdefb": BackgroundColor.BBDEFB,
-  "#CE93D8": BackgroundColor.CE93_D8,
-  "#fff176": BackgroundColor.FFF176,
-  "#ffffff": BackgroundColor.FFFFFF,
-  "#2196F3": BackgroundColor.THE_2196_F3,
-  "#4CAF50": BackgroundColor.THE_4_CAF50
-});
+//   Map<String, dynamic> toJson() => {
+//         "label": label,
+//         "vocalization": vocalization,
+//         "image": image,
+//         "loadBoard": loadBoardValues.reverse[loadBoard],
+//         "sound": sound,
+//         "type": typeValues.reverse[type],
+//         "backgroundColor": backgroundColorValues.reverse[backgroundColor],
+//         "linkedBoard": linkedBoard,
+//         "id": id,
+//         "labelKey": labelKey == null ? null : labelKey,
+//       };
+// }
 
-enum LoadBoard {
-  THE_602_E54_A46_DA4_CD00127_E7859,
-  EMPTY,
-  THE_602_D15_A083821500191_B4621
-}
+// enum BackgroundColor {
+//   BBDEFB,
+//   FFF176,
+//   THE_4_CAF50,
+//   THE_2196_F3,
+//   CE93_D8,
+//   FFFFFF
+// }
 
-final loadBoardValues = EnumValues({
-  "": LoadBoard.EMPTY,
-  "602d15a083821500191b4621": LoadBoard.THE_602_D15_A083821500191_B4621,
-  "602e54a46da4cd00127e7859": LoadBoard.THE_602_E54_A46_DA4_CD00127_E7859
-});
+// final backgroundColorValues = EnumValues({
+//   "#bbdefb": BackgroundColor.BBDEFB,
+//   "#CE93D8": BackgroundColor.CE93_D8,
+//   "#fff176": BackgroundColor.FFF176,
+//   "#ffffff": BackgroundColor.FFFFFF,
+//   "#2196F3": BackgroundColor.THE_2196_F3,
+//   "#4CAF50": BackgroundColor.THE_4_CAF50
+// });
 
-enum Type { FOLDER, BUTTON }
+// enum LoadBoard {
+//   THE_602_E54_A46_DA4_CD00127_E7859,
+//   EMPTY,
+//   THE_602_D15_A083821500191_B4621
+// }
 
-final typeValues = EnumValues({"button": Type.BUTTON, "folder": Type.FOLDER});
+// final loadBoardValues = EnumValues({
+//   "": LoadBoard.EMPTY,
+//   "602d15a083821500191b4621": LoadBoard.THE_602_D15_A083821500191_B4621,
+//   "602e54a46da4cd00127e7859": LoadBoard.THE_602_E54_A46_DA4_CD00127_E7859
+// });
 
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
+// enum Type { FOLDER, BUTTON }
 
-  EnumValues(this.map);
+// final typeValues = EnumValues({"button": Type.BUTTON, "folder": Type.FOLDER});
 
-  Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
-}
+// class EnumValues<T> {
+//   Map<String, T> map;
+//   Map<T, String> reverseMap;
+
+//   EnumValues(this.map);
+
+//   Map<T, String> get reverse {
+//     if (reverseMap == null) {
+//       reverseMap = map.map((k, v) => new MapEntry(v, k));
+//     }
+//     return reverseMap;
+//   }
+// }

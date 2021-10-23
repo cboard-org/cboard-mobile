@@ -41,7 +41,6 @@ class Tile extends StatelessWidget {
           child: content.endsWith("svg")
               ? SvgPicture.asset(content)
               : Image.asset(content),
-          // Image.asset(content),
         ),
       ),
       Expanded(

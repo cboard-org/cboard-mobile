@@ -79,7 +79,8 @@ class MainAppBar extends StatelessWidget {
             ),
             // Board Name
             TextButton(
-              onPressed: () => _showBottomSheet(),
+              onPressed: () =>
+                  _showBottomSheet(), //TODO: add functionality to navigate to new board
               child: RichText(
                 text: TextSpan(
                   children: [

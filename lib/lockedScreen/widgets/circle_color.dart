@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 typedef ColorChange = void Function(Color);
 
+//Circle color implemented in color_board
 class CircleColor extends StatelessWidget {
   final bool isSelected;
   final Color color;
