@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
   final Map<String, Folder> data;
   final String folderId;
   const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
