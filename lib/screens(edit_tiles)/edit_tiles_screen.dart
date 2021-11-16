@@ -10,7 +10,6 @@ class EditTileScreen extends StatefulWidget {
 
 class _EditTileScreenState extends State<EditTileScreen> {
   bool lock = false;
-
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;

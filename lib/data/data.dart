@@ -6,13 +6,10 @@ import 'dart:convert';
 
 import 'package:cboard_mobile/data/jsonString.dart';
 
-//Default home board that users first see when log in
 Map<String, Folder> defaultBoards = getData(jsonString).folders;
 
-//Transfer json data to dart objects
 Data getData(String str) => Data.fromJson(json.decode(str));
 
-//Transfer dart objects to json string for uploading to database
 String postToJson(Data data) => json.encode(data.toJson());
 
 class Data {
@@ -30,8 +27,6 @@ class Data {
         beginner: json["beginner"] as List<dynamic>,
         // advanced:
         //     json["advanced"].map<Folder>((x) => Folder.fromJson(x)).toList(),
-
-        //Create folder obkect, map folder to its own id
         folders: <String, Folder>{
           for (Folder value in json["advanced"]
               .map<Folder>((x) => Folder.fromJson(x))
@@ -77,7 +72,6 @@ class Folder {
         email: emailValues.map[json["email"]],
         isPublic: json["isPublic"],
         hidden: json["hidden"],
-        //Create tile objects contained in folder
         subItems:
             json["tiles"].map<TileData>((x) => TileData.fromJson(x)).toList(),
         caption: json["caption"],
@@ -136,7 +130,6 @@ class TileData {
       };
 }
 
-//Background color values, different between cboard mobile and web
 enum BackgroundColor { RGB_255241118, RGB_187222251 }
 
 final backgroundColorValues = EnumValues({

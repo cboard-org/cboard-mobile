@@ -22,9 +22,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ScrollController _scrollController;
+  ScrollController _scrollController; //enable scrolling the screen
   double _scrollOffset = 0.0;
-  FlutterTts flutterTts = FlutterTts();
+  FlutterTts flutterTts = FlutterTts(); //implement Flutter tts
 
   @override
   void initState() {
@@ -48,10 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
     //Keep track of screen size
     final Size screenSize = MediaQuery.of(context).size;
 
-    //Keep track Label Position
+    //State management model
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
 
+    //A folder object containing tiles
     final Folder folder = widget.data[widget.folderId];
 
     //Flutter tts object
@@ -99,7 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount: folder.subItems.length + 2,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
-            // ignore: todo
             //TODO: Integrate with Display Layout Options of Unlocked Screens
             crossAxisCount: 3,
           ),
@@ -112,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                   color: soft_green,
                   //User taps to add sentence in the top sentence bar
-                  tapped: () => {}
+                  tapped: () => {} //null for now
+                  //Later, use or change this function to add text
                   // () => {
                   //   setState(() {
                   //     homeModel.addWords(TileData("Edit", "", paua));
