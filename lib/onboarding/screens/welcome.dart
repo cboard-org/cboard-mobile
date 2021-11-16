@@ -1,5 +1,6 @@
 import 'package:cboard_mobile/onboarding/screens/language-region.dart';
 import 'package:cboard_mobile/onboarding/screens/log-in.dart';
+import 'package:cboard_mobile/onboarding/screens/sign-up--main.dart';
 import 'package:cboard_mobile/onboarding/widgets/header.dart';
 import 'package:cboard_mobile/shared/button.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
@@ -46,7 +47,7 @@ class Welcome extends StatelessWidget {
                   onPress: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LanguageRegion()),
+                      MaterialPageRoute(builder: (context) => SignUpMain()),
                     );
                   },
                 ),
