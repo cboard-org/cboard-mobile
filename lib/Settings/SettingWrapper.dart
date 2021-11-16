@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/Settings/routes.dart';
+import 'package:cboard_mobile/app_localizations.dart';
 import 'package:cboard_mobile/models/settings.dart';
 // import 'package:cboard_mobile/shared/Themes.dart';
 import 'package:cboard_mobile/shared/app-bar.dart';
@@ -6,6 +7,8 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/Settings/Feedback.dart' as feedback;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import '../shared/button.dart';
 import 'routes.dart';
@@ -14,32 +17,67 @@ class SettingWrapper extends StatelessWidget {
   // ThemeNotifier theme = new ThemeNotifier();
   //Idea: The whole screen is ListView with each item is a section [People,Language,System,Help]. Each section is a ListView with each item is a ListTile.
   final Map<String, Map<String, SettingListItem>> section = {
-    'People': {'Guest': new SettingListItem(Icons.account_circle, '/welcome')},
-    'Language': {
-      'Language': new SettingListItem(Icons.language, '/language'),
-      'Speech': new SettingListItem(Icons.record_voice_over, '/speech')
+    'settings_people': {'settings_people_Guest': new SettingListItem(Icons.account_circle, '/welcome')},
+    'settings_language': {
+      'settings_language_Language': new SettingListItem(Icons.language, '/language'),
+      'settings_language_Speech': new SettingListItem(Icons.record_voice_over, '/speech')
     },
-    'System': {
-      'Export': new SettingListItem(Icons.cloud_upload, '/export'),
-      'Import': new SettingListItem(Icons.cloud_download, '/import'),
-      'Display': new SettingListItem(Icons.remove_red_eye, '/display'),
-      'Scanning': new SettingListItem(Icons.center_focus_strong, '/scanner'),
-      'Navigation': new SettingListItem(Icons.chevron_right, '/navigation')
+    'settings_system': {
+      'settings_system_Export': new SettingListItem(Icons.cloud_upload, '/export'),
+      'settings_system_Import': new SettingListItem(Icons.cloud_download, '/import'),
+      'settings_system_Display': new SettingListItem(Icons.remove_red_eye, '/display'),
+      'settings_system_Scanning': new SettingListItem(Icons.center_focus_strong, '/scanner'),
+      'settings_system_Navigation': new SettingListItem(Icons.chevron_right, '/navigation')
     },
-    'Help': {
-      'User Help': new SettingListItem(Icons.help, '/user help'),
-      'About Cboard': new SettingListItem(Icons.info, '/about'),
-      'Donate': new SettingListItem(Icons.monetization_on, '/donate'),
-      'Feedback': new SettingListItem(Icons.feedback, '/feedback')
+    'settings_help': {
+      'settings_help_UserHelp': new SettingListItem(Icons.help, '/user help'),
+      'settings_help_AboutCboard': new SettingListItem(Icons.info, '/about'),
+      'settings_help_Donate': new SettingListItem(Icons.monetization_on, '/donate'),
+      'settings_help_Feedback': new SettingListItem(Icons.feedback, '/feedback')
     }
   };
   @override
   Widget build(BuildContext context) {
     // var settingModel = Provider.of<SettingsModel>(context);
+    // FlutterTts tts = new FlutterTts();
+    // var _langs;
+
+    // Future _fetchLanguages() async{
+    //   _langs = await tts.getLanguages;
+    // }
+
+    // List<Locale> _getSupportedLanguages(){
+    //   List<Locale> languages = [];
+    //   _fetchLanguages();
+    //   for(var lang in _langs){
+    //     languages.add(lang);
+    //   }
+    //   return languages;
+    // }
+
     return ChangeNotifierProvider(
       create: (BuildContext context) => SettingsModel(),
       child: MaterialApp(
         routes: getRoute(),
+        // This list should be fetched from languages supported by the TTS (Google or Samsung)
+        supportedLocales: [
+          Locale('en', 'US')
+        ],
+        // This locale should be fetched from provider
+        locale: Locale('en', 'US'),
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
+        localeResolutionCallback: (locale, supportedLocales){
+          for(var supportedLocale in supportedLocales){
+            if(supportedLocale.languageCode == locale.languageCode && supportedLocale.countryCode == locale.countryCode){
+              return supportedLocale;
+            }
+          }
+          return Locale('en', 'US');
+        },
         theme: ThemeData(
           primaryColor: paua,
           accentColor: fog,
@@ -55,7 +93,9 @@ class SettingWrapper extends StatelessWidget {
             //     ? mercury
             //     : Color(0xFF424242),
             appBar: BaseAppBar(
-              title: Text('Settings'),
+              title: Text(
+                "Settings",
+              ),
               appBar: AppBar(),
             ),
             body: ListView.separated(
@@ -74,7 +114,7 @@ class SettingWrapper extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        section.keys.elementAt(index),
+                        AppLocalizations.of(context).translate(section.keys.elementAt(index)),
                         textAlign: TextAlign.left,
                       ),
                       (index ==
@@ -88,13 +128,10 @@ class SettingWrapper extends StatelessWidget {
                                     .icon,
                                 color: dark_violet,
                               ),
-                              title: Text(section.values
-                                  .elementAt(0)
-                                  .keys
-                                  .elementAt(0)),
+                              title: Text(AppLocalizations.of(context).translate(section.values.elementAt(0).keys.elementAt(0))),
                               trailing: Button(
                                 padding: 9,
-                                label: Text('LOGIN/SIGN UP'),
+                                label: Text(AppLocalizations.of(context).translate("settings_login_button")),
                                 isPrimary: false,
                                 onPress: () {
                                   Navigator.of(context).pushNamed(section.values
@@ -138,10 +175,10 @@ class SettingWrapper extends StatelessWidget {
                                       size: 20,
                                     ),
                                     title: Text(
-                                      section.values
+                                      AppLocalizations.of(context).translate(section.values
                                           .elementAt(index)
                                           .keys
-                                          .elementAt(iconIndex),
+                                          .elementAt(iconIndex))
                                     ));
                               }),
                     ],

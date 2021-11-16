@@ -1,0 +1,20 @@
+{
+    "settings_title": "समायोजन",
+    "settings_login_button": "साइन अप/लॉग इन", 
+    "settings_people": "लोग",
+    "settings_people_Guest": "अतिथि",
+    "settings_language": "भाषा",
+    "settings_language_Language": "भाषा",
+    "settings_language_Speech": "भाषण",
+    "settings_system": "प्रणाली",
+    "settings_system_Export": "निर्यात",
+    "settings_system_Import": "आयात",
+    "settings_system_Display": "प्रदर्शन",
+    "settings_system_Scanning": "स्कैनिंग",
+    "settings_system_Navigation": "मार्गदर्शन",
+    "settings_help": "मदद",
+    "settings_help_UserHelp": "उपयोगकर्ता सहायता",
+    "settings_help_AboutCboard": "सी बोर्ड के बारे में",
+    "settings_help_Donate": "दान करना",
+    "settings_help_Feedback": "प्रतिपुष्टि"
+}

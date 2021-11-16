@@ -11,6 +11,7 @@ class Tile extends StatelessWidget {
   final Color color;
   //Label color
   final Color labelColor;
+
   final Function tapped;
   //Label Position, either top or bottom
   final bool labelPos;

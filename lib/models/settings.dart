@@ -39,7 +39,7 @@ class SettingsModel extends ChangeNotifier {
   scanningMethod _method = scanningMethod.Automatic;
 
   //Getters
-  String get locale => _locale;
+  Locale get locale => Locale(_locale.split("-")[0], _locale.split("-")[1]);
   bool get darkTheme => _darkTheme;
   bool get predictiveText => _predictiveText;
   bool get outputBar => _outputBar;

@@ -48,6 +48,8 @@ class _EditTile extends State<TextTile> {
             },
             autofocus: true,
             controller: _editingController,
+            decoration: null,
+            maxLines: null,
           ),
         );
       //else show normal tile with text as main content

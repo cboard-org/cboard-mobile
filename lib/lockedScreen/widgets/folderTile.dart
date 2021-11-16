@@ -1,4 +1,5 @@
 import 'package:cboard_mobile/lockedScreen/data.dart';
+// import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/lockedScreen/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:cboard_mobile/lockedScreen/data.dart';
+import 'dart:async';
 import 'package:cboard_mobile/lockedScreen/widgets/folderTile.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/sentence_bar.dart';
 import 'package:cboard_mobile/lockedScreen/widgets/tile.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 class HomeScreen extends StatefulWidget {
   final Map<String, Folder> data;
   final String folderId;
+  // const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
   const HomeScreen({Key key,@required this.data,@required this.folderId}) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final dialologModel = Provider.of<DialogModel>(context);
     final homeModel = Provider.of<HomeModel>(context);
 
-    //A folder object containing tiles
+    final data = widget.data;
     final Folder folder = widget.data[widget.folderId];
 
     //Flutter tts object
@@ -105,6 +105,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           itemBuilder: (BuildContext context, int index) {
             // 'Add text' tile
+
+            // if (index == 0) {
+            //   return Tile(
+            //     labelPos: dialologModel.labelTop,
+            //     text: "Add text",
+            //     content: 'assets/symbols/A.svg',
+            //     color: soft_green,
+            //     //User taps to add sentence in the top sentence bar
+            //     tapped: () => {
+            //       setState(() {
+            //         homeModel.add(TileData(name: "Edit", content: "", color: paua));
+            //       }),
+            //     },
+            //   );
+
+            //   // 'Add tile/folder' tile
+            // } else
+            
+            // if (index == data.length) {
             if (index == 0) {
               return Tile(
                   labelPos: dialologModel.tileLabelTop,
