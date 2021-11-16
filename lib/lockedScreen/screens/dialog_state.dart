@@ -14,6 +14,7 @@ class DialogState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dialogModel = Provider.of<DialogModel>(context);
+    //Keep track of the current dialog stage
     int state = dialogModel.currentState;
     if (state == 1) {
       return EditAppearance(type);

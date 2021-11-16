@@ -250,10 +250,6 @@ class _SentenceBarState extends State<SentenceBar> {
               : GestureDetector(
                   onTap: widget.tapped,
                   child: ListView.builder(
-                    // padding: const EdgeInsets.symmetric(
-                    //   vertical: 10.0,
-                    //   horizontal: 10.0,
-                    // ),
                     //User can scroll tiles horizontally
                     scrollDirection: Axis.horizontal,
                     itemCount: words.length,

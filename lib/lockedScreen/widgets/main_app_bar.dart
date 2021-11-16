@@ -80,7 +80,8 @@ class MainAppBar extends StatelessWidget {
             ),
             // Board Name
             TextButton(
-              onPressed: () => _showBottomSheet(),
+              onPressed: () =>
+                  _showBottomSheet(), //TODO: add functionality to navigate to new board
               child: RichText(
                 text: TextSpan(
                   children: [
@@ -102,15 +103,16 @@ class MainAppBar extends StatelessWidget {
                 ),
               ),
             ),
-              // Lock
-              GestureDetector(
-                onTap: () => Provider.of<HomeModel>(context,listen:false).tapUnlock(context), // insert new homescreen here
-                child: Icon(
-                  Icons.lock,
-                  color: Colors.white,
-                  size: 25.0,
-                ),
+            // Lock
+            GestureDetector(
+              onTap: () => Provider.of<HomeModel>(context, listen: false)
+                  .tapUnlock(context), // insert new homescreen here
+              child: Icon(
+                Icons.lock,
+                color: Colors.white,
+                size: 25.0,
               ),
+            ),
           ],
         ),
       );

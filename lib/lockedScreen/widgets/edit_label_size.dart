@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Set tile/folder text size. TODO: implement function to change the size of the text (currently not available)
 class EditLabelSize extends StatefulWidget {
   final String type;
 

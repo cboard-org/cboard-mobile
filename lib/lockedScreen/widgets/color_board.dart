@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+//Board of colors so user can change tile/folder color in dialog_state
 class ColorBoard extends StatelessWidget {
   final List<Color> colors;
   final void Function(Color) colorChange;

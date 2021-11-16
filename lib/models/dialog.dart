@@ -56,6 +56,7 @@ class DialogModel with ChangeNotifier {
     _folderBackgroundColor = newColor;
     notifyListeners();
   }
+
   bool get tileLabelTop => _tileLabelTop;
   void updateTileLabelPos(bool newPos) {
     _tileLabelTop = newPos;

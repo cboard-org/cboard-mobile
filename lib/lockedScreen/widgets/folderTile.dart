@@ -36,15 +36,17 @@ class FolderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
+      //Symbol image
       Expanded(
         flex: 3,
         child: Container(
+          //Use suitable image renderer depending on image types
           child: content.endsWith("svg")
               ? SvgPicture.asset(content)
               : Image.asset(content),
-          // Image.asset(content),
         ),
       ),
+      //Tile layout
       Expanded(
         flex: 1,
         child: Container(
@@ -64,6 +66,7 @@ class FolderTile extends StatelessWidget {
       )
     ];
 
+    //If chosen, redener HomeScreen with tiles in folder
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
