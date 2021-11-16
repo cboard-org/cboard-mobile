@@ -24,46 +24,15 @@ dependencies:
   flutter:
     sdk: flutter
   overlay_screen: ^1.2.0+1
-  flutter_markdown: ^0.5.2
-  url_launcher: ^6.0.4
-<<<<<<< HEAD
-=======
   http: ^0.12.2
   provider: ^4.3.3
   flutter_native_splash: ^1.0.2
   flutter_tts: ^3.0.0
-  file_picker: ^3.0.1
-  flutter_svg: ^0.22.0
-    overlay_screen: ^1.2.0+1
-  flutter_markdown: ^0.5.2
-  url_launcher: ^6.0.4
-  http: ^0.13.3
->>>>>>> 25f046a78d4bb05dd5ae9df9ee56b366f5477ae6
-  flutter_native_splash: ^1.0.2
-  flutter_tts: ^3.0.0
-  file_picker: ^3.0.1
-  http: ^0.13.3
-  image_picker: ^0.8.2
-  image_cropper: ^1.4.1
-  provider: ^5.0.0
-  flutter_sound: ^8.2.5
-  permission_handler: ^8.1.4+1
-  flutter_svg: ^0.22.0
-  path_provider: ^2.0.3
-  bubble_tab_indicator: ^0.1.6
-<<<<<<< HEAD
-  logger: ^1.1.0
-=======
->>>>>>> 25f046a78d4bb05dd5ae9df9ee56b366f5477ae6
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  logging: ^1.0.2
-  flutter_localizations:
-    sdk: flutter
-
 
 dev_dependencies:
   flutter_test:
@@ -83,14 +52,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/help/
-    - assets/markdown/About/
-    - assets/markdown/User-help/
-    - assets/symbols/arasaac/
-    - assets/symbols/cboard/
-    - assets/symbols/mulberry/
-    - assets/symbols/
-    - assets/languages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

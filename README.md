@@ -44,13 +44,3 @@ Tung Tran
 Ngan Phan
 
 Tim Nguyen
-
-Akanksha Singh
-
-Manasa Pakala
-
-Miloni Mittal
-
-Rukmini Meda
-
-Tina Kong

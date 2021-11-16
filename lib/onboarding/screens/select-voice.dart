@@ -1,18 +1,18 @@
 import 'package:cboard_mobile/shared/app-bar.dart';
 import 'package:flutter/material.dart';
 
-class SignUpMain extends StatefulWidget {
-  const SignUpMain({Key key}) : super(key: key);
+class SelectVoice extends StatefulWidget {
+  const SelectVoice({Key key}) : super(key: key);
   @override
-  _SignUpMainState createState() => _SignUpMainState();
+  _SelectVoiceState createState() => _SelectVoiceState();
 }
 
-class _SignUpMainState extends State<SignUpMain> {
+class _SelectVoiceState extends State<SelectVoice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: Text('Sign Up'),
+        title: Text('Select Voice'),
         appBar: AppBar(),
       ),
     );
