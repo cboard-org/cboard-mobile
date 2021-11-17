@@ -31,7 +31,7 @@ const Color bright_red = Color(0xFFE53935);
 //Add text tile color
 const Color soft_green = Color(0xFFE0F1BC);
 
-const Color tangerine = Color(0xFFF68E6D); 
+const Color tangerine = Color(0xFFF68E6D);
 const Color blue = Color(0xFF91C0F8);
 const Color cosmic_latte = Color(0xFFE9FFEE);
 const Color white_smoke = Color(0xFFF8F8F8);

@@ -1,25 +1,18 @@
-import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/stylesheets/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cboard_mobile/models/dialog.dart';
-import 'package:cboard_mobile/models/home.dart';
-import 'models/dialog.dart';
-import 'models/home.dart';
-import 'package:cboard_mobile/onboarding/screens/welcome.dart';
-import 'package:cboard_mobile/onboarding/widgets/password-confirm-provider.dart';
-import 'package:cboard_mobile/unlocked/providers/edit_tile_provider.dart';
-import 'package:cboard_mobile/unlocked/providers/unlocked_home_provider.dart';
-import 'package:cboard_mobile/Settings/SettingWrapper.dart';
-import 'package:cboard_mobile/models/settings.dart';
-import 'package:cboard_mobile/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/Providers/locked/dialog.dart';
+import 'package:cboard_mobile/Providers/locked/home.dart';
+import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/Providers/unlocked/edit_tile_provider.dart';
+import 'package:cboard_mobile/Providers/unlocked/unlocked_home_provider.dart';
+import 'package:cboard_mobile/UI/onboarding/screens/welcome.dart';
+import 'package:cboard_mobile/UI/onboarding/widgets/password-confirm-provider.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
-import 'app_localizations.dart';
 
+import 'Providers/locked/dialog.dart';
+import 'Providers/locked/home.dart';
+import 'app_localizations.dart';
 
 void main() => runApp(MyApp());
 
@@ -60,9 +53,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'C-Board Mobile',
         // This list should be fetched from the languages supported by the TTS (Google/Samsung)
-        supportedLocales: [
-          Locale('en', 'US')
-        ],
+        supportedLocales: [Locale('en', 'US')],
         // This locale should be fetched from provider
         locale: Locale('en', 'US'),
         localizationsDelegates: [
@@ -70,9 +61,10 @@ class MyApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        localeResolutionCallback: (locale, supportedLocales){
-          for(var supportedLocale in supportedLocales){
-            if(supportedLocale.languageCode == locale.languageCode && supportedLocale.countryCode == locale.countryCode){
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode &&
+                supportedLocale.countryCode == locale.countryCode) {
               return supportedLocale;
             }
           }
