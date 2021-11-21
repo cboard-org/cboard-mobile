@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/providers/settings/settings.dart';
 import 'package:cboard_mobile/UI/Settings/screens/Feedback.dart' as feedback;
 import 'package:cboard_mobile/UI/Settings/screens/routes.dart';
 import 'package:cboard_mobile/app_localizations.dart';

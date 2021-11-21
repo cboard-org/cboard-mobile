@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/Providers/locked/home.dart';
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/folderTile.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/sentence_bar.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/tile.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/providers/locked/home.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/widgets/folderWidget.dart';
+import 'package:cboard_mobile/UI/locked/widgets/sentence_bar.dart';
+import 'package:cboard_mobile/UI/locked/widgets/tileWidget.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -14,11 +14,11 @@ import 'package:provider/provider.dart';
 import '../widgets/main_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Map<String, Folder> data;
-  final String folderId;
+  final Map<String, FolderModel> data;
+  final String boardId;
 
   // const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
-  const HomeScreen({Key key, @required this.data, @required this.folderId})
+  const HomeScreen({Key key, @required this.data, @required this.boardId})
       : super(key: key);
 
   @override
@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double _scrollOffset = 0.0;
   FlutterTts flutterTts = FlutterTts(); //implement Flutter tts
 
+  final GlobalKey<ScaffoldState> _lockedScaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
     _scrollController = ScrollController()
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final homeModel = Provider.of<HomeModel>(context);
 
     final data = widget.data;
-    final Folder folder = widget.data[widget.folderId];
+    final FolderModel folderModel = widget.data[widget.boardId];
 
     //Flutter tts object
     Future _speak(String text) async {
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: 7.0,
           ),
           // Add list of tiles from database together with 2 tiles for 'Add text' and 'Add tile/folder'
-          itemCount: folder.subItems.length + 2,
+          itemCount: folderModel.subItems.length + 1,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // Total 3 tiles on one row.
             //TODO: Integrate with Display Layout Options of Unlocked Screens
@@ -129,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // if (index == data.length) {
             if (index == 0) {
-              return Tile(
+              return TileWidget(
                   labelPos: dialologModel.tileLabelTop,
                   text: "Add text",
                   content: 'assets/symbols/mulberry/a_-_lower_case.svg',
@@ -145,21 +146,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
 
               // 'Add tile/folder' tile
-            } else if (index == folder.subItems.length + 1) {
-              return Tile(
-                  labelPos: dialologModel.tileLabelTop,
-                  text: "Add tile/folder",
-                  content: 'assets/symbols/mulberry/a_-_lower_case.svg',
-                  color: soft_green,
-                  //Tapped function is null as user can't add tile in Unlocked Screen
-                  tapped: () => {});
-
-              //Normal tile
-            } else {
-              final TileData tileInfo = folder.subItems[index - 1];
+            }
+            // else if (index == folder.subItems.length + 1) {
+            //   return Tile(
+            //       labelPos: dialologModel.tileLabelTop,
+            //       text: "Add tile/folder",
+            //       content: 'assets/symbols/mulberry/a_-_lower_case.svg',
+            //       color: soft_green,
+            //       //Tapped function is null as user can't add tile in Unlocked Screen
+            //       tapped: () => {});
+            //
+            //   //Normal tile
+            // }
+            else {
+              final TileModel tileInfo = folderModel.subItems[index - 1];
               String title = tileInfo.labelKey.split('.').last;
               if (tileInfo.loadBoard == null) {
-                return Tile(
+                return TileWidget(
                   labelPos: dialologModel.tileLabelTop,
                   text: title,
                   content: 'assets' + tileInfo.image,
@@ -174,11 +177,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 );
               } else {
-                TileData folderInfo = tileInfo;
-                return FolderTile(
+                TileModel folderInfo = tileInfo;
+                return FolderWidget(
                   text: tileInfo.labelKey.split('.').last,
                   content: 'assets' + tileInfo.image,
-                  folderId: folderInfo.loadBoard,
+                  boardId: folderInfo.loadBoard,
                   color: dialologModel.folderBackgroundColor,
                   labelColor: dialologModel.folderTextColor,
                   labelPos: dialologModel.folderLabelTop,

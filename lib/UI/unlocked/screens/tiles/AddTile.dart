@@ -1,6 +1,8 @@
 import 'package:cboard_mobile/UI/unlocked/screens/UnlockedHomepage.dart';
 import 'package:cboard_mobile/UI/unlocked/screens/tiles/VoiceRecorder.dart';
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
+import 'package:cboard_mobile/models/data/jsonString.dart';
 import 'package:cboard_mobile/services/utils.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -44,6 +46,8 @@ class _AddTileScreenState extends State<AddTileScreen> {
 
   final _imagePicker = ImagePicker();
   XFile image;
+
+
 
   _pickGallery() async {
     final XFile _imageRes =
@@ -89,7 +93,8 @@ class _AddTileScreenState extends State<AddTileScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => UnlockedHomeScreen(
-                            tiles: example1,
+                        data: getData(jsonString).folders,
+                        folderId: "root",
                           )))
             },
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
@@ -151,7 +156,7 @@ class _AddTileScreenState extends State<AddTileScreen> {
                             child: Stack(
                               children: [
                                 SvgPicture.asset(
-                                  "assets/symbols/mulberry/add.svg",
+                                  "/symbols/mulberry/a_-_lower_case.svg",
                                   width: screenSize.width / 2,
                                 ),
                                 Align(

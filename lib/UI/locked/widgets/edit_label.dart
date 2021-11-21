@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/tile.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/UI/locked/widgets/tileWidget.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class _EditLabel extends State<EditLabel> {
                 SizedBox(
                   height: 100,
                   width: 100,
-                  child: Tile(
+                  child: TileWidget(
                     labelPos: false,
                     color: currentBackgroundColor,
                     text: 'Label',
@@ -86,7 +86,7 @@ class _EditLabel extends State<EditLabel> {
                 SizedBox(
                   height: 100,
                   width: 100,
-                  child: Tile(
+                  child: TileWidget(
                     labelPos: true,
                     color: currentBackgroundColor,
                     text: 'Label',

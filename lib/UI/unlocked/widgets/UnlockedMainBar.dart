@@ -1,7 +1,7 @@
-import 'package:cboard_mobile/Providers/locked/home.dart';
+import 'package:cboard_mobile/providers/locked/home.dart';
 import 'package:cboard_mobile/UI/Settings/SettingWrapper.dart';
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/screens/home_screen.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -142,7 +142,7 @@ class UnlockedMainBar extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen(
                                       data: defaultBoards,
-                                      folderId: "root",
+                                      boardId: "root",
                                     )));
                       }, // insert new screen here
                       child: Icon(

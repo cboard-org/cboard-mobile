@@ -1,10 +1,11 @@
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
 import 'package:flutter/cupertino.dart';
 
 class EditTileProvider extends ChangeNotifier {
-  List<Tile> editList = [];
+  List<TileModel> editList = [];
 
-  addAllEditList(List<Tile> selectList) {
+  addAllEditList(List<TileModel> selectList) {
     editList.clear();
     editList.addAll(selectList);
     notifyListeners();

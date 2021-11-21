@@ -3,13 +3,17 @@
 //     final post = postFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:cboard_mobile/models/data/jsonString.dart';
 
-Map<String, Folder> defaultBoards = getData(jsonString).folders;
+//Default home board that users first see when log in
+Map<String, FolderModel> defaultBoards = getData(jsonString).folders;
 
+//Transfer json data to dart objects
 Data getData(String str) => Data.fromJson(json.decode(str));
 
+//Transfer dart objects to json string for uploading to database
 String postToJson(Data data) => json.encode(data.toJson());
 
 class Data {
@@ -22,15 +26,17 @@ class Data {
   List<dynamic> beginner;
 
   // List<Folder> advanced;
-  Map<String, Folder> folders;
+  Map<String, FolderModel> folders;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         beginner: json["beginner"] as List<dynamic>,
         // advanced:
         //     json["advanced"].map<Folder>((x) => Folder.fromJson(x)).toList(),
-        folders: <String, Folder>{
-          for (Folder value in json["advanced"]
-              .map<Folder>((x) => Folder.fromJson(x))
+
+        //Create folder obkect, map folder to its own id
+        folders: <String, FolderModel>{
+          for (FolderModel value in json["advanced"]
+              .map<FolderModel>((x) => FolderModel.fromJson(x))
               .toList())
             value.id: value
         },
@@ -42,8 +48,8 @@ class Data {
       };
 }
 
-class Folder {
-  Folder({
+class FolderModel {
+  FolderModel ({
     this.id,
     this.name,
     this.nameKey,
@@ -62,10 +68,10 @@ class Folder {
   Email email;
   bool isPublic;
   bool hidden;
-  List<TileData> subItems;
+  List<TileModel> subItems;
   String caption;
 
-  factory Folder.fromJson(Map<String, dynamic> json) => Folder(
+  factory FolderModel.fromJson(Map<String, dynamic> json) => FolderModel(
         id: json["id"],
         name: json["name"],
         nameKey: json["nameKey"],
@@ -73,8 +79,9 @@ class Folder {
         email: emailValues.map[json["email"]],
         isPublic: json["isPublic"],
         hidden: json["hidden"],
+        //Create tile objects contained in folder
         subItems:
-            json["tiles"].map<TileData>((x) => TileData.fromJson(x)).toList(),
+            json["tiles"].map<TileModel>((x) => TileModel.fromJson(x)).toList(),
         caption: json["caption"],
       );
 
@@ -99,8 +106,8 @@ enum Email { SUPPORT_CBOARD_IO }
 
 final emailValues = EnumValues({"support@cboard.io": Email.SUPPORT_CBOARD_IO});
 
-class TileData {
-  TileData({
+class TileModel {
+  TileModel ({
     this.labelKey,
     this.image,
     this.id,
@@ -111,10 +118,10 @@ class TileData {
   String labelKey;
   String image;
   String id;
-  BackgroundColor backgroundColor;
+  Color backgroundColor;
   String loadBoard;
 
-  factory TileData.fromJson(Map<String, dynamic> json) => TileData(
+  factory TileModel.fromJson(Map<String, dynamic> json) => TileModel(
         labelKey: json["labelKey"],
         image: json["image"],
         id: json["id"],
@@ -131,11 +138,12 @@ class TileData {
       };
 }
 
+//Background color values, different between cboard mobile and web
 enum BackgroundColor { RGB_255241118, RGB_187222251 }
 
 final backgroundColorValues = EnumValues({
-  "rgb(187, 222, 251)": BackgroundColor.RGB_187222251,
-  "rgb(255, 241, 118)": BackgroundColor.RGB_255241118
+  "rgb(187, 222, 251)": Color(187222251),
+  "rgb(255, 241, 118)": Color(255241118)
 });
 
 class EnumValues<T> {

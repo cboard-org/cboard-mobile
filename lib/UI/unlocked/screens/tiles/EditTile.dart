@@ -1,7 +1,9 @@
-import 'package:cboard_mobile/Providers/unlocked/edit_tile_provider.dart';
+import 'package:cboard_mobile/providers/unlocked/edit_tile_provider.dart';
 import 'package:cboard_mobile/UI/unlocked/screens/UnlockedHomepage.dart';
 import 'package:cboard_mobile/UI/unlocked/screens/tiles/VoiceRecorder.dart';
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
+import 'package:cboard_mobile/models/data/jsonString.dart';
 import 'package:cboard_mobile/services/utils.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
@@ -14,7 +16,7 @@ import 'package:provider/provider.dart';
 
 class EditTileScreen extends StatefulWidget {
   final bool isMultiple;
-  final Tile tile;
+  final TileModel tileModel;
   final bool isDelete;
   final int index;
   final Map<Text, IconData> modelBottom = {
@@ -36,7 +38,7 @@ class EditTileScreen extends StatefulWidget {
   EditTileScreen(
       {Key key,
       this.isMultiple = false,
-      this.tile,
+      @required this.tileModel,
       this.isDelete = false,
       this.index})
       : super(key: key);
@@ -50,8 +52,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
 
   // double _scrollOffset = 0.0;
   bool lock = false;
-  String _bgColor;
-  String _textColor;
+  Color _bgColor;
+  Color _textColor;
 
   String _type = "Tile";
 
@@ -79,8 +81,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
     super.initState();
 
     _scrollController = ScrollController()..addListener(() {});
-    _bgColor = widget.tile?.backgroundColor;
-    _textColor = widget.tile?.textColor;
+    _bgColor = widget.tileModel?.backgroundColor;
+    _textColor = Colors.black;
     if (widget.isDelete) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         showDialog(
@@ -173,8 +175,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-    TextEditingController nameController = TextEditingController()
-      ..text = widget.tile.name;
+    TextEditingController nameController = TextEditingController(text: widget.tileModel.labelKey.split('.').last);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenSize.height) / 15,
@@ -185,13 +186,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => UnlockedHomeScreen(
-                            tiles: example1,
+                        data: getData(jsonString).folders,
+                        folderId: "root",
                           )))
             },
             child: Icon(Icons.arrow_back, color: Colors.white, size: 25.0),
           ),
           centerTitle: true,
-          title: widget.tile?.name != "Label"
+          title: widget.tileModel?.labelKey != "Label"
               ? Text('Edit')
               : Text(
                   "New Tile or Folder"), // Debug: Change title to keep track of how many tiles
@@ -244,14 +246,15 @@ class _EditTileScreenState extends State<EditTileScreen> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color(int.parse("0xff" + _bgColor ??
-                                    widget.tile.backgroundColor))),
+                                color:  _bgColor ??
+                                    widget.tileModel.backgroundColor),
                             child: Stack(
                               children: [
-                                SvgPicture.asset(
-                                  widget.tile.imageUrl,
+                                widget.tileModel.image.endsWith("svg")
+                                    ? SvgPicture.asset("assets" + widget.tileModel.image,
                                   width: screenSize.width / 2,
-                                ),
+                                )
+                                    : Image.asset("assets" + widget.tileModel.image,width: screenSize.width / 2,),
                                 Align(
                                   alignment: Alignment.topRight,
                                   child: Icon(Icons.camera_alt_outlined),
@@ -265,13 +268,12 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     Container(
                       height: MediaQuery.of(context).size.height / 28,
                       child: Center(
-                        child: Text(widget.tile.name,
+                        child: Text(widget.tileModel.labelKey.split('.').last,
                             style: TextStyle(
                                 fontSize: 14.0,
                                 fontFamily: "Robotto",
                                 fontWeight: FontWeight.w500,
-                                color: Color(int.parse("0xff" + _textColor ??
-                                    widget.tile.textColor)))),
+                                color: _textColor)),
                       ),
                     ),
                   ],
@@ -282,7 +284,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
           Column(
             children: <Widget>[
               Visibility(
-                visible: widget.tile.name == "Label",
+                visible: widget.tileModel.labelKey == "Label",
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -296,34 +298,34 @@ class _EditTileScreenState extends State<EditTileScreen> {
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ListTile(
-                          title: Text("Tile",
-                              style: CustomTypography.Typography.subTitle()),
-                          leading: Radio<String>(
-                            value: 'Tile',
-                            groupValue: _type,
-                            onChanged: (String val) {
-                              setState(() {
-                                _type = val;
-                              });
-                              print(_type);
-                            },
-                          ),
+                        Text("Tile",
+                        style: CustomTypography.Typography.subTitle()),
+                        Spacer(flex: 1,),
+                        Radio<String>(
+                          value: 'Tile',
+                          groupValue: _type,
+                          onChanged: (String val) {
+                            setState(() {
+                              _type = val;
+                            });
+                            print(_type);
+                          },
                         ),
-                        ListTile(
-                          title: Text("Folder",
-                              style: CustomTypography.Typography.subTitle()),
-                          leading: Radio<String>(
-                            value: 'Folder',
-                            groupValue: _type,
-                            onChanged: (String val) {
-                              setState(() {
-                                _type = val;
-                              });
-                              print(_type);
-                            },
-                          ),
+                        Spacer(flex: 4),
+                      Text("Folder",
+                          style: CustomTypography.Typography.subTitle()),
+                        Spacer(flex: 1,),
+                        Radio<String>(
+                          value: 'Folder',
+                          groupValue: _type,
+                          onChanged: (String val) {
+                            setState(() {
+                              _type = val;
+                            });
+                            print(_type);
+                          },
                         ),
+                        Spacer(flex: 3),
                       ],
                     ),
                     // trailing: Wrap(
@@ -385,8 +387,8 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         //     style: CustomTypography.Typography.subTitle()),
                         trailing: IconButton(
                           onPressed: () => Utils.speak(
-                              widget.tile.name != "Label"
-                                  ? widget.tile.name
+                              widget.tileModel.labelKey != "Label"
+                                  ? widget.tileModel.labelKey.split('.').last
                                   : ""),
                           icon: Icon(
                             Icons.play_arrow,
@@ -417,13 +419,13 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               InkResponse(
                                 onTap: () {
                                   setState(() {
-                                    _bgColor = colorToHex(colorCircular);
+                                    _bgColor = colorCircular;
                                   });
                                 },
                                 child: CircleAvatar(
                                   radius: screenSize.width / 36,
                                   backgroundColor: colorCircular,
-                                  child: Color(int.parse("0xff" + _bgColor)) ==
+                                  child: _bgColor ==
                                           colorCircular
                                       ? Icon(
                                           Icons.check,
@@ -471,14 +473,14 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               InkResponse(
                                 onTap: () {
                                   setState(() {
-                                    _textColor = colorToHex(colorCircular);
+                                    _textColor = colorCircular;
                                   });
                                 },
                                 child: CircleAvatar(
                                   radius: screenSize.width / 36,
                                   backgroundColor: colorCircular,
                                   child:
-                                      Color(int.parse("0xff" + _textColor)) ==
+                                      _textColor ==
                                               colorCircular
                                           ? Icon(
                                               Icons.check,
@@ -521,9 +523,10 @@ class _EditTileScreenState extends State<EditTileScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => VoiceRecorder(
-                                      tileRecord:
-                                          widget.tile.isRecording ?? true,
-                                      tile: widget.tile,
+                                      tileRecord: false,
+                                          // add field for recording in the tile model
+                                          // widget.tileModel.isRecording ?? true,
+                                      tileModel: widget.tileModel,
                                     )))
                       }, // Debug: change to edit
                     ),
@@ -600,7 +603,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EditTileScreen(
-                                        tile: editTileProvider
+                                        tileModel: editTileProvider
                                             .editList[widget.index + 1],
                                         isMultiple: true,
                                         index: widget.index + 1,

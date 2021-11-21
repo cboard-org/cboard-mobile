@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/providers/settings/settings.dart';
 import 'package:cboard_mobile/sharedWidgets/app-bar.dart';
 import 'package:cboard_mobile/sharedWidgets/divider.dart';
 import 'package:cboard_mobile/sharedWidgets/switchTile.dart';

@@ -1,11 +1,13 @@
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
 import 'package:flutter/material.dart';
 
 class UnlockedHomeProvider extends ChangeNotifier {
-  List<String> navigation = [];
+  List<String> navigation= [];
+  List<String> navigation_names= [];
   bool selectMode = false;
-  List<Tile> hideList = [];
-  Map<String, Tile> selectList = {};
+  List<TileModel> hideList = [];
+  Map<String, TileModel> selectList = {};
 
   switchSelectionMode() {
     selectMode = !selectMode;
@@ -13,13 +15,13 @@ class UnlockedHomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  addToSelect(Tile tile) {
-    selectList[tile.name] = tile;
+  addToSelect(TileModel tile) {
+    selectList[tile.labelKey] = tile;
     notifyListeners();
   }
 
-  removeFromSelect(Tile tile) {
-    selectList.remove(tile.name);
+  removeFromSelect(TileModel tile) {
+    selectList.remove(tile.labelKey);
     notifyListeners();
   }
 
@@ -28,21 +30,23 @@ class UnlockedHomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  selectAll(List<Tile> tileList) {
+  selectAll(List<TileModel> tileList) {
     tileList.forEach((tile) {
-      selectList[tile.name] = tile;
+      selectList[tile.labelKey] = tile;
     });
     notifyListeners();
   }
 
-  addToNavigation(String folderName) {
-    navigation.add(folderName);
+  addToNavigation(String loadBoard) {
+    navigation.add(loadBoard);
     notifyListeners();
   }
 
-  removeNavigation(String folderName) {
+  removeNavigation(String loadBoard) {
     navigation.removeRange(
-        navigation.lastIndexOf(folderName), navigation.length - 1);
+        navigation.lastIndexOf(loadBoard), navigation.length - 1);
+
+
     notifyListeners();
   }
 

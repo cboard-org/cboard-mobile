@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cboard_mobile/UI//onboarding/widgets/username-field.dart';
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/screens/home_screen.dart';
 import 'package:cboard_mobile/UI/onboarding/widgets/header.dart';
 import 'package:cboard_mobile/UI/onboarding/widgets/password-confirm-provider.dart';
 import 'package:cboard_mobile/UI/onboarding/widgets/password-field.dart';
@@ -130,7 +130,7 @@ class LogInFormState extends State<LogInForm> {
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen(
                                       data: getData(jsonString).folders,
-                                      folderId: "root",
+                                      boardId: "root",
                                     )),
                           );
                         }

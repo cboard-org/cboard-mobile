@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';

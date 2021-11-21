@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/folderTile.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/UI/locked/widgets/folderWidget.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'color_board.dart';
-import 'tile.dart';
+import 'tileWidget.dart';
 
 class EditAppearance extends StatefulWidget {
   final String type;
@@ -79,14 +79,14 @@ class _EditMain extends State<EditAppearance> {
             height: 100,
             width: 100,
             child: widget.type == 'TILE'
-                ? Tile(
+                ? TileWidget(
                     labelPos: dialogModel.tileLabelTop,
                     color: currentBackgroundColor,
                     text: 'Label',
                     content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                     labelColor: currentTextColor,
                   )
-                : FolderTile(
+                : FolderWidget(
                     text: 'Label',
                     content: 'assets/symbols/mulberry/a_-_lower_case.svg',
                     color: currentBackgroundColor,

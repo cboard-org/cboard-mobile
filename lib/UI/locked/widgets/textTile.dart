@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/tile.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/UI/locked/widgets/tileWidget.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +56,7 @@ class _EditTile extends State<TextTile> {
       //else show normal tile with text as main content
       return SizedBox(
         width: MediaQuery.of(context).size.width * 0.2,
-        child: Tile(
+        child: TileWidget(
           text: "Edit",
           content: sentence,
           color: fog,

@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/screens/home_screen.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/screens/home_screen.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
@@ -53,7 +53,7 @@ class _CustomContainerState extends State<CustomContainer> {
                         MaterialPageRoute(
                             builder: (context) => HomeScreen(
                                   data: defaultBoards,
-                                  folderId: "root",
+                                  boardId: "root",
                                 )),
                       );
                     },

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
 import 'package:cboard_mobile/sharedWidgets/app-bar.dart';
 import 'package:cboard_mobile/sharedWidgets/button.dart';
@@ -15,9 +16,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final bool tileRecord;
-  final Tile tile;
+  final TileModel tileModel;
 
-  VoiceRecorder({Key key, this.tileRecord = false, this.tile})
+  VoiceRecorder({Key key, this.tileRecord = false, this.tileModel})
       : super(key: key);
 
   @override
@@ -88,7 +89,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
 
   Future<File> downloadFile(String path) async {
     // File sourceFile = File(_mPath);
-    String _downloadPath = await _getDownloadPath(widget.tile.name + ".mp3");
+    String _downloadPath = await _getDownloadPath(widget.tileModel.id + ".mp3");
     FlutterSoundHelper()
         .convertFile(_mPath, Codec.aacADTS, _downloadPath, Codec.mp3);
     // final newFile = await sourceFile.copy(_downloadPath);
@@ -283,7 +284,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                           label: Text("Download"),
                           isPrimary: true,
                           onPress: () {
-                            downloadFile(widget.tile.name).then((value) => {
+                            downloadFile(widget.tileModel.id).then((value) => {
                                   if (value != null)
                                     print("downloaded" + value.path)
                                   else

@@ -1,17 +1,18 @@
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
+import 'package:cboard_mobile/models/data/data.dart';
 import 'package:cboard_mobile/UI/unlocked/screens/UnlockedHomepage.dart';
 // import 'package:cboard_mobile/data/mockData.dart';
 import 'package:cboard_mobile/models/data/data_unlocked.dart';
+import 'package:cboard_mobile/models/data/jsonString.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeModel extends ChangeNotifier {
-  List<TileData> words = [];
+  List<TileModel> words = [];
   String fullSent = "";
   int _unlockCount = 0;
 
-  void addWords(TileData newTile) {
+  void addWords(TileModel newTile) {
     words.add(newTile);
     //For adding sentence to top bar
     // String newWord = newTile.name != "Edit" ? newTile.name : newTile.content;
@@ -21,7 +22,7 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<TileData> getWords() {
+  List<TileModel> getWords() {
     return words;
   }
 
@@ -40,6 +41,12 @@ class HomeModel extends ChangeNotifier {
 
   void tapUnlock(BuildContext context) {
     _unlockCount++;
+    if (_unlockCount != 3 && _unlockCount < 5) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Press ${5 - _unlockCount} times to unlock"),
+        duration: Duration(seconds: 1),
+      ));
+    }
     if (_unlockCount == 3) {
       final _screenSize = MediaQuery.of(context).size;
       // unlock dialog
@@ -82,7 +89,8 @@ class HomeModel extends ChangeNotifier {
     } else if (_unlockCount == 5) {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => UnlockedHomeScreen(
-                tiles: example1,
+                data: getData(jsonString).folders,
+                folderId: "root",
               )));
     }
   }

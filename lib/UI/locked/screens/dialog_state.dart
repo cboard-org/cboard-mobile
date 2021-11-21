@@ -1,7 +1,7 @@
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/edit_appearance.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/edit_label.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/edit_label_size.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/UI/locked/widgets/edit_appearance.dart';
+import 'package:cboard_mobile/UI/locked/widgets/edit_label.dart';
+import 'package:cboard_mobile/UI/locked/widgets/edit_label_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

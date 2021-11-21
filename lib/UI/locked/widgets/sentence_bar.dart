@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:cboard_mobile/Providers/locked/dialog.dart';
-import 'package:cboard_mobile/Providers/locked/home.dart';
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/expand_text_screen.dart';
+import 'package:cboard_mobile/providers/locked/dialog.dart';
+import 'package:cboard_mobile/providers/locked/home.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/widgets/expand_text_screen.dart';
 // import 'package:cboard_mobile/data/mockData.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/tile.dart';
+import 'package:cboard_mobile/UI/locked/widgets/tileWidget.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -40,7 +40,7 @@ class _SentenceBarState extends State<SentenceBar> {
   }
 
   _createTile(String text) {
-    return TileData(id: text.split(" ")[0], labelKey: text, image: null);
+    return TileModel(id: text.split(" ")[0], labelKey: text, image: null);
   }
 
   @override
@@ -100,11 +100,11 @@ class _SentenceBarState extends State<SentenceBar> {
                       scrollDirection: Axis.horizontal,
                       itemCount: words.length,
                       itemBuilder: (BuildContext context, int index) {
-                        TileData tileInfo = words[index];
+                        TileModel tileInfo = words[index];
                         String title = tileInfo.labelKey.split('.').last;
                         return SizedBox(
                             width: MediaQuery.of(context).size.width * 0.2,
-                            child: Tile(
+                            child: TileWidget(
                               labelPos: dialogModel.tileLabelTop,
                               text: title,
                               content: (tileInfo.image != null)

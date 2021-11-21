@@ -1,16 +1,24 @@
-import 'package:cboard_mobile/Providers/unlocked/edit_tile_provider.dart';
-import 'package:cboard_mobile/Providers/unlocked/unlocked_home_provider.dart';
+import 'package:cboard_mobile/UI/unlocked/screens/tiles/AddTile.dart';
 import 'package:cboard_mobile/UI/unlocked/screens/tiles/EditTile.dart';
+import 'package:cboard_mobile/UI/unlocked/widgets/tile_options_dialog.dart';
+import 'package:cboard_mobile/providers/unlocked/edit_tile_provider.dart';
+import 'package:cboard_mobile/providers/unlocked/unlocked_home_provider.dart';
 import 'package:cboard_mobile/UI/unlocked/widgets/widgets.dart';
-import 'package:cboard_mobile/models/data/data_unlocked.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/sharedWidgets/folder_widget.dart';
+import 'package:cboard_mobile/sharedWidgets/tile_widget.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UnlockedHomeScreen extends StatefulWidget {
-  final List<Tile> tiles;
+  final Map<String, FolderModel> data;
+  final String folderId;
 
-  const UnlockedHomeScreen({Key key, this.tiles}) : super(key: key);
+  // const HomeScreen({Key key, this.data, this.folderId}) : super(key: key);
+  const UnlockedHomeScreen(
+      {Key key, @required this.data, @required this.folderId})
+      : super(key: key);
 
   @override
   _UnlockedHomeScreenState createState() => _UnlockedHomeScreenState();
@@ -19,7 +27,7 @@ class UnlockedHomeScreen extends StatefulWidget {
 class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
   ScrollController _scrollController;
   double _scrollOffset = 0.0;
-
+  FolderModel folderModel;
   @override
   void initState() {
     _scrollController = ScrollController()
@@ -28,6 +36,7 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
           _scrollOffset = _scrollController.offset;
         });
       });
+    folderModel = widget.data[widget.folderId];
     super.initState();
   }
 
@@ -66,20 +75,62 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                   scrollOffset: _scrollOffset), // Main Navigation Bar
               Container(
                   height: 30,
-                  margin: EdgeInsets.fromLTRB(10, 6, 6, 0),
+                  margin: EdgeInsets.fromLTRB(3, 6, 6, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Consumer<UnlockedHomeProvider>(
                           builder: (context, unlockedHomeProvider, child) {
-                        return Text(
-                          unlockedHomeProvider.prettyNavigation(),
-                          style: TextStyle(
-                            color: paua,
-                            fontSize: 14.0,
-                            fontFamily: "Robotto",
-                          ),
-                        );
+                        return
+                            //   Text(
+                            //   unlockedHomeProvider.prettyNavigation(),
+                            //   style: TextStyle(
+                            //     color: paua,
+                            //     fontSize: 14.0,
+                            //     fontFamily: "Robotto",
+                            //   ),
+                            // );
+                            ListView(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: unlockedHomeProvider.navigation
+                                    .map((item) => Row(
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            UnlockedHomeScreen(
+                                                                data:
+                                                                    defaultBoards,
+                                                                folderId:
+                                                                    item)));
+                                              },
+                                              child: Text(
+                                                defaultBoards[item]
+                                                    .nameKey
+                                                    .split('.')
+                                                    .last,
+                                                style: TextStyle(
+                                                  color: paua,
+                                                  fontSize: 14.0,
+                                                  fontFamily: "Robotto",
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              ">",
+                                              style: TextStyle(
+                                                color: paua,
+                                                fontSize: 12.0,
+                                                fontFamily: "Robotto",
+                                              ),
+                                            ),
+                                          ],
+                                        ))
+                                    .toList());
                       }),
                       Consumer<UnlockedHomeProvider>(
                         builder: (context, unlockedHomeProvider, child) {
@@ -103,7 +154,8 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                                             Provider.of<UnlockedHomeProvider>(
                                                     context,
                                                     listen: false)
-                                                .selectAll(widget.tiles);
+                                                .selectAll(
+                                                    folderModel.subItems);
                                           },
                                         ),
                                         TextButton(
@@ -196,26 +248,132 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
         ),
       ),
       body: Container(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-          ),
-          padding: const EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 7.0,
-          ),
-          itemCount: widget.tiles.length + 1,
-          itemBuilder: (context, index) {
-            if (index < widget.tiles.length)
-              return TilesWidget(
-                tile: widget.tiles[index],
-                size: screenSize.width * 0.3,
+        child: Consumer<UnlockedHomeProvider>(
+            builder: (context, unlockedHomeProvider, child) {
+          return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 7.0,
+              ),
+              itemCount: folderModel.subItems.length + 1,
+              itemBuilder: (context, index) {
+                if (index == folderModel.subItems.length) {
+                  return TileWidget(
+                      tileModel: TileModel(
+                        backgroundColor: soft_green,
+                        image: '/symbols/mulberry/a_-_lower_case.svg',
+                        labelKey: "Label",
+                      ),
+                      tapped: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditTileScreen(
+                                          tileModel: TileModel(
+                                            backgroundColor: soft_green,
+                                            image:
+                                                '/symbols/mulberry/a_-_lower_case.svg',
+                                            labelKey: "Label",
+                                          ),
+                                        )))
+                          });
+                  //Normal tile
+                } else {
+                  final TileModel tileInfo = folderModel.subItems[index];
+                  String title = tileInfo.labelKey.split('.').last;
+                  if (tileInfo.loadBoard == null) {
+                    return TileWidget(
+                        tileModel: tileInfo,
+                        tapped: () => {
+                              if (unlockedHomeProvider.selectMode)
+                                {
+                                  if (!unlockedHomeProvider.selectList
+                                      .containsKey(tileInfo.labelKey))
+                                    Provider.of<UnlockedHomeProvider>(context,
+                                            listen: false)
+                                        .addToSelect(tileInfo)
+                                  else
+                                    Provider.of<UnlockedHomeProvider>(context,
+                                            listen: false)
+                                        .removeFromSelect(tileInfo)
+                                }
+                              else
+                                print(tileInfo.labelKey)
+                            },
+                        longPressed: () {
+                          showGeneralDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierLabel: 'Image Dialog',
+                              pageBuilder: (
+                                _,
+                                Animation<double> animation,
+                                Animation<double> secondaryAnimation,
+                              ) =>
+                                  TileOptionsDialog(tileModel: tileInfo));
+                        });
+                  } else {
+                    TileModel folderInfo = tileInfo;
+                    return FolderWidget(
+                      folderModel: folderInfo,
+                      folderId: folderInfo.loadBoard,
+                      tapped: () => {
+                        if(unlockedHomeProvider.selectMode){
+                          if (!unlockedHomeProvider.selectList
+                              .containsKey(tileInfo.labelKey))
+                            Provider.of<UnlockedHomeProvider>(context,
+                                listen: false)
+                                .addToSelect(folderInfo)
+                          else
+                            Provider.of<UnlockedHomeProvider>(context,
+                                listen: false)
+                                .removeFromSelect(folderInfo)
+                        } else {
+                          Provider.of<UnlockedHomeProvider>(context,
+                              listen: false)
+                              .addToNavigation(folderInfo.loadBoard),
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      UnlockedHomeScreen(
+                                        data: defaultBoards,
+                                        folderId: folderInfo.loadBoard,
+                                      ))).then((value) =>
+                          {
+                            Provider.of<UnlockedHomeProvider>(context,
+                                listen: false)
+                                .popNavigation()
+                          })
+                        }
+                      },
+                      longPressed: () {
+                        showGeneralDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            barrierLabel: 'Image Dialog',
+                            pageBuilder: (
+                              _,
+                              Animation<double> animation,
+                              Animation<double> secondaryAnimation,
+                            ) =>
+                                TileOptionsDialog(tileModel: tileInfo));
+                      },
+                    );
+                  }
+                }
+              }
+              // if (index < folderModel.subItems.length)
+              //   return TilesWidget(
+              //     // tile: widget.tiles[index],
+              //     size: screenSize.width * 0.3,
+              //   );
+              // return AddWidget(size: screenSize.width * 0.3);
               );
-            return AddWidget(size: screenSize.width * 0.3);
-            // else
-            //   return TilesWidget(tile: tile, size: size)
-          },
-        ),
+        }),
       ),
       bottomNavigationBar: Consumer<UnlockedHomeProvider>(
         builder: (context, unlockedHomeProvider, child) {
@@ -246,12 +404,13 @@ class _UnlockedHomeScreenState extends State<UnlockedHomeScreen> {
                                   .addAllEditList(unlockedHomeProvider
                                       .selectList.values
                                       .toList());
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => EditTileScreen(
                                             isMultiple: true,
-                                            tile: editTileProvider.editList[0],
+                                            tileModel: editTileProvider.editList[0],
                                             index: 0,
                                           )));
                             }

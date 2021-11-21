@@ -2,7 +2,7 @@ import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Tile extends StatelessWidget {
+class TileWidget extends StatelessWidget {
   //Label name
   final String text;
 
@@ -23,7 +23,7 @@ class Tile extends StatelessWidget {
   //Check if tile is for adding text or not
   final bool edittingTile;
 
-  const Tile({
+  const TileWidget({
     Key key,
     this.content,
     this.text,

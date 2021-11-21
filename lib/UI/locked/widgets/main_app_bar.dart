@@ -1,5 +1,5 @@
-import 'package:cboard_mobile/Providers/locked/home.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/edit_dialog.dart';
+import 'package:cboard_mobile/providers/locked/home.dart';
+import 'package:cboard_mobile/UI/locked/widgets/edit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:cboard_mobile/Providers/locked/home.dart';
-import 'package:cboard_mobile/UI/lockedScreen/data.dart';
-import 'package:cboard_mobile/UI/lockedScreen/widgets/tts_speak_button.dart';
+import 'package:cboard_mobile/providers/locked/home.dart';
+import 'package:cboard_mobile/models/data/data.dart';
+import 'package:cboard_mobile/UI/locked/widgets/tts_speak_button.dart';
 import 'package:cboard_mobile/stylesheets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -37,7 +37,7 @@ class _ExpandTextScreenState extends State<ExpandTextScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     _createTile(String text) {
-      return TileData(id: text.split(" ")[0], labelKey: text, image: null);
+      return TileModel(id: text.split(" ")[0], labelKey: text, image: null);
     }
 
     _previousButton() {

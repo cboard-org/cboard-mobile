@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/providers/settings/settings.dart';
 import 'package:cboard_mobile/sharedWidgets/app-bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

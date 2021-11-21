@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/providers/settings/settings.dart';
 import 'package:cboard_mobile/UI/onboarding/screens/voice.dart';
 import 'package:cboard_mobile/UI/onboarding/screens/welcome.dart';
 import 'package:cboard_mobile/UI/onboarding/widgets/header-user.dart';

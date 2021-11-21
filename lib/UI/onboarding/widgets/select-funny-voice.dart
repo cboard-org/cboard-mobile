@@ -1,4 +1,4 @@
-import 'package:cboard_mobile/Providers/settings/settings.dart';
+import 'package:cboard_mobile/providers/settings/settings.dart';
 import 'package:cboard_mobile/UI/onboarding/widgets/checkmark.dart';
 import 'package:cboard_mobile/stylesheets/typography.dart' as CustomTypography;
 import 'package:flutter/foundation.dart';
