@@ -1,7 +1,0 @@
-#Settings
-#Dark Mode
-ThemeManager.dart
-#Shared preferences
-StorageManager.dart
-#Theme
-lib/shared/Themes.dart

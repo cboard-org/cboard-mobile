@@ -247,5 +247,6 @@ class LocaleModel {
   };
 
   static List<String> get countries => countryList;
+
   static List<String> get languages => languageMap.keys;
 }
